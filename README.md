@@ -21,7 +21,7 @@ The Arcade project undertaken in the Second year at [{Epitech}](https://www.epit
 *GAMES:*
 - Movement: (to be determined)
 
-## **Technology Notes**
+## **⚙️ Technology Notes**
 
 The game was developed using the following technologies:
 
