@@ -5,3 +5,6 @@ arcade
 ~*
 *.a
 *.out
+*.gcda
+*.gcno
+unit_tests
