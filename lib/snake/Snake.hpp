@@ -2,17 +2,17 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** Snake
+** SnakeGame
 */
 
 #pragma once
 
 #include "../../Interfaces/IGame.hpp"
 
-class Snake : public IGame {
+class SnakeGame : public IGame {
     public:
-        Snake();
-        ~Snake();
+        SnakeGame();
+        ~SnakeGame();
 
         //Game
         void startGame();

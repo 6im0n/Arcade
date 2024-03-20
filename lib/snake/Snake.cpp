@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** Snake
+** SnakeGame
 */
 
 #include "Snake.hpp"
@@ -29,7 +29,7 @@ void generateLine(std::vector<std::shared_ptr<IEntity>> &_entities, int y, int s
     _entities.push_back(wall2);
 }
 
-Snake::Snake()
+SnakeGame::SnakeGame()
 {
     generateWallLine(_entities, 0, 20);
     for (int i = 1; i < 15; i++) {
@@ -38,43 +38,43 @@ Snake::Snake()
     generateWallLine(_entities, 15, 20);
 }
 
-Snake::~Snake()
+SnakeGame::~SnakeGame()
 {
 }
 
-void Snake::startGame()
+void SnakeGame::startGame()
 {
 }
 
-void Snake::stopGame()
+void SnakeGame::stopGame()
 {
 }
 
-int Snake::getScore()
+int SnakeGame::getScore()
 {
     return _score;
 }
 
-void Snake::simulate()
+void SnakeGame::simulate()
 {
 }
 
-void Snake::catchKeyEvent(int key)
+void SnakeGame::catchKeyEvent(int key)
 {
     (void)key;
 }
 
-std::vector<std::shared_ptr<IEntity>> Snake::getEntities()
+std::vector<std::shared_ptr<IEntity>> SnakeGame::getEntities()
 {
     return _entities;
 }
 
-std::vector<std::shared_ptr<IText>> Snake::getTexts()
+std::vector<std::shared_ptr<IText>> SnakeGame::getTexts()
 {
     return _texts;
 }
 
-std::vector<std::shared_ptr<ISound>> Snake::getSounds()
+std::vector<std::shared_ptr<ISound>> SnakeGame::getSounds()
 {
     return _sounds;
 }
