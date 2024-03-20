@@ -5,7 +5,7 @@
 #include <criterion/internal/assert.h>
 #include <iostream>
 #include <memory>
-#include "../core/dlLoader.hpp"
+#include "../core/DLLoader.hpp"
 
 Test(dlLoader, dlLoader_good_test)
 {

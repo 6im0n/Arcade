@@ -19,7 +19,7 @@ NAME_SFML = lib/arcade_sfml.so
 NAME_SDL = lib/arcade_sdl.so
 
 SRC_CORE =	core/main.cpp \
-		    core/dlLoader.cpp \
+		    core/DLLoader.cpp \
 
 PACMAN_SRC =	lib/pacman/pacman.cpp \
 
@@ -32,7 +32,7 @@ SFML_SRC =		lib/sfml/sfml.cpp \
 SDL_SRC =		lib/sdl/sdl.cpp \
 
 SRC_TEST =	tests/test.cpp \
-			core/dlLoader.cpp \
+			core/DLLoader.cpp \
 
 OBJ_CORE = $(SRC_CORE:.cpp=.o)
 OBJ_PACMAN = $(PACMAN_SRC:.cpp=.o)

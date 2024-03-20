@@ -5,7 +5,7 @@
 ** dlLoader.hpp
 */
 
-#include "dlLoader.hpp"
+#include "DLLoader.hpp"
 #include <iostream>
 #include <dlfcn.h>
 
