@@ -11,6 +11,7 @@ NAME_SFML = lib/arcade_sfml.so
 NAME_SDL = lib/arcade_sdl.so
 
 SRC =	core/main.cpp \
+		core/dlLoader.cpp \
 
 PACMAN_SRC =	lib/pacman/pacman.cpp \
 

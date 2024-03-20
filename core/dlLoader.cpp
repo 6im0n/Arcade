@@ -6,6 +6,8 @@
 */
 
 #include "dlLoader.hpp"
+#include <iostream>
+#include <dlfcn.h>
 
 template <typename T>
 arcade::DLLoader<T>::DLLoader(std::string const &entryPoint) : entryPoint(entryPoint){
