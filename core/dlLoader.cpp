@@ -32,3 +32,5 @@ T *arcade::DLLoader<T>::getInstance(std::string const &libname) {
     T *tmp = object();
     return tmp;
 }
+
+template class arcade::DLLoader<int>;
