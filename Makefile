@@ -37,11 +37,11 @@ OBJ_SFML		= $(SFML_SRC:.cpp=.o)
 OBJ_SDL			= $(SDL_SRC:.cpp=.o)
 
 #flags
-CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
+CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20 -fPIC
 SFML_FlAGS		= -lsfml-graphics -lsfml-window -lsfml-system
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
 NCURSES_FLAGS	= -lncurses
-INC				= -I./include
+INC				= -I.
 
 #Compiler
 CC				= g++
