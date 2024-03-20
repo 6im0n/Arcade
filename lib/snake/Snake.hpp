@@ -7,30 +7,28 @@
 
 #pragma once
 
-#include "../../Interfaces/IGame.hpp"
+#include "Interfaces/IEntity.hpp"
+#include <lib/snake/Entities/SnakeBody.hpp>
 
-class Snake : public IGame {
+enum Direction {
+    D_LEFT,
+    D_DOWN,
+    D_RIGHT,
+    D_UP
+};
+
+class Snake {
     public:
         Snake();
         ~Snake();
 
-        //Game
-        void startGame();
-        void stopGame();
-        int getScore();
-        void simulate();
+        void placeSnake(std::vector<std::shared_ptr<IEntity>>) const;
+        void moveSnake();
+        void growSnake();
+        void setDirection(bool left);
 
-        //Event
-        void catchKeyEvent(int key);
-
-        //Display
-        std::vector<std::shared_ptr<IEntity>> getEntities();
-        std::vector<std::shared_ptr<IText>> getTexts();
-        std::vector<std::shared_ptr<ISound>> getSounds();
-
+    protected:
     private:
-        std::vector<std::shared_ptr<IEntity>> _entities;
-        std::vector<std::shared_ptr<IText>> _texts;
-        std::vector<std::shared_ptr<ISound>> _sounds;
-        int _score;
+        std::vector<std::shared_ptr<SnakeBody>> _snake;
+        Direction _dir;
 };

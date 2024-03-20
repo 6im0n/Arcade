@@ -5,76 +5,65 @@
 ** Snake
 */
 
-#include "Snake.hpp"
-#include "Wall.hpp"
-#include "Void.hpp"
-
-void generateWallLine(std::vector<std::shared_ptr<IEntity>> &_entities, int y, int size)
-{
-    for (int i = 0; i < size; i++) {
-        std::shared_ptr<Wall> wall = std::make_shared<Wall>(i, y);
-        _entities.push_back(wall);
-    }
-}
-
-void generateLine(std::vector<std::shared_ptr<IEntity>> &_entities, int y, int size)
-{
-    std::shared_ptr<Wall> wall = std::make_shared<Wall>(0, y);
-    _entities.push_back(wall);
-    for (int i = 1; i < size - 1; i++) {
-        std::shared_ptr<Void> void_case = std::make_shared<Void>(i, y);
-        _entities.push_back(void_case);
-    }
-    std::shared_ptr<Wall> wall2 = std::make_shared<Wall>(size - 1, y);
-    _entities.push_back(wall2);
-}
+#include "lib/snake/Snake.hpp"
 
 Snake::Snake()
 {
-    generateWallLine(_entities, 0, 20);
-    for (int i = 1; i < 15; i++) {
-        generateLine(_entities, i, 20);
-    }
-    generateWallLine(_entities, 15, 20);
+    _snake.push_back(std::make_shared<SnakeBody>(10, 10));
+    _snake.push_back(std::make_shared<SnakeBody>(10, 11));
+    _snake.push_back(std::make_shared<SnakeBody>(10, 12));
+    _snake.push_back(std::make_shared<SnakeBody>(10, 13));
+    _dir = D_RIGHT;
 }
 
 Snake::~Snake()
 {
 }
 
-void Snake::startGame()
+void Snake::placeSnake(std::vector<std::shared_ptr<IEntity>> entities) const
 {
+    for (auto &entity : _snake) {
+        entities.push_back(entity);
+    }
 }
 
-void Snake::stopGame()
+void Snake::moveSnake()
 {
+    SnakeBody *head = _snake.front().get();
+
+    if (_dir == D_UP)
+        head->setPos(head->getPos()[0], head->getPos()[1] - 1);
+    if (_dir == D_DOWN)
+        head->setPos(head->getPos()[0], head->getPos()[1] + 1);
+    if (_dir == D_LEFT)
+        head->setPos(head->getPos()[0] - 1, head->getPos()[1]);
+    if (_dir == D_RIGHT)
+        head->setPos(head->getPos()[0] + 1, head->getPos()[1]);
+
+    for (std::size_t i = 1; i < _snake.size(); i++) {
+        SnakeBody *body = _snake[i].get();
+        SnakeBody *prev = _snake[i - 1].get();
+        std::size_t x = prev->getPos()[0];
+        std::size_t y = prev->getPos()[1];
+
+        body->setPos(x, y);
+    }
 }
 
-int Snake::getScore()
+void Snake::growSnake()
 {
-    return _score;
+    SnakeBody *end = _snake.back().get();
+    std::size_t x = end->getPos()[0];
+    std::size_t y = end->getPos()[1];
+
+    _snake.push_back(std::make_shared<SnakeBody>(x, y));
 }
 
-void Snake::simulate()
+void Snake::setDirection(bool left)
 {
-}
-
-void Snake::catchKeyEvent(int key)
-{
-    (void)key;
-}
-
-std::vector<std::shared_ptr<IEntity>> Snake::getEntities()
-{
-    return _entities;
-}
-
-std::vector<std::shared_ptr<IText>> Snake::getTexts()
-{
-    return _texts;
-}
-
-std::vector<std::shared_ptr<ISound>> Snake::getSounds()
-{
-    return _sounds;
+    if (left) {
+        _dir = static_cast<Direction>(_dir + 1);
+    } else {
+        _dir = static_cast<Direction>(_dir - 1);
+    }
 }
