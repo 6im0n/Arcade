@@ -5,7 +5,7 @@
 ** SnakeGame
 */
 
-#include "Snake.hpp"
+#include "SnakeGame.hpp"
 #include "Wall.hpp"
 #include "Void.hpp"
 

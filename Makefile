@@ -22,10 +22,11 @@ SRC_CORE =	core/main.cpp \
 
 PACMAN_SRC =	lib/pacman/pacman.cpp \
 
-SNAKE_SRC =		lib/snake/Color.cpp	\
-				lib/snake/Snake.cpp	\
-				lib/snake/Void.cpp	\
-				lib/snake/Wall.cpp	\
+SNAKE_SRC =		lib/snake/Color.cpp		\
+				lib/snake/SnakeGame.cpp	\
+				lib/snake/Void.cpp		\
+				lib/snake/Wall.cpp		\
+				lib/snake/SnakeBody.cpp	\
 
 NCURSES_SRC =	lib/ncurses/ncurses.cpp \
 
