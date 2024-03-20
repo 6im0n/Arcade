@@ -22,7 +22,10 @@ SRC_CORE =	core/main.cpp \
 
 PACMAN_SRC =	lib/pacman/pacman.cpp \
 
-SNAKE_SRC =		lib/snake/snake.cpp \
+SNAKE_SRC =		lib/snake/Color.cpp	\
+				lib/snake/Snake.cpp	\
+				lib/snake/Void.cpp	\
+				lib/snake/Wall.cpp	\
 
 NCURSES_SRC =	lib/ncurses/ncurses.cpp \
 
@@ -38,7 +41,7 @@ OBJ_SNAKE = $(SNAKE_SRC:.cpp=.o)
 OBJ_NCURSES = $(NCURSES_SRC:.cpp=.o)
 OBJ_SFML = $(SFML_SRC:.cpp=.o)
 OBJ_SDL = $(SDL_SRC:.cpp=.o)
-CXXFLAGS = -g -Wall -Wextra -Werror -std=c++20 -I./include
+CXXFLAGS = -g -Wall -Wextra -Werror -std=c++20 -I . -fPIC
 
 all: $(NAME)
 
