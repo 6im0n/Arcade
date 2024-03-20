@@ -49,32 +49,32 @@ void Void::setRotation(float rotation)
     _rotation = rotation;
 }
 
-std::vector<std::size_t> Void::getPos()
+std::vector<std::size_t> Void::getPos() const
 {
     return _pos;
 }
 
-std::vector<std::size_t> Void::getSize()
+std::vector<std::size_t> Void::getSize() const
 {
     return _size;
 }
 
-int Void::getChar()
+int Void::getChar() const
 {
     return _char;
 }
 
-std::shared_ptr<IColor> Void::getColor()
+std::shared_ptr<IColor> Void::getColor() const
 {
     return _color;
 }
 
-std::string Void::getPath()
+std::string Void::getPath() const
 {
     return _path;
 }
 
-float Void::getRotation()
+float Void::getRotation() const
 {
     return _rotation;
 }

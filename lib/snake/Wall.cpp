@@ -49,32 +49,32 @@ void Wall::setRotation(float rotation)
     _rotation = rotation;
 }
 
-std::vector<std::size_t> Wall::getPos()
+std::vector<std::size_t> Wall::getPos() const
 {
     return _pos;
 }
 
-std::vector<std::size_t> Wall::getSize()
+std::vector<std::size_t> Wall::getSize() const
 {
     return _size;
 }
 
-int Wall::getChar()
+int Wall::getChar() const
 {
     return _char;
 }
 
-std::shared_ptr<IColor> Wall::getColor()
+std::shared_ptr<IColor> Wall::getColor() const
 {
     return _color;
 }
 
-std::string Wall::getPath()
+std::string Wall::getPath() const
 {
     return _path;
 }
 
-float Wall::getRotation()
+float Wall::getRotation() const
 {
     return _rotation;
 }

@@ -23,12 +23,12 @@ class Void : public IEntity {
         void setRotation(float rotation);
 
         //getters
-        std::vector<std::size_t> getPos();
-        std::vector<std::size_t> getSize();
-        int getChar();
-        std::shared_ptr<IColor> getColor();
-        std::string getPath();
-        float getRotation();
+        std::vector<std::size_t> getPos() const;
+        std::vector<std::size_t> getSize() const;
+        int getChar() const;
+        std::shared_ptr<IColor> getColor() const;
+        std::string getPath() const;
+        float getRotation() const;
 
     private:
         std::vector<std::size_t> _pos;
