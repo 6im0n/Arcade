@@ -5,8 +5,25 @@
 #include <criterion/internal/assert.h>
 #include <iostream>
 #include <memory>
+#include "../core/DLLoader.hpp"
 
-Test(test, test)
+Test(dlLoader, dlLoader_good_test)
 {
-    cr_assert(1 == 1);
+    arcade::DLLoader<int> *tmp = new arcade::DLLoader<int>("init");
+    int *test = tmp->getInstance("./lib/ncurses.so");
+    cr_assert_eq(test, 0);
+}
+
+Test(dlLoader, dlLoader_bad_lib)
+{
+    arcade::DLLoader<int> *tmp = new arcade::DLLoader<int>("init");
+    int *test = tmp->getInstance("./lib/ncuses.so");
+    cr_assert_eq(test, nullptr);
+}
+
+Test(dlLoader, dlLoader_bad_entry)
+{
+    arcade::DLLoader<int> *tmp = new arcade::DLLoader<int>("a");
+    int *test = tmp->getInstance("./lib/ncurses.so");
+    cr_assert_eq(test, nullptr);
 }
