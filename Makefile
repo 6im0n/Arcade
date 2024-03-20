@@ -6,7 +6,7 @@
 ##
 
 
-NAME_CORE =  arcade
+NAME =  arcade
 
 NAME_PACMAN = lib/arcade_pacman.so
 
@@ -40,18 +40,12 @@ OBJ_SFML = $(SFML_SRC:.cpp=.o)
 OBJ_SDL = $(SDL_SRC:.cpp=.o)
 CXXFLAGS = -g -Wall -Wextra -Werror -std=c++20 -I./include
 
-all: $(NAME_CORE)
+all: $(NAME)
 
-$(NAME_CORE): $(OBJ_CORE) $(OBJ_PACMAN) $(OBJ_SNAKE) $(OBJ_NCURSES) $(OBJ_SFML) $(OBJ_SDL)
-	g++ -std=c++20 -Wall -Wextra -Werror -o $(NAME_CORE) $(OBJ_CORE)
-	g++ -shared -o $(NAME_PACMAN) $(OBJ_PACMAN)
-	g++ -shared -o $(NAME_SNAKE) $(OBJ_SNAKE)
-	g++ -shared -o $(NAME_NCURSES) $(OBJ_NCURSES) -lncurses
-	g++ -shared -o $(NAME_SFML) $(OBJ_SFML) -lsfml-graphics -lsfml-window -lsfml-system
-	g++ -shared -o $(NAME_SDL) $(OBJ_SDL) -lSDL2 -lSDL2_image -lSDL2_ttf
+$(NAME) : core game graphicals
 
 core : $(OBJ_CORE)
-	g++ -std=c++20 -Wall -Wextra -Werror -o $(NAME_CORE) $(OBJ_CORE)
+	g++ -std=c++20 -Wall -Wextra -Werror -o $(NAME) $(OBJ_CORE)
 
 game : $(OBJ_PACMAN) $(OBJ_SNAKE)
 	g++ -shared -o $(NAME_PACMAN) $(OBJ_PACMAN)
@@ -71,7 +65,7 @@ clean:
 	rm -f $(OBJ_SDL)
 
 fclean: clean
-	rm -f $(NAME_CORE)
+	rm -f $(NAME)
 	rm -f $(NAME_PACMAN)
 	rm -f $(NAME_SNAKE)
 	rm -f $(NAME_NCURSES)
