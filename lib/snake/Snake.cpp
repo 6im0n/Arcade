@@ -5,7 +5,7 @@
 ** Snake
 */
 
-#include "lib/snake/Entities/Snake.hpp"
+#include "lib/snake/Snake.hpp"
 
 Snake::Snake()
 {
@@ -13,7 +13,7 @@ Snake::Snake()
     _snake.push_back(std::make_shared<SnakeBody>(10, 11));
     _snake.push_back(std::make_shared<SnakeBody>(10, 12));
     _snake.push_back(std::make_shared<SnakeBody>(10, 13));
-    _dir = RIGHT;
+    _dir = D_RIGHT;
 }
 
 Snake::~Snake()
@@ -31,16 +31,16 @@ void Snake::moveSnake()
 {
     SnakeBody *head = _snake.front().get();
 
-    if (_dir == UP)
+    if (_dir == D_UP)
         head->setPos(head->getPos()[0], head->getPos()[1] - 1);
-    if (_dir == DOWN)
+    if (_dir == D_DOWN)
         head->setPos(head->getPos()[0], head->getPos()[1] + 1);
-    if (_dir == LEFT)
+    if (_dir == D_LEFT)
         head->setPos(head->getPos()[0] - 1, head->getPos()[1]);
-    if (_dir == RIGHT)
+    if (_dir == D_RIGHT)
         head->setPos(head->getPos()[0] + 1, head->getPos()[1]);
 
-    for (int i = 1; i < _snake.size(); i++) {
+    for (std::size_t i = 1; i < _snake.size(); i++) {
         SnakeBody *body = _snake[i].get();
         SnakeBody *prev = _snake[i - 1].get();
         std::size_t x = prev->getPos()[0];

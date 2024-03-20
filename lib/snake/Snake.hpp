@@ -11,10 +11,10 @@
 #include <lib/snake/Entities/SnakeBody.hpp>
 
 enum Direction {
-    LEFT,
-    DOWN,
-    RIGHT,
-    UP
+    D_LEFT,
+    D_DOWN,
+    D_RIGHT,
+    D_UP
 };
 
 class Snake {
