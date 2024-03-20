@@ -42,6 +42,18 @@ $(NAME): $(OBJ) $(OBJ_PACMAN) $(OBJ_SNAKE) $(OBJ_NCURSES) $(OBJ_SFML) $(OBJ_SDL)
 	g++ -shared -o $(NAME_SFML) $(OBJ_SFML) -lsfml-graphics -lsfml-window -lsfml-system
 	g++ -shared -o $(NAME_SDL) $(OBJ_SDL) -lSDL2 -lSDL2_image -lSDL2_ttf
 
+core : $(OBJ)
+	g++ -std=c++20 -Wall -Wextra -Werror -o $(NAME) $(OBJ)
+
+game : $(OBJ_PACMAN) $(OBJ_SNAKE)
+	g++ -shared -o $(NAME_PACMAN) $(OBJ_PACMAN)
+	g++ -shared -o $(NAME_SNAKE) $(OBJ_SNAKE)
+
+graphicals : $(OBJ_NCURSES) $(OBJ_SFML) $(OBJ_SDL)
+	g++ -shared -o $(NAME_NCURSES) $(OBJ_NCURSES) -lncurses
+	g++ -shared -o $(NAME_SFML) $(OBJ_SFML) -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -shared -o $(NAME_SDL) $(OBJ_SDL) -lSDL2 -lSDL2_image -lSDL2_ttf
+
 clean:
 	rm -f $(OBJ)
 	rm -f $(OBJ_PACMAN)
