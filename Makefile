@@ -15,8 +15,8 @@ NAME_SDL 	 	= lib/arcade_sdl.so
 
 #Sources
 
-SRC_CORE      =	core/main.cpp \
-		            core/DLLoader.cpp \
+SRC_CORE      	= core/main.cpp \
+		          core/DLLoader.cpp \
 
 PACMAN_SRC   	= lib/pacman/pacman.cpp \
 
@@ -28,8 +28,8 @@ SFML_SRC     	= lib/sfml/sfml.cpp \
 
 SDL_SRC      	= lib/sdl/sdl.cpp \
 
-SRC_TEST      =	tests/test.cpp \
-			          core/DLLoader.cpp \
+SRC_TEST     	= tests/test.cpp \
+			      core/DLLoader.cpp \
 
 #Objects
 OBJ_CORE		= $(SRC_CORE:.cpp=.o)
