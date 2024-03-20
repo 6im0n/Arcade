@@ -5,9 +5,9 @@
 ** SnakeGame
 */
 
-#include "SnakeGame.hpp"
-#include "Wall.hpp"
-#include "Void.hpp"
+#include "lib/snake/SnakeGame.hpp"
+#include "lib/snake/Entities/Wall.hpp"
+#include "lib/snake/Entities/Void.hpp"
 
 void generateWallLine(std::vector<std::shared_ptr<IEntity>> &_entities, int y, int size)
 {

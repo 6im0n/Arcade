@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../../Interfaces/IEntity.hpp"
+#include "Interfaces/IEntity.hpp"
 
 class SnakeBody : public IEntity {
     public:

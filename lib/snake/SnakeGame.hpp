@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "../../Interfaces/IGame.hpp"
-#include "lib/snake/Entities/Snake.hpp"
+#include "Interfaces/IGame.hpp"
+#include "lib/snake/Snake.hpp"
 
 class SnakeGame : public IGame {
     public:
