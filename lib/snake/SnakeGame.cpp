@@ -36,6 +36,8 @@ SnakeGame::SnakeGame()
         generateLine(_entities, i, 20);
     }
     generateWallLine(_entities, 15, 20);
+    _score = 0;
+    _snake = Snake();
 }
 
 SnakeGame::~SnakeGame()
@@ -61,7 +63,11 @@ void SnakeGame::simulate()
 
 void SnakeGame::catchKeyEvent(int key)
 {
-    (void)key;
+    if (key == Keys::LEFT) {
+        _snake.setDirection(true);
+    } else if (key == Keys::RIGHT) {
+        _snake.setDirection(false);
+    }
 }
 
 std::vector<std::shared_ptr<IEntity>> SnakeGame::getEntities()

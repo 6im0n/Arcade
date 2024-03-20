@@ -8,6 +8,7 @@
 #pragma once
 
 #include "../../Interfaces/IGame.hpp"
+#include "lib/snake/Entities/Snake.hpp"
 
 class SnakeGame : public IGame {
     public:
@@ -33,4 +34,5 @@ class SnakeGame : public IGame {
         std::vector<std::shared_ptr<IText>> _texts;
         std::vector<std::shared_ptr<ISound>> _sounds;
         int _score;
+        Snake _snake;
 };
