@@ -5,6 +5,8 @@
 ** main.cpp
 */
 
+#include "DLLoader.hpp"
+
 int main(void)
 {
     return 0;
