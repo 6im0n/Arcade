@@ -14,7 +14,9 @@ NAME_SFML 	 	= lib/arcade_sfml.so
 NAME_SDL 	 	= lib/arcade_sdl.so
 
 #Sources
-SRC_CORE     	= core/main.cpp \
+
+SRC_CORE      =	core/main.cpp \
+		            core/DLLoader.cpp \
 
 PACMAN_SRC   	= lib/pacman/pacman.cpp \
 
@@ -26,7 +28,8 @@ SFML_SRC     	= lib/sfml/sfml.cpp \
 
 SDL_SRC      	= lib/sdl/sdl.cpp \
 
-SRC_TEST     	= tests/test.cpp \
+SRC_TEST      =	tests/test.cpp \
+			          core/DLLoader.cpp \
 
 #Objects
 OBJ_CORE		= $(SRC_CORE:.cpp=.o)
@@ -108,15 +111,16 @@ fclean: clean
 	@$(call GREEN,"✅ [$@] done !")
 
 tests_fclean:
-	@rm -f $(OBJ_TEST)
-	@rm -f unit_tests
-	@rm -f unit_tests-main.gcda
-	@rm -f unit_tests-main.gcno
+	rm -f $(OBJ_TEST)
+	rm -f $(NAME)
+	rm -f unit_tests
+	rm -f *.gcda
+	rm -f *.gcno
 
 re: fclean all
 
 tests_run: re
-	@g++ -o unit_tests $(SRC_CORE) $(CXXFLAGS) -lcriterion --coverage
+	g++ -o unit_tests $(SRC_TEST) $(CXXFLAGS) -lcriterion --coverage
 	./unit_tests
 	gcovr --exclude tests/
 	gcovr -b --exclude tests/
