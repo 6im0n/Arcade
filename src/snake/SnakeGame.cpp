@@ -47,6 +47,7 @@ SnakeGame::SnakeGame()
             _entities.push_back(entity);
         }
     }
+    srand(time(NULL));
 }
 
 SnakeGame::~SnakeGame()
@@ -82,16 +83,18 @@ int SnakeGame::simulate()
     }
 
     auto head = _snake.getSnake().front();
-    for (auto &food : _foods) {
-        std::vector<std::size_t> pos = food.get()->getPos();
+    for (std::size_t i = 0; i < _foods.size(); i++) {
+        std::vector<std::size_t> pos = _foods[i].get()->getPos();
         if (head->getPos()[0] == pos[0] && head->getPos()[1] == pos[1]) {
             _score += 1;
             _snake.growSnake();
 
-            delete &food;
+            _foods.erase(_foods.begin() + i);
             auto new_food = std::make_shared<Food>(_snake);
             _foods.push_back(new_food);
         }
+    }
+    for (auto &food : _foods) {
         _entities.push_back(food);
     }
     for (auto snakeBody : _snake.getSnake()) {
@@ -105,9 +108,13 @@ int SnakeGame::simulate()
 void SnakeGame::catchKeyEvent(int key)
 {
     if (key == Arcade::Keys::LEFT) {
-        _snake.setDirection(true);
+        _snake.setDirection(Direction::D_LEFT);
     } else if (key == Arcade::Keys::RIGHT) {
-        _snake.setDirection(false);
+        _snake.setDirection(Direction::D_RIGHT);
+    } else if (key == Arcade::Keys::UP) {
+        _snake.setDirection(Direction::D_UP);
+    } else if (key == Arcade::Keys::DOWN) {
+        _snake.setDirection(Direction::D_DOWN);
     }
 }
 

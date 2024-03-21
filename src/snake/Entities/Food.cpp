@@ -11,12 +11,13 @@
 
 std::size_t randomX()
 {
-    return rand() % AREA_GAME_WIDTH;
+
+    return (rand() % (AREA_GAME_WIDTH - 2)) + 1;
 }
 
 std::size_t randomY()
 {
-    return rand() % AREA_GAME_HEIGHT;
+    return (rand() % (AREA_GAME_HEIGHT - 2)) + 1;
 }
 
 std::vector<std::size_t> randomPos(Snake snake)
