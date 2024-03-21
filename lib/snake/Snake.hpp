@@ -26,6 +26,7 @@ class Snake {
         void moveSnake();
         void growSnake();
         void setDirection(bool left);
+        std::vector<std::shared_ptr<SnakeBody>> getSnake() const;
 
     protected:
     private:

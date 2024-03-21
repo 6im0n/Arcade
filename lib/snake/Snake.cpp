@@ -67,3 +67,8 @@ void Snake::setDirection(bool left)
         _dir = static_cast<Direction>(_dir - 1);
     }
 }
+
+std::vector<std::shared_ptr<SnakeBody>> Snake::getSnake() const
+{
+    return _snake;
+}
