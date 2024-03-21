@@ -6,6 +6,7 @@
 */
 
 #include "lib/snake/Snake.hpp"
+#include "Entities/Wall.hpp"
 
 Snake::Snake()
 {
@@ -27,18 +28,31 @@ void Snake::placeSnake(std::vector<std::shared_ptr<IEntity>> entities) const
     }
 }
 
-void Snake::moveSnake()
+int moveSnakePart(SnakeBody *part, std::vector<std::vector<std::shared_ptr<IEntity>>> map, std::size_t x, std::size_t y)
+{
+    if (typeid(map[y][x]) == typeid(Wall) || typeid(map[y][x]) == typeid(SnakeBody)) {
+        return -1;
+    }
+    part->setPos(x, y);
+    return 0;
+}
+
+int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
 {
     SnakeBody *head = _snake.front().get();
 
     if (_dir == D_UP)
-        head->setPos(head->getPos()[0], head->getPos()[1] - 1);
+        if (moveSnakePart(head, map, head->getPos()[0], head->getPos()[1] - 1) == -1)
+            return -1;
     if (_dir == D_DOWN)
-        head->setPos(head->getPos()[0], head->getPos()[1] + 1);
+        if (moveSnakePart(head, map, head->getPos()[0], head->getPos()[1] + 1) == -1)
+            return -1;
     if (_dir == D_LEFT)
-        head->setPos(head->getPos()[0] - 1, head->getPos()[1]);
+        if (moveSnakePart(head, map, head->getPos()[0] - 1, head->getPos()[1]) == -1)
+            return -1;
     if (_dir == D_RIGHT)
-        head->setPos(head->getPos()[0] + 1, head->getPos()[1]);
+        if (moveSnakePart(head, map, head->getPos()[0] + 1, head->getPos()[1]) == -1)
+            return -1;
 
     for (std::size_t i = 1; i < _snake.size(); i++) {
         SnakeBody *body = _snake[i].get();
@@ -46,8 +60,10 @@ void Snake::moveSnake()
         std::size_t x = prev->getPos()[0];
         std::size_t y = prev->getPos()[1];
 
-        body->setPos(x, y);
+        if (moveSnakePart(body, map, x, y) == 1)
+            return -1;
     }
+    return 0;
 }
 
 void Snake::growSnake()

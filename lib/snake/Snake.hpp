@@ -23,7 +23,7 @@ class Snake {
         ~Snake();
 
         void placeSnake(std::vector<std::shared_ptr<IEntity>>) const;
-        void moveSnake();
+        int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map);
         void growSnake();
         void setDirection(bool left);
         std::vector<std::shared_ptr<SnakeBody>> getSnake() const;

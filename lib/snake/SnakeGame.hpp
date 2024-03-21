@@ -37,6 +37,8 @@ class SnakeGame : public IGame {
         std::vector<std::shared_ptr<IEntity>> _entities;
         std::vector<std::shared_ptr<IText>> _texts;
         std::vector<std::shared_ptr<ISound>> _sounds;
+        std::vector<std::vector<std::shared_ptr<IEntity>>> _map;
+
         int _score;
         Snake _snake;
         std::vector<Food> _foods;
