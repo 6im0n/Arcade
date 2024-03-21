@@ -28,7 +28,7 @@ void generateLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
         line.push_back(void_case);
     }
     std::shared_ptr<Wall> wall2 = std::make_shared<Wall>(size - 1, y);
-    line.push_back(wall);
+    line.push_back(wall2);
 }
 
 SnakeGame::SnakeGame()
