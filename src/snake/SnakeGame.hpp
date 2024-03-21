@@ -13,6 +13,10 @@
 
 #define AREA_GAME_WIDTH 17
 #define AREA_GAME_HEIGHT 15
+#define WINDOW_WIDTH 25
+#define WINDOW_HEIGHT 29
+#define START_WIDTH (WINDOW_WIDTH - AREA_GAME_WIDTH) / 2
+#define START_HEIGHT (WINDOW_HEIGHT - AREA_GAME_HEIGHT) / 2
 
 class SnakeGame : public IGame {
     public:
