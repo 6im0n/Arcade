@@ -80,8 +80,6 @@ int SnakeGame::simulate()
             _entities.push_back(entity);
         }
     }
-    if (_snake.moveSnake(_map) == -1)
-        return -1;
 
     auto head = _snake.getSnake().front();
     for (auto &food : _foods) {
@@ -99,6 +97,8 @@ int SnakeGame::simulate()
     for (auto snakeBody : _snake.getSnake()) {
         _entities.push_back(snakeBody);
     }
+    if (_snake.moveSnake(_map) == -1)
+        return -1;
     return 0;
 }
 
