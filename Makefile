@@ -24,8 +24,9 @@ SNAKE_SRC =		lib/snake/Entities/Color.cpp		\
 				lib/snake/Entities/Void.cpp			\
 				lib/snake/Entities/Wall.cpp			\
 				lib/snake/Entities/SnakeBody.cpp	\
-				lib/snake/SnakeGame.cpp	\
-				lib/snake/Snake.cpp		\
+				lib/snake/Entities/Food.cpp			\
+				lib/snake/SnakeGame.cpp				\
+				lib/snake/Snake.cpp					\
 
 NCURSES_SRC  	= lib/ncurses/ncurses.cpp \
 

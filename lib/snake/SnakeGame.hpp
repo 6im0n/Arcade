@@ -9,6 +9,10 @@
 
 #include "Interfaces/IGame.hpp"
 #include "lib/snake/Snake.hpp"
+#include "lib/snake/Entities/Food.hpp"
+
+#define AREA_GAME_WIDTH 17
+#define AREA_GAME_HEIGHT 15
 
 class SnakeGame : public IGame {
     public:
@@ -35,4 +39,5 @@ class SnakeGame : public IGame {
         std::vector<std::shared_ptr<ISound>> _sounds;
         int _score;
         Snake _snake;
+        std::vector<Food> _foods;
 };
