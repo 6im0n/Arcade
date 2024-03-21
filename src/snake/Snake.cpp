@@ -30,9 +30,9 @@ void Snake::placeSnake(std::vector<std::shared_ptr<IEntity>> entities) const
 
 int moveSnakePart(SnakeBody *part, std::vector<std::vector<std::shared_ptr<IEntity>>> map, std::size_t x, std::size_t y)
 {
-    if (typeid(map[y][x]) == typeid(Wall) || typeid(map[y][x]) == typeid(SnakeBody)) {
+    IEntity *mapElement = map[y][x].get();
+    if (typeid(*mapElement) == typeid(Wall) || typeid(*mapElement) == typeid(SnakeBody))
         return -1;
-    }
     part->setPos(x, y);
     return 0;
 }
