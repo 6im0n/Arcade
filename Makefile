@@ -18,21 +18,21 @@ SRC_CORE      	= core/main.cpp \
 		          core/DLLoader.cpp \
 				  core/Core.cpp \
 
-PACMAN_SRC   	= lib/pacman/pacman.cpp \
+PACMAN_SRC   	= src/pacman/pacman.cpp \
 
-SNAKE_SRC =		lib/snake/Entities/Color.cpp		\
-				lib/snake/Entities/Void.cpp			\
-				lib/snake/Entities/Wall.cpp			\
-				lib/snake/Entities/SnakeBody.cpp	\
-				lib/snake/Entities/Food.cpp			\
-				lib/snake/SnakeGame.cpp				\
-				lib/snake/Snake.cpp					\
+SNAKE_SRC =		src/snake/Entities/Color.cpp		\
+				src/snake/Entities/Void.cpp			\
+				src/snake/Entities/Wall.cpp			\
+				src/snake/Entities/SnakeBody.cpp	\
+				src/snake/Entities/Food.cpp			\
+				src/snake/SnakeGame.cpp				\
+				src/snake/Snake.cpp					\
 
-NCURSES_SRC  	= lib/ncurses/ncurses.cpp \
+NCURSES_SRC  	= src/ncurses/ncurses.cpp \
 
-SFML_SRC     	= lib/sfml/sfml.cpp \
+SFML_SRC     	= src/sfml/sfml.cpp \
 
-SDL_SRC      	= lib/sdl/sdl.cpp \
+SDL_SRC      	= src/sdl/sdl.cpp \
 
 SRC_TEST     	= tests/testDLLoader.cpp \
 			      core/DLLoader.cpp \

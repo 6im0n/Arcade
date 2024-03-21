@@ -8,8 +8,8 @@
 #pragma once
 
 #include "Interfaces/IGame.hpp"
-#include "lib/snake/Snake.hpp"
-#include "lib/snake/Entities/Food.hpp"
+#include "Snake.hpp"
+#include "Entities/Food.hpp"
 
 #define AREA_GAME_WIDTH 17
 #define AREA_GAME_HEIGHT 15

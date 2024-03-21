@@ -7,7 +7,7 @@
 
 #include "Food.hpp"
 #include "Color.hpp"
-#include "lib/snake/SnakeGame.hpp"
+#include "src/snake/SnakeGame.hpp"
 
 std::size_t randomX()
 {
@@ -35,8 +35,10 @@ std::vector<std::size_t> randomPos(Snake snake)
 
 Food::Food(Snake snake)
 {
-    _size = {1, 1};
+    _size = {17, 17};
     _pos = randomPos(snake);
+    _path = "assets/apple";
+    _rotation = 0;
     _char = 'O';
     _color = std::make_unique<Color>(40, 79, 42, 255);
 }

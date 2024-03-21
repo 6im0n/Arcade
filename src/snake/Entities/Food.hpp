@@ -8,7 +8,7 @@
 #pragma once
 
 #include "Interfaces/IEntity.hpp"
-#include "lib/snake/Snake.hpp"
+#include "src/snake/Snake.hpp"
 
 class Food : public IEntity {
     public:

@@ -8,7 +8,7 @@
 #pragma once
 
 #include "Interfaces/IEntity.hpp"
-#include <lib/snake/Entities/SnakeBody.hpp>
+#include <src/snake/Entities/SnakeBody.hpp>
 
 enum Direction {
     D_LEFT,

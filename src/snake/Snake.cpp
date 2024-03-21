@@ -5,7 +5,7 @@
 ** Snake
 */
 
-#include "lib/snake/Snake.hpp"
+#include "Snake.hpp"
 #include "Entities/Wall.hpp"
 
 Snake::Snake()

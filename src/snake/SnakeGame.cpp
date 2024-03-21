@@ -5,10 +5,10 @@
 ** SnakeGame
 */
 
-#include "lib/snake/SnakeGame.hpp"
-#include "lib/snake/Entities/Wall.hpp"
-#include "lib/snake/Entities/Void.hpp"
-#include "lib/snake/Entities/Food.hpp"
+#include "SnakeGame.hpp"
+#include "Entities/Wall.hpp"
+#include "Entities/Void.hpp"
+#include "Entities/Food.hpp"
 #include "includes/keys.hpp"
 
 void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
@@ -28,11 +28,15 @@ void generateLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
         line.push_back(void_case);
     }
     std::shared_ptr<Wall> wall2 = std::make_shared<Wall>(size - 1, y);
-    line.push_back(wall2);
+    line.push_back(wall);
 }
 
 SnakeGame::SnakeGame()
 {
+    for (int i = 0; i < 15; i++) {
+        std::vector<std::shared_ptr<IEntity>> line;
+        _map.push_back(line);
+    }
     generateWallLine(_map[0], 0, 20);
     for (int i = 1; i < 14; i++) {
         generateLine(_map[i], i, 20);
@@ -70,6 +74,12 @@ int SnakeGame::getScore()
 
 int SnakeGame::simulate()
 {
+    _entities.clear();
+    for (auto &line : _map) {
+        for (auto &entity : line) {
+            _entities.push_back(entity);
+        }
+    }
     if (_snake.moveSnake(_map) == -1)
         return -1;
 
@@ -114,4 +124,20 @@ std::vector<std::shared_ptr<IText>> SnakeGame::getTexts()
 std::vector<std::shared_ptr<ISound>> SnakeGame::getSounds()
 {
     return _sounds;
+}
+
+extern "C"
+{
+    __attribute__((constructor))
+    void constructor()
+    {
+    }
+    __attribute__((destructor))
+    void destructor()
+    {
+    }
+    std::unique_ptr<SnakeGame> loadGameInstance()
+    {
+        return std::make_unique<SnakeGame>();
+    }
 }

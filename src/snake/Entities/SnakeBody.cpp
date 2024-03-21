@@ -11,7 +11,10 @@
 SnakeBody::SnakeBody(std::size_t x, std::size_t y)
 {
     _pos = {x, y};
+    _size = {17, 17};
+    _path = "assets/body";
     _char = '=';
+    _rotation = 0;
     _color = std::make_unique<Color>(39, 122, 16, 255);
 }
 
