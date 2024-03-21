@@ -82,13 +82,9 @@ void Snake::growSnake()
     _snake.push_back(std::make_shared<SnakeBody>(x, y));
 }
 
-void Snake::setDirection(bool left)
+void Snake::setDirection(Direction dir)
 {
-    if (left) {
-        _dir = static_cast<Direction>(_dir + 1);
-    } else {
-        _dir = static_cast<Direction>(_dir - 1);
-    }
+    _dir = dir;
 }
 
 std::vector<std::shared_ptr<SnakeBody>> Snake::getSnake() const
