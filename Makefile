@@ -14,9 +14,9 @@ NAME_SFML 	 	= lib/arcade_sfml.so
 NAME_SDL 	 	= lib/arcade_sdl.so
 
 #Sources
-
 SRC_CORE      	= core/main.cpp \
 		          core/DLLoader.cpp \
+				  core/Core.cpp \
 
 PACMAN_SRC   	= lib/pacman/pacman.cpp \
 
@@ -34,7 +34,7 @@ SFML_SRC     	= lib/sfml/sfml.cpp \
 
 SDL_SRC      	= lib/sdl/sdl.cpp \
 
-SRC_TEST     	= tests/test.cpp \
+SRC_TEST     	= tests/testDLLoader.cpp \
 			      core/DLLoader.cpp \
 
 #Objects
@@ -116,7 +116,7 @@ fclean: clean
 	@rm -f $(NAME_SDL)
 	@$(call GREEN,"✅ [$@] done !")
 
-tests_fclean:
+tests_fclean: fclean
 	rm -f $(OBJ_TEST)
 	rm -f $(NAME)
 	rm -f unit_tests

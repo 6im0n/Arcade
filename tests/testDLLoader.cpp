@@ -9,21 +9,21 @@
 
 Test(dlLoader, dlLoader_good_test)
 {
-    arcade::DLLoader<int> *tmp = new arcade::DLLoader<int>("init");
+    Arcade::DLLoader<int> *tmp = new Arcade::DLLoader<int>("init");
     int *test = tmp->getInstance("./lib/ncurses.so");
     cr_assert_eq(test, 0);
 }
 
 Test(dlLoader, dlLoader_bad_lib)
 {
-    arcade::DLLoader<int> *tmp = new arcade::DLLoader<int>("init");
+    Arcade::DLLoader<int> *tmp = new Arcade::DLLoader<int>("init");
     int *test = tmp->getInstance("./lib/ncuses.so");
     cr_assert_eq(test, nullptr);
 }
 
 Test(dlLoader, dlLoader_bad_entry)
 {
-    arcade::DLLoader<int> *tmp = new arcade::DLLoader<int>("a");
+    Arcade::DLLoader<int> *tmp = new Arcade::DLLoader<int>("a");
     int *test = tmp->getInstance("./lib/ncurses.so");
     cr_assert_eq(test, nullptr);
 }
