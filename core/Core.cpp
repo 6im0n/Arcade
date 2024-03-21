@@ -9,9 +9,12 @@
 
 arcade::Core::Core(std::string graphicPath)
 {
-    _graphicLoader = new DLLoader<IGraphic>(GRAPHIC_ENTRY_POINT);
+    _graphicLoader = new DLLoader<IGraphic>(ENTRY_POINT);
     _graphic = _graphicLoader->getInstance(graphicPath);
-    _gameLoader = new DLLoader<IGame>(GAME_ENTRY_POINT);
+    if (_graphic == nullptr) {
+        exit(84);
+    }
+    _gameLoader = new DLLoader<IGame>(ENTRY_POINT);
 }
 
 arcade::Core::~Core()
@@ -41,14 +44,14 @@ void arcade::Core::run()
                 if (_isMenu == false) {
                     quitGame();
                 } else {
-                    break;
+                    exit(84);
                 }
             }
             if (_game->startGame() == -1) {
                 if (_isMenu == false) {
                     quitGame();
                 } else {
-                    break;
+                    exit(84);
                 }
             }
         }

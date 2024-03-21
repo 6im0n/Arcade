@@ -10,13 +10,12 @@
 #include "DLLoader.hpp"
 #include <memory>
 
-#define GRAPHIC_ENTRY_POINT "entryPointGraphic"
-#define GAME_ENTRY_POINT "entryPointGame"
+#define ENTRY_POINT "loadInstance"
 
-//key O = next game
-//key P = previous game
-//key L = next graphic
-//key M = previous graphic
+//key O = previous game
+//key P = next game
+//key L = previous graphic
+//key M = next graphic
 
 namespace arcade {
     class Core {
