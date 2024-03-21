@@ -9,33 +9,33 @@
 #include "lib/snake/Entities/Wall.hpp"
 #include "lib/snake/Entities/Void.hpp"
 
-void generateWallLine(std::vector<std::shared_ptr<IEntity>> &_entities, int y, int size)
+void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
     for (int i = 0; i < size; i++) {
         std::shared_ptr<Wall> wall = std::make_shared<Wall>(i, y);
-        _entities.push_back(wall);
+        line.push_back(wall);
     }
 }
 
-void generateLine(std::vector<std::shared_ptr<IEntity>> &_entities, int y, int size)
+void generateLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
     std::shared_ptr<Wall> wall = std::make_shared<Wall>(0, y);
-    _entities.push_back(wall);
+    line.push_back(wall);
     for (int i = 1; i < size - 1; i++) {
         std::shared_ptr<Void> void_case = std::make_shared<Void>(i, y);
-        _entities.push_back(void_case);
+        line.push_back(void_case);
     }
     std::shared_ptr<Wall> wall2 = std::make_shared<Wall>(size - 1, y);
-    _entities.push_back(wall2);
+    line.push_back(wall2);
 }
 
 SnakeGame::SnakeGame()
 {
-    generateWallLine(_entities, 0, 20);
-    for (int i = 1; i < 15; i++) {
-        generateLine(_entities, i, 20);
+    generateWallLine(_map[0], 0, 20);
+    for (int i = 1; i < 14; i++) {
+        generateLine(_map[i], i, 20);
     }
-    generateWallLine(_entities, 15, 20);
+    generateWallLine(_map[14], 14, 20);
     _score = 0;
     _snake = Snake();
 }
