@@ -12,7 +12,7 @@
 
 #include "IEntity.hpp"
 
-namespace arcade {
+namespace Arcade {
     class IText {
         public:
             virtual ~IText() = default;

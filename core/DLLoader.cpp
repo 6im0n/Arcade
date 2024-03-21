@@ -12,17 +12,17 @@
 #include <dlfcn.h>
 
 template <typename T>
-arcade::DLLoader<T>::DLLoader(std::string const &entryPoint) : entryPoint(entryPoint) {
+Arcade::DLLoader<T>::DLLoader(std::string const &entryPoint) : entryPoint(entryPoint) {
     handle = nullptr;
 }
 
 template <typename T>
-arcade::DLLoader<T>::~DLLoader() {
+Arcade::DLLoader<T>::~DLLoader() {
     dlclose(handle);
 }
 
 template <typename T>
-T *arcade::DLLoader<T>::getInstance(std::string const &libname) {
+T *Arcade::DLLoader<T>::getInstance(std::string const &libname) {
     if (handle != nullptr)
         dlclose(handle);
     handle = dlopen(libname.c_str(), RTLD_LAZY);
@@ -36,10 +36,10 @@ T *arcade::DLLoader<T>::getInstance(std::string const &libname) {
 }
 
 template <typename T>
-void arcade::DLLoader<T>::setEntryPoint(std::string const &entryPoint) {
+void Arcade::DLLoader<T>::setEntryPoint(std::string const &entryPoint) {
     this->entryPoint = entryPoint;
 }
 
-template class arcade::DLLoader<int>;
-template class arcade::DLLoader<arcade::IGame>;
-template class arcade::DLLoader<arcade::IGraphic>;
+template class Arcade::DLLoader<int>;
+template class Arcade::DLLoader<Arcade::IGame>;
+template class Arcade::DLLoader<Arcade::IGraphic>;

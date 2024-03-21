@@ -12,7 +12,7 @@
 #include "ISound.hpp"
 #include <memory>
 
-namespace arcade {
+namespace Arcade {
     enum Keys {
         UNKNOWN = -1,
         A = 0,

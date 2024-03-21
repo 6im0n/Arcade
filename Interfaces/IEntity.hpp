@@ -11,7 +11,7 @@
 #include <memory>
 #include <vector>
 
-namespace arcade {
+namespace Arcade {
     class IColor {
         public:
             virtual ~IColor() = default;

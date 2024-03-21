@@ -8,7 +8,7 @@
 #include <vector>
 #include <string>
 
-namespace arcade {
+namespace Arcade {
     template <typename T>
     class DLLoader {
         public :

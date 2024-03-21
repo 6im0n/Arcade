@@ -12,7 +12,7 @@
 #include "ISound.hpp"
 #include <memory>
 
-namespace arcade {
+namespace Arcade {
     class IGame {
         public:
             virtual ~IGame() = default;

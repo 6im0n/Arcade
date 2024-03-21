@@ -7,7 +7,7 @@
 
 #include "Core.hpp"
 
-arcade::Core::Core(std::string graphicPath)
+Arcade::Core::Core(std::string graphicPath)
 {
     _graphicLoader = new DLLoader<IGraphic>(ENTRY_POINT);
     _graphic = _graphicLoader->getInstance(graphicPath);
@@ -17,7 +17,7 @@ arcade::Core::Core(std::string graphicPath)
     _gameLoader = new DLLoader<IGame>(ENTRY_POINT);
 }
 
-arcade::Core::~Core()
+Arcade::Core::~Core()
 {
     delete _graphic;
     delete _game;
@@ -26,12 +26,12 @@ arcade::Core::~Core()
     delete _gameLoader;
 }
 
-void arcade::Core::run()
+void Arcade::Core::run()
 {
     while (5) {
         _key_event = _graphic->getKeyEvent();
-        if (_key_event == arcade::Keys::O || _key_event == arcade::Keys::P
-            || _key_event == arcade::Keys::L || _key_event == arcade::Keys::M) {
+        if (_key_event == Arcade::Keys::O || _key_event == Arcade::Keys::P
+            || _key_event == Arcade::Keys::L || _key_event == Arcade::Keys::M) {
         } else {
             _game->catchKeyEvent(_key_event);
         }
@@ -55,28 +55,28 @@ void arcade::Core::run()
                 }
             }
         }
-        _key_event = arcade::Keys::UNKNOWN;
+        _key_event = Arcade::Keys::UNKNOWN;
     }
 }
 
-void arcade::Core::loadMenu()
+void Arcade::Core::loadMenu()
 {
     _game = _menu;
     _isMenu = true;
 }
 
-void arcade::Core::loadGame(const std::string &gamePath)
+void Arcade::Core::loadGame(const std::string &gamePath)
 {
     _game = _gameLoader->getInstance(gamePath);
     _isMenu = false;
 }
 
-void arcade::Core::loadGraphic(const std::string &graphicPath)
+void Arcade::Core::loadGraphic(const std::string &graphicPath)
 {
     _graphic = _graphicLoader->getInstance(graphicPath);
 }
 
-void arcade::Core::quitGame()
+void Arcade::Core::quitGame()
 {
     delete _game;
     loadMenu();

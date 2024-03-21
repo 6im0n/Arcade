@@ -9,7 +9,7 @@
 
 #include <string>
 
-namespace arcade {
+namespace Arcade {
     class ISound {
         public:
             enum Status {

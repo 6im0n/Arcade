@@ -17,7 +17,7 @@
 //key L = previous graphic
 //key M = next graphic
 
-namespace arcade {
+namespace Arcade {
     class Core {
         public :
             Core(std::string graphicPath);
