@@ -8,6 +8,7 @@
 #include "lib/snake/SnakeGame.hpp"
 #include "lib/snake/Entities/Wall.hpp"
 #include "lib/snake/Entities/Void.hpp"
+#include "lib/snake/Entities/Food.hpp"
 #include "includes/keys.hpp"
 
 void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
@@ -37,20 +38,29 @@ SnakeGame::SnakeGame()
         generateLine(_map[i], i, 20);
     }
     generateWallLine(_map[14], 14, 20);
-    _score = 0;
-    _snake = Snake();
+    for (auto &line : _map) {
+        for (auto &entity : line) {
+            _entities.push_back(entity);
+        }
+    }
 }
 
 SnakeGame::~SnakeGame()
 {
 }
 
-void SnakeGame::startGame()
+int SnakeGame::startGame()
 {
+    _snake = Snake();
+    auto new_food = std::make_shared<Food>(_snake);
+    _foods.push_back(new_food);
+    _score = 0;
+    return 0;
 }
 
-void SnakeGame::stopGame()
+int SnakeGame::stopGame()
 {
+    return 0;
 }
 
 int SnakeGame::getScore()
@@ -58,8 +68,28 @@ int SnakeGame::getScore()
     return _score;
 }
 
-void SnakeGame::simulate()
+int SnakeGame::simulate()
 {
+    if (_snake.moveSnake(_map) == -1)
+        return -1;
+
+    auto head = _snake.getSnake().front();
+    for (auto &food : _foods) {
+        std::vector<std::size_t> pos = food.get()->getPos();
+        if (head->getPos()[0] == pos[0] && head->getPos()[1] == pos[1]) {
+            _score += 1;
+            _snake.growSnake();
+
+            delete &food;
+            auto new_food = std::make_shared<Food>(_snake);
+            _foods.push_back(new_food);
+        }
+        _entities.push_back(food);
+    }
+    for (auto snakeBody : _snake.getSnake()) {
+        _entities.push_back(snakeBody);
+    }
+    return 0;
 }
 
 void SnakeGame::catchKeyEvent(int key)
