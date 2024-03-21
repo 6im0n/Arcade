@@ -45,6 +45,16 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
     if (_timer.getElapsedTime() < _speed)
         return 0;
 
+    for (std::size_t i = _snake.size() - 1; i > 0; i--) {
+        SnakeBody *current = _snake[i].get();
+        SnakeBody *prev = _snake[i - 1].get();
+        std::size_t x = prev->getPos()[0];
+        std::size_t y = prev->getPos()[1];
+
+        if (moveSnakePart(current, map, x, y) == 1)
+            return -1;
+    }
+
     SnakeBody *head = _snake.front().get();
     if (_dir == D_UP)
         if (moveSnakePart(head, map, head->getPos()[0], head->getPos()[1] - 1) == -1)
@@ -59,15 +69,6 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
         if (moveSnakePart(head, map, head->getPos()[0] + 1, head->getPos()[1]) == -1)
             return -1;
 
-    for (std::size_t i = 1; i < _snake.size(); i++) {
-        SnakeBody *body = _snake[i].get();
-        SnakeBody *prev = _snake[i - 1].get();
-        std::size_t x = prev->getPos()[0];
-        std::size_t y = prev->getPos()[1];
-
-        if (moveSnakePart(body, map, x, y) == 1)
-            return -1;
-    }
     _timer.reset();
     return 0;
 }
