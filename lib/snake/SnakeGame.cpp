@@ -8,6 +8,7 @@
 #include "lib/snake/SnakeGame.hpp"
 #include "lib/snake/Entities/Wall.hpp"
 #include "lib/snake/Entities/Void.hpp"
+#include "includes/keys.hpp"
 
 void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
@@ -63,9 +64,9 @@ void SnakeGame::simulate()
 
 void SnakeGame::catchKeyEvent(int key)
 {
-    if (key == Keys::LEFT) {
+    if (key == Arcade::Keys::LEFT) {
         _snake.setDirection(true);
-    } else if (key == Keys::RIGHT) {
+    } else if (key == Arcade::Keys::RIGHT) {
         _snake.setDirection(false);
     }
 }
