@@ -6,11 +6,13 @@
 */
 
 #include "DLLoader.hpp"
+#include "../Interfaces/IGame.hpp"
+#include "../Interfaces/IGraphic.hpp"
 #include <iostream>
 #include <dlfcn.h>
 
 template <typename T>
-arcade::DLLoader<T>::DLLoader(std::string const &entryPoint) : entryPoint(entryPoint){
+arcade::DLLoader<T>::DLLoader(std::string const &entryPoint) : entryPoint(entryPoint) {
     handle = nullptr;
 }
 
@@ -33,4 +35,11 @@ T *arcade::DLLoader<T>::getInstance(std::string const &libname) {
     return tmp;
 }
 
+template <typename T>
+void arcade::DLLoader<T>::setEntryPoint(std::string const &entryPoint) {
+    this->entryPoint = entryPoint;
+}
+
 template class arcade::DLLoader<int>;
+template class arcade::DLLoader<arcade::IGame>;
+template class arcade::DLLoader<arcade::IGraphic>;
