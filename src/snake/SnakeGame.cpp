@@ -14,20 +14,20 @@
 void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
     for (int i = 0; i < size; i++) {
-        std::shared_ptr<Wall> wall = std::make_shared<Wall>(i, y);
+        std::shared_ptr<Wall> wall = std::make_shared<Wall>(i + START_WIDTH, y + START_HEIGHT);
         line.push_back(wall);
     }
 }
 
 void generateLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
-    std::shared_ptr<Wall> wall = std::make_shared<Wall>(0, y);
+    std::shared_ptr<Wall> wall = std::make_shared<Wall>(START_WIDTH, y + START_HEIGHT);
     line.push_back(wall);
     for (int i = 1; i < size - 1; i++) {
-        std::shared_ptr<Void> void_case = std::make_shared<Void>(i, y);
+        std::shared_ptr<Void> void_case = std::make_shared<Void>(i + START_WIDTH, y + START_HEIGHT);
         line.push_back(void_case);
     }
-    std::shared_ptr<Wall> wall2 = std::make_shared<Wall>(size - 1, y);
+    std::shared_ptr<Wall> wall2 = std::make_shared<Wall>(size - 1 + START_WIDTH, y + START_HEIGHT);
     line.push_back(wall2);
 }
 

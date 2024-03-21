@@ -7,13 +7,14 @@
 
 #include "Snake.hpp"
 #include "Entities/Wall.hpp"
+#include "SnakeGame.hpp"
 
 Snake::Snake()
 {
-    _snake.push_back(std::make_shared<SnakeBody>(10, 10));
-    _snake.push_back(std::make_shared<SnakeBody>(10, 11));
-    _snake.push_back(std::make_shared<SnakeBody>(10, 12));
-    _snake.push_back(std::make_shared<SnakeBody>(10, 13));
+    _snake.push_back(std::make_shared<SnakeBody>(14, 17));
+    _snake.push_back(std::make_shared<SnakeBody>(14, 18));
+    _snake.push_back(std::make_shared<SnakeBody>(14, 19));
+    _snake.push_back(std::make_shared<SnakeBody>(14, 20));
     _dir = D_RIGHT;
     _timer = Timer();
     _timer.start();
@@ -36,7 +37,7 @@ int moveSnakePart(SnakeBody *part, std::vector<std::vector<std::shared_ptr<IEnti
     IEntity *mapElement = map[y][x].get();
     if (typeid(*mapElement) == typeid(Wall) || typeid(*mapElement) == typeid(SnakeBody))
         return -1;
-    part->setPos(x, y);
+    part->setPos(x + START_WIDTH, y + START_HEIGHT);
     return 0;
 }
 
@@ -48,8 +49,8 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
     for (std::size_t i = _snake.size() - 1; i > 0; i--) {
         SnakeBody *current = _snake[i].get();
         SnakeBody *prev = _snake[i - 1].get();
-        std::size_t x = prev->getPos()[0];
-        std::size_t y = prev->getPos()[1];
+        std::size_t x = prev->getPos()[0] - START_WIDTH;
+        std::size_t y = prev->getPos()[1] - START_HEIGHT;
 
         if (moveSnakePart(current, map, x, y) == 1)
             return -1;
@@ -57,16 +58,16 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
 
     SnakeBody *head = _snake.front().get();
     if (_dir == D_UP)
-        if (moveSnakePart(head, map, head->getPos()[0], head->getPos()[1] - 1) == -1)
+        if (moveSnakePart(head, map, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == -1)
             return -1;
     if (_dir == D_DOWN)
-        if (moveSnakePart(head, map, head->getPos()[0], head->getPos()[1] + 1) == -1)
+        if (moveSnakePart(head, map, head->getPos()[0] - START_WIDTH, head->getPos()[1] + 1 - START_HEIGHT) == -1)
             return -1;
     if (_dir == D_LEFT)
-        if (moveSnakePart(head, map, head->getPos()[0] - 1, head->getPos()[1]) == -1)
+        if (moveSnakePart(head, map, head->getPos()[0] - 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == -1)
             return -1;
     if (_dir == D_RIGHT)
-        if (moveSnakePart(head, map, head->getPos()[0] + 1, head->getPos()[1]) == -1)
+        if (moveSnakePart(head, map, head->getPos()[0] + 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == -1)
             return -1;
 
     _timer.reset();
