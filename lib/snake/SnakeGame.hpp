@@ -20,10 +20,10 @@ class SnakeGame : public IGame {
         ~SnakeGame();
 
         //Game
-        void startGame();
-        void stopGame();
+        int startGame();
+        int stopGame();
         int getScore();
-        void simulate();
+        int simulate();
 
         //Event
         void catchKeyEvent(int key);
@@ -41,5 +41,5 @@ class SnakeGame : public IGame {
 
         int _score;
         Snake _snake;
-        std::vector<Food> _foods;
+        std::vector<std::shared_ptr<Food>> _foods;
 };
