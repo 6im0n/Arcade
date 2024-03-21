@@ -12,7 +12,7 @@
 
 #include "IEntity.hpp"
 
-namespace Arcade {
+//namespace Arcade {
     class IText {
         public:
             virtual ~IText() = default;
@@ -33,4 +33,4 @@ namespace Arcade {
             virtual std::size_t getSize() const = 0;
             virtual float getRotation() const = 0;
     };
-}
+//}

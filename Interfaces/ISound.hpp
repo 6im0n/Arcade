@@ -9,7 +9,7 @@
 
 #include <string>
 
-namespace Arcade {
+//namespace Arcade {
     class ISound {
         public:
             enum Status {
@@ -30,4 +30,4 @@ namespace Arcade {
             virtual float getVolume() const = 0;
             virtual int getStatus() const = 0;
     };
-}
+//}

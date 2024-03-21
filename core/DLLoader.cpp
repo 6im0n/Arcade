@@ -41,5 +41,5 @@ void Arcade::DLLoader<T>::setEntryPoint(std::string const &entryPoint) {
 }
 
 template class Arcade::DLLoader<int>;
-template class Arcade::DLLoader<Arcade::IGame>;
-template class Arcade::DLLoader<Arcade::IGraphic>;
+template class Arcade::DLLoader<IGame>;
+template class Arcade::DLLoader<IGraphic>;

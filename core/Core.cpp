@@ -30,8 +30,8 @@ void Arcade::Core::run()
 {
     while (5) {
         _key_event = _graphic->getKeyEvent();
-        if (_key_event == Arcade::Keys::O || _key_event == Arcade::Keys::P
-            || _key_event == Arcade::Keys::L || _key_event == Arcade::Keys::M) {
+        if (_key_event == Keys::O || _key_event == Keys::P
+            || _key_event == Keys::L || _key_event == Keys::M) {
         } else {
             _game->catchKeyEvent(_key_event);
         }
@@ -55,7 +55,7 @@ void Arcade::Core::run()
                 }
             }
         }
-        _key_event = Arcade::Keys::UNKNOWN;
+        _key_event = Keys::UNKNOWN;
     }
 }
 

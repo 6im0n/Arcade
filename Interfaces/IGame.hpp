@@ -12,7 +12,7 @@
 #include "ISound.hpp"
 #include <memory>
 
-namespace Arcade {
+//namespace Arcade {
     class IGame {
         public:
             virtual ~IGame() = default;
@@ -31,4 +31,4 @@ namespace Arcade {
             virtual std::vector<std::shared_ptr<IText>> getTexts() = 0;
             virtual std::vector<std::shared_ptr<ISound>> getSounds() = 0;
     };
-}
+//}

@@ -12,7 +12,7 @@
 #include "ISound.hpp"
 #include <memory>
 
-namespace Arcade {
+//namespace Arcade {
     enum Keys {
         UNKNOWN = -1,
         A = 0,
@@ -82,4 +82,4 @@ namespace Arcade {
             virtual void displayText(std::vector<std::shared_ptr<IText>> texts) = 0;
             virtual void playSound(std::vector<std::shared_ptr<ISound>> sounds) = 0;
     };
-}
+//}
