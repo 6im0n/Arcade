@@ -15,6 +15,9 @@ Snake::Snake()
     _snake.push_back(std::make_shared<SnakeBody>(10, 12));
     _snake.push_back(std::make_shared<SnakeBody>(10, 13));
     _dir = D_RIGHT;
+    _timer = Timer();
+    _timer.start();
+    _speed = 0.4;
 }
 
 Snake::~Snake()
@@ -39,8 +42,10 @@ int moveSnakePart(SnakeBody *part, std::vector<std::vector<std::shared_ptr<IEnti
 
 int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
 {
-    SnakeBody *head = _snake.front().get();
+    if (_timer.getElapsedTime() < _speed)
+        return 0;
 
+    SnakeBody *head = _snake.front().get();
     if (_dir == D_UP)
         if (moveSnakePart(head, map, head->getPos()[0], head->getPos()[1] - 1) == -1)
             return -1;
@@ -63,6 +68,7 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
         if (moveSnakePart(body, map, x, y) == 1)
             return -1;
     }
+    _timer.reset();
     return 0;
 }
 

@@ -27,6 +27,7 @@ SNAKE_SRC =		src/snake/Entities/Color.cpp		\
 				src/snake/Entities/Food.cpp			\
 				src/snake/SnakeGame.cpp				\
 				src/snake/Snake.cpp					\
+				classes/Timer.cpp					\
 
 NCURSES_SRC  	= src/ncurses/ncurses.cpp \
 

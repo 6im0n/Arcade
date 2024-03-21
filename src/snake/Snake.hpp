@@ -7,8 +7,11 @@
 
 #pragma once
 
+#include <chrono>
+
+#include "src/snake/Entities/SnakeBody.hpp"
 #include "Interfaces/IEntity.hpp"
-#include <src/snake/Entities/SnakeBody.hpp>
+#include "classes/Timer.hpp"
 
 enum Direction {
     D_LEFT,
@@ -32,4 +35,6 @@ class Snake {
     private:
         std::vector<std::shared_ptr<SnakeBody>> _snake;
         Direction _dir;
+        Timer _timer;
+        float _speed;
 };
