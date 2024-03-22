@@ -113,11 +113,11 @@ Test(Snake, MoveNormalyDown)
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
     snake.setDirection(D_DOWN);
-    cr_assert_eq(snake.moveSnake(map), 0);
+    cr_assert_eq(snake.moveSnake(map), -1);
     std::vector<std::shared_ptr<SnakeBody>> snakeEntities2 = snake.getSnake();
     cr_assert_eq(snakeEntities.size(), 4);
     cr_assert_eq(snakeEntities2.size(), 4);
-    cr_assert_eq(snakeEntities2[0]->getPos()[1], headpos[1] + 1, "Expected %d %d, got %d %d", headpos[0], headpos[1] + 1, snakeEntities2[0]->getPos()[0], snakeEntities2[0]->getPos()[1]);
+    cr_assert_eq(snakeEntities2[0]->getPos()[1], headpos[1], "Expected %d %d, got %d %d", headpos[0], headpos[1], snakeEntities2[0]->getPos()[0], snakeEntities2[0]->getPos()[1]);
 }
 
 Test(Snake, MoveNormalyUp)

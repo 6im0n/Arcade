@@ -47,6 +47,7 @@ SnakeGame::SnakeGame()
             _entities.push_back(entity);
         }
     }
+    _score = 0;
     srand(time(NULL));
 }
 
