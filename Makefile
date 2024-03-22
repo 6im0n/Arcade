@@ -41,6 +41,7 @@ SRC_TEST     	= tests/tests_color.cpp		\
 				  classes/Timer.cpp			\
 				  tests/snake/Entities/tests_food.cpp		\
 				  tests/snake/Entities/tests_void.cpp		\
+				  tests/snake/Entities/tests_wall.cpp		\
 				  tests/snake/Entities/tests_snake_body.cpp	\
 				  src/snake/Entities/Food.cpp				\
 				  src/snake/Entities/Wall.cpp				\
