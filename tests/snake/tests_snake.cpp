@@ -13,7 +13,7 @@
 #include "src/snake/Entities/Void.hpp"
 #include "src/snake/SnakeGame.hpp"
 
-void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
+static void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
     for (int i = 0; i < size; i++) {
         std::shared_ptr<Wall> wall = std::make_shared<Wall>(i + START_WIDTH, y + START_HEIGHT);
@@ -21,7 +21,7 @@ void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int si
     }
 }
 
-void generateLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
+static void generateLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
     std::shared_ptr<Wall> wall = std::make_shared<Wall>(START_WIDTH, y + START_HEIGHT);
     line.push_back(wall);

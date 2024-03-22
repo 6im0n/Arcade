@@ -44,9 +44,11 @@ SRC_TEST     	= tests/tests_color.cpp		\
 				  tests/snake/Entities/tests_wall.cpp		\
 				  tests/snake/Entities/tests_snake_body.cpp	\
 				  tests/snake/tests_snake.cpp	\
+				  tests/snake/tests_SnakeGame.cpp	\
 				  src/snake/Entities/Food.cpp				\
 				  src/snake/Entities/Wall.cpp				\
 				  src/snake/Snake.cpp						\
+				  src/snake/SnakeGame.cpp						\
 				  src/snake/Entities/SnakeBody.cpp			\
 				  src/snake/Entities/Void.cpp				\
 
