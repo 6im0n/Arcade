@@ -28,7 +28,7 @@ Test(SnakeGame, GetScore)
 {
     SnakeGame game;
     int score = game.getScore();
-    cr_assert_eq(score, 0);
+    cr_assert_eq(score, 0, "Expected 0, got %d", score);
 }
 
 Test(SnakeGame, Simulate)
