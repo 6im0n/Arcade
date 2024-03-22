@@ -21,13 +21,23 @@ Snake::Snake()
     _speed = 0.4;
 }
 
-int moveSnakePart(SnakeBody *part, std::vector<std::vector<std::shared_ptr<IEntity>>> map, std::size_t x, std::size_t y)
+bool checkCollision(std::vector<std::vector<std::shared_ptr<IEntity>>> map,
+    std::vector<std::shared_ptr<SnakeBody>> snake,
+    std::size_t x, std::size_t y)
 {
     IEntity *mapElement = map[y][x].get();
-    if (typeid(*mapElement) == typeid(Wall) || typeid(*mapElement) == typeid(SnakeBody))
-        return -1;
+    if (typeid(*mapElement) == typeid(Wall))
+        return false;
+    for (auto &part : snake) {
+        if (part->getPos()[0] == x + START_WIDTH && part->getPos()[1] == y + START_HEIGHT)
+            return false;
+    }
+    return true;
+}
+
+void moveSnakePart(SnakeBody *part, std::size_t x, std::size_t y)
+{
     part->setPos(x + START_WIDTH, y + START_HEIGHT);
-    return 0;
 }
 
 int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
@@ -41,22 +51,31 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
         std::size_t x = prev->getPos()[0] - START_WIDTH;
         std::size_t y = prev->getPos()[1] - START_HEIGHT;
 
-        moveSnakePart(current, map, x, y);
+        moveSnakePart(current, x, y);
     }
 
     SnakeBody *head = _snake[0].get();
-    if (_dirrection == D_UP)
-        if (moveSnakePart(head, map, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == -1)
+
+    if (_dirrection == D_UP) {
+        if (checkCollision(map, _snake, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == false)
             return -1;
-    if (_dirrection == D_DOWN)
-        if (moveSnakePart(head, map, head->getPos()[0] - START_WIDTH, head->getPos()[1] + 1 - START_HEIGHT) == -1)
+        moveSnakePart(head, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT);
+    }
+    if (_dirrection == D_DOWN) {
+        if (checkCollision(map, _snake, head->getPos()[0] - START_WIDTH, head->getPos()[1] + 1 - START_HEIGHT) == false)
             return -1;
-    if (_dirrection == D_LEFT)
-        if (moveSnakePart(head, map, head->getPos()[0] - 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == -1)
+        moveSnakePart(head, head->getPos()[0] - START_WIDTH, head->getPos()[1] + 1 - START_HEIGHT);
+    }
+    if (_dirrection == D_LEFT) {
+        if (checkCollision(map, _snake, head->getPos()[0] - 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == false)
             return -1;
-    if (_dirrection == D_RIGHT)
-        if (moveSnakePart(head, map, head->getPos()[0] + 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == -1)
+        moveSnakePart(head, head->getPos()[0] - 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT);
+    }
+    if (_dirrection == D_RIGHT) {
+        if (checkCollision(map, _snake, head->getPos()[0] + 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == false)
             return -1;
+        moveSnakePart(head, head->getPos()[0] + 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT);
+    }
 
     _timer.reset();
     return 0;
