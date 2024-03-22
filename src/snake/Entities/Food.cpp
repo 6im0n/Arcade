@@ -6,7 +6,7 @@
 */
 
 #include "Food.hpp"
-#include "Color.hpp"
+#include "classes/Color.hpp"
 #include "src/snake/SnakeGame.hpp"
 
 std::size_t randomX()

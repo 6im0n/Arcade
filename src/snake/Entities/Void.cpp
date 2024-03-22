@@ -6,7 +6,7 @@
 */
 
 #include "Void.hpp"
-#include "Color.hpp"
+#include "classes/Color.hpp"
 
 Void::Void(std::size_t x, std::size_t y)
 {

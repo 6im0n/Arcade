@@ -6,7 +6,7 @@
 */
 
 #include "Wall.hpp"
-#include "Color.hpp"
+#include "classes/Color.hpp"
 
 Wall::Wall(std::size_t x, std::size_t y)
 {
