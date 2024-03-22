@@ -26,7 +26,7 @@ std::vector<std::size_t> randomPos(Snake snake)
     std::size_t y = randomY();
 
     for (auto &body : snake.getSnake()) {
-        auto bodyPos = body->getPos();
+        std::vector<std::size_t> bodyPos = body->getPos();
         if (bodyPos[0] == x && bodyPos[1] == y) {
             return randomPos(snake);
         }
