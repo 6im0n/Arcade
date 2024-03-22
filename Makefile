@@ -35,10 +35,10 @@ SFML_SRC     	= src/sfml/sfml.cpp \
 
 SDL_SRC      	= src/sdl/sdl.cpp \
 
-SRC_TEST     	= tests/snake/Entities/tests_color.cpp	\
-				  classes/Color.cpp						\
-				  tests/snake/Entities/tests_timer.cpp	\
-				  classes/Timer.cpp						\
+SRC_TEST     	= tests/tests_color.cpp		\
+				  classes/Color.cpp			\
+				  tests/tests_timer.cpp		\
+				  classes/Timer.cpp			\
 
 #Objects
 OBJ_CORE		= $(SRC_CORE:.cpp=.o)
