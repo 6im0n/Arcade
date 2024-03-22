@@ -109,7 +109,7 @@ clean:
 	@rm -f $(OBJ_SDL)
 	@$(call GREEN,"✅ [$@] done !")
 
-fclean: clean
+fclean: clean tests_fclean
 	@rm -f $(NAME)
 	@rm -f $(NAME_PACMAN)
 	@rm -f $(NAME_SNAKE)
@@ -118,7 +118,7 @@ fclean: clean
 	@rm -f $(NAME_SDL)
 	@$(call GREEN,"✅ [$@] done !")
 
-tests_fclean: fclean
+tests_fclean:
 	rm -f $(OBJ_TEST)
 	rm -f $(NAME)
 	rm -f unit_tests
