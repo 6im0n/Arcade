@@ -23,7 +23,7 @@ enum Direction {
 class Snake {
     public:
         Snake();
-        ~Snake();
+        ~Snake() = default;
 
         int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map);
         void growSnake();
@@ -33,7 +33,7 @@ class Snake {
     protected:
     private:
         std::vector<std::shared_ptr<SnakeBody>> _snake;
-        Direction _dir;
+        Direction _dirrection;
         Timer _timer;
         float _speed;
 };

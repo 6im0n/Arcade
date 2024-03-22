@@ -12,7 +12,7 @@
 class Wall : public IEntity {
     public:
         Wall(std::size_t x, std::size_t y);
-        ~Wall();
+        ~Wall() = default;
 
         //setters
         void setPos(std::size_t x, std::size_t y);

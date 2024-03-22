@@ -11,7 +11,6 @@
 
 std::size_t randomX()
 {
-
     return (rand() % (AREA_GAME_WIDTH - 2)) + 1 + START_WIDTH;
 }
 
@@ -42,10 +41,6 @@ Food::Food(Snake snake)
     _rotation = 0;
     _char = 'O';
     _color = std::make_unique<Color>(40, 79, 42, 255);
-}
-
-Food::~Food()
-{
 }
 
 void Food::setPos(std::size_t x, std::size_t y)

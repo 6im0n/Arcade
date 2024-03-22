@@ -18,10 +18,6 @@ Wall::Wall(std::size_t x, std::size_t y)
     _rotation = 0;
 }
 
-Wall::~Wall()
-{
-}
-
 void Wall::setPos(std::size_t x, std::size_t y)
 {
     _pos = {x, y};

@@ -21,7 +21,7 @@
 class SnakeGame : public IGame {
     public:
         SnakeGame();
-        ~SnakeGame();
+        ~SnakeGame() = default;
 
         //Game
         int startGame();

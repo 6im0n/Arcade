@@ -12,7 +12,7 @@
 class Color : public IColor {
     public:
         Color(short r, short g, short b, short a);
-        ~Color();
+        ~Color() = default;
 
     void setColor(short r, short g, short b, short a);
 

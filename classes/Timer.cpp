@@ -12,10 +12,6 @@ Timer::Timer()
     _start = std::chrono::system_clock::now();
 }
 
-Timer::~Timer()
-{
-}
-
 void Timer::start()
 {
     _start = std::chrono::system_clock::now();

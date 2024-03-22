@@ -50,10 +50,6 @@ SnakeGame::SnakeGame()
     srand(time(NULL));
 }
 
-SnakeGame::~SnakeGame()
-{
-}
-
 int SnakeGame::startGame()
 {
     _snake = Snake();
@@ -65,6 +61,8 @@ int SnakeGame::startGame()
 
 int SnakeGame::stopGame()
 {
+    _foods.clear();
+    _entities.clear();
     return 0;
 }
 

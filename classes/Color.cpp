@@ -12,10 +12,6 @@ Color::Color(short r, short g, short b, short a)
 {
 }
 
-Color::~Color()
-{
-}
-
 void Color::setColor(short r, short g, short b, short a)
 {
     _r = r;

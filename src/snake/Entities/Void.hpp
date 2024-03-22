@@ -12,7 +12,7 @@
 class Void : public IEntity {
     public:
         Void(std::size_t x, std::size_t y);
-        ~Void();
+        ~Void() = default;
 
         //setters
         void setPos(std::size_t x, std::size_t y);

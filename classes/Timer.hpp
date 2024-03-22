@@ -12,7 +12,7 @@
 class Timer {
     public:
         Timer();
-        ~Timer();
+        ~Timer() = default;
 
         void start();
         void reset();

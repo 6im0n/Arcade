@@ -18,10 +18,6 @@ Void::Void(std::size_t x, std::size_t y)
     _color = std::make_unique<Color>(66, 242, 17, 255);
 }
 
-Void::~Void()
-{
-}
-
 void Void::setPos(std::size_t x, std::size_t y)
 {
     _pos = {x, y};

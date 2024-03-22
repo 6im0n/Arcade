@@ -15,14 +15,10 @@ Snake::Snake()
     _snake.push_back(std::make_shared<SnakeBody>(14, 18));
     _snake.push_back(std::make_shared<SnakeBody>(14, 19));
     _snake.push_back(std::make_shared<SnakeBody>(14, 20));
-    _dir = D_RIGHT;
+    _dirrection = D_RIGHT;
     _timer = Timer();
     _timer.start();
     _speed = 0.4;
-}
-
-Snake::~Snake()
-{
 }
 
 int moveSnakePart(SnakeBody *part, std::vector<std::vector<std::shared_ptr<IEntity>>> map, std::size_t x, std::size_t y)
@@ -49,16 +45,16 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
     }
 
     SnakeBody *head = _snake[0].get();
-    if (_dir == D_UP)
+    if (_dirrection == D_UP)
         if (moveSnakePart(head, map, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == -1)
             return -1;
-    if (_dir == D_DOWN)
+    if (_dirrection == D_DOWN)
         if (moveSnakePart(head, map, head->getPos()[0] - START_WIDTH, head->getPos()[1] + 1 - START_HEIGHT) == -1)
             return -1;
-    if (_dir == D_LEFT)
+    if (_dirrection == D_LEFT)
         if (moveSnakePart(head, map, head->getPos()[0] - 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == -1)
             return -1;
-    if (_dir == D_RIGHT)
+    if (_dirrection == D_RIGHT)
         if (moveSnakePart(head, map, head->getPos()[0] + 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT) == -1)
             return -1;
 
@@ -77,7 +73,7 @@ void Snake::growSnake()
 
 void Snake::setDirection(Direction dir)
 {
-    _dir = dir;
+    _dirrection = dir;
 }
 
 std::vector<std::shared_ptr<SnakeBody>> Snake::getSnake() const
