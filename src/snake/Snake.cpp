@@ -25,13 +25,6 @@ Snake::~Snake()
 {
 }
 
-void Snake::placeSnake(std::vector<std::shared_ptr<IEntity>> entities) const
-{
-    for (auto &entity : _snake) {
-        entities.push_back(entity);
-    }
-}
-
 int moveSnakePart(SnakeBody *part, std::vector<std::vector<std::shared_ptr<IEntity>>> map, std::size_t x, std::size_t y)
 {
     IEntity *mapElement = map[y][x].get();
@@ -52,11 +45,10 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
         std::size_t x = prev->getPos()[0] - START_WIDTH;
         std::size_t y = prev->getPos()[1] - START_HEIGHT;
 
-        if (moveSnakePart(current, map, x, y) == 1)
-            return -1;
+        moveSnakePart(current, map, x, y);
     }
 
-    SnakeBody *head = _snake.front().get();
+    SnakeBody *head = _snake[0].get();
     if (_dir == D_UP)
         if (moveSnakePart(head, map, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == -1)
             return -1;
