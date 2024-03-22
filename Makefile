@@ -45,6 +45,7 @@ OBJ_SNAKE		= $(SNAKE_SRC:.cpp=.o)
 OBJ_NCURSES		= $(NCURSES_SRC:.cpp=.o)
 OBJ_SFML		= $(SFML_SRC:.cpp=.o)
 OBJ_SDL			= $(SDL_SRC:.cpp=.o)
+OBJ_TEST		= $(SRC_TEST:.cpp=.o)
 
 #flags
 CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20 -fPIC
@@ -126,8 +127,14 @@ tests_fclean: fclean
 
 re: fclean all
 
-tests_run: re
-	g++ -o unit_tests $(SRC_TEST) $(CXXFLAGS) -lcriterion --coverage
+obj: $(OBJ_CORE) $(OBJ_PACMAN) $(OBJ_SNAKE) $(OBJ_NCURSES) $(OBJ_SFML) $(OBJ_SDL)
+
+test_obj: $(OBJ_TEST)
+
+tests_run: tests_fclean
+	$(MAKE) obj CXXFLAGS+=--coverage -lcriterion
+	$(MAKE) test_obj CXXFLAGS+=--coverage -lcriterion
+	g++ -o unit_tests $(OBJ_TEST) $(CXXFLAGS) -lcriterion --coverage
 	./unit_tests
 	gcovr --exclude tests/
 	gcovr -b --exclude tests/
