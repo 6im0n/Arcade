@@ -6,7 +6,7 @@
 */
 
 #include "SnakeBody.hpp"
-#include "Color.hpp"
+#include "classes/Color.hpp"
 
 SnakeBody::SnakeBody(std::size_t x, std::size_t y)
 {
