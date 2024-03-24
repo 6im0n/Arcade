@@ -96,6 +96,9 @@ Test(Snake, MoveNormalyLeft)
 
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
+    snake.setDirection(D_UP);
+    cr_assert_eq(snake.moveSnake(map), 0);
+    sleep(1);
     snake.setDirection(D_LEFT);
     cr_assert_eq(snake.moveSnake(map), 0);
     std::vector<std::shared_ptr<SnakeBody>> snakeEntities2 = snake.getSnake();
@@ -160,9 +163,12 @@ Test(Snake, MoveWithWallDirLeft)
     std::vector<std::shared_ptr<SnakeBody>> snakeEntities = snake.getSnake();
     std::vector<std::vector<std::shared_ptr<IEntity>>> map = genMap();
 
-    map[17 - START_HEIGHT][13 - START_WIDTH] = std::make_shared<Wall>(17, 13);
+    map[16 - START_HEIGHT][13 - START_WIDTH] = std::make_shared<Wall>(16, 13);
 
     auto headpos = snakeEntities[0]->getPos();
+    sleep(1);
+    snake.setDirection(D_UP);
+    cr_assert_eq(snake.moveSnake(map), 0);
     sleep(1);
     snake.setDirection(D_LEFT);
     cr_assert_eq(snake.moveSnake(map), -1);
