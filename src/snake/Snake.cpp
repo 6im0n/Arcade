@@ -92,6 +92,11 @@ void Snake::growSnake()
 
 void Snake::setDirection(Direction dir)
 {
+    if ((_dirrection == D_UP && dir == D_DOWN) ||
+        (_dirrection == D_DOWN && dir == D_UP) ||
+        (_dirrection == D_LEFT && dir == D_RIGHT) ||
+        (_dirrection == D_RIGHT && dir == D_LEFT))
+        return;
     _dirrection = dir;
 }
 
