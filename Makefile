@@ -40,7 +40,7 @@ OBJ_SFML		= $(SFML_SRC:.cpp=.o)
 OBJ_SDL			= $(SDL_SRC:.cpp=.o)
 
 #flags
-CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20 -fPIC
+CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
 SFML_FlAGS		= -lsfml-graphics -lsfml-window -lsfml-system
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
 NCURSES_FLAGS	= -lncurses
@@ -55,7 +55,30 @@ GREEN 			= /bin/echo -e "\x1b[32m $1\x1b[0m"
 YELLOW 			= /bin/echo -e "\x1b[33m $1\x1b[0m"
 
 #Rules
-all: $(NAME) $(NAME_PACMAN) $(NAME_SNAKE) $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
+all: core games graphics
+
+#-----------------Games Rules--------------------
+
+games: $(NAME_PACMAN) $(NAME_SNAKE)
+
+%.o: 	%.cpp
+	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
+	$(call YELLOW,"🆗 $<") || \
+	$(call YELLOW,"❌ $<")
+
+$(NAME_PACMAN) : $(OBJ_PACMAN)
+	@$(LINKER) -shared -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
+	$(call YELLOW,"✅ $@") || \
+	$(call YELLOW,"❌ $@")
+
+$(NAME_SNAKE) : $(OBJ_SNAKE)
+	@$(LINKER) -shared -o $(NAME_SNAKE) $(OBJ_SNAKE) $(CXXFLAGS) && \
+	$(call YELLOW,"✅ $@") || \
+	$(call YELLOW,"❌ $@")
+
+#------------------Core Rules--------------------
+
+core: $(NAME)
 
 %.o: 	%.cpp
 	@$(CC) $(INC) $(CXXFLAGS) -c -o $@ $< && \
@@ -67,15 +90,14 @@ $(NAME) : $(OBJ_CORE)
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
-$(NAME_PACMAN) : $(OBJ_PACMAN)
-	@$(LINKER) -shared -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
-	$(call YELLOW,"✅ $@") || \
-	$(call YELLOW,"❌ $@")
+#-----------------Graphics Rules------------------
 
-$(NAME_SNAKE) : $(OBJ_SNAKE)
-	@$(LINKER) -shared -o $(NAME_SNAKE) $(OBJ_SNAKE) $(CXXFLAGS) && \
-	$(call YELLOW,"✅ $@") || \
-	$(call YELLOW,"❌ $@")
+graphics: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
+
+%.o: 	%.cpp
+	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
+	$(call YELLOW,"🆗 $<") || \
+	$(call YELLOW,"❌ $<")
 
 $(NAME_NCURSES) : $(OBJ_NCURSES)
 	@$(LINKER) -shared -o $(NAME_NCURSES) $(OBJ_NCURSES) $(CXXFLAGS) $(NCURSES_FLAGS) && \
