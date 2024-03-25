@@ -24,6 +24,7 @@ SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 				src/snake/Entities/Wall.cpp			\
 				src/snake/Entities/SnakeBody.cpp	\
 				src/snake/Entities/Food.cpp			\
+				src/snake/Score.cpp						\
 				src/snake/SnakeGame.cpp				\
 				src/snake/Snake.cpp					\
 				classes/Timer.cpp					\
