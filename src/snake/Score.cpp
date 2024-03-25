@@ -14,7 +14,7 @@ Score::Score()
     _size = 25;
     _rotation = 0;
     _color = std::make_shared<Color>(255, 255, 255, 255);
-    _fontPath = "assets/Roboto-Regular.ttf";
+    _fontPath = "assets/Roboto-Regular";
     _text = "Score:";
     _score = 0;
 }
