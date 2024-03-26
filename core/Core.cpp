@@ -6,7 +6,7 @@
 */
 
 #include "Core.hpp"
-#include "includes/keys.hpp"
+#include "includes/Keys.hpp"
 
 Arcade::Core::Core(std::string graphicPath)
 {

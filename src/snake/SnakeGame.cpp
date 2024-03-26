@@ -9,7 +9,7 @@
 #include "Entities/Wall.hpp"
 #include "Entities/Void.hpp"
 #include "Entities/Food.hpp"
-#include "includes/keys.hpp"
+#include "includes/Keys.hpp"
 
 void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
 {
