@@ -13,27 +13,29 @@
 #include "Interfaces/IEntity.hpp"
 #include "classes/Timer.hpp"
 
-enum Direction {
-    D_LEFT,
-    D_DOWN,
-    D_RIGHT,
-    D_UP
-};
+namespace Arcade {
+    enum Direction {
+        D_LEFT,
+        D_DOWN,
+        D_RIGHT,
+        D_UP
+    };
 
-class Snake {
-    public:
-        Snake();
-        ~Snake() = default;
+    class Snake {
+        public:
+            Snake();
+            ~Snake() = default;
 
-        int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map);
-        void growSnake();
-        void setDirection(Direction dir);
-        std::vector<std::shared_ptr<SnakeBody>> getSnake() const;
+            int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map);
+            void growSnake();
+            void setDirection(Direction dir);
+            std::vector<std::shared_ptr<SnakeBody>> getSnake() const;
 
-    protected:
-    private:
-        std::vector<std::shared_ptr<SnakeBody>> _snake;
-        Direction _dirrection;
-        Timer _timer;
-        float _speed;
-};
+        protected:
+        private:
+            std::vector<std::shared_ptr<SnakeBody>> _snake;
+            Direction _dirrection;
+            Timer _timer;
+            float _speed;
+    };
+}

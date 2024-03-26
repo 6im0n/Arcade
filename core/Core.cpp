@@ -7,15 +7,20 @@
 
 #include "Core.hpp"
 #include "includes/keys.hpp"
+#include <iostream>
 
 Arcade::Core::Core(std::string graphicPath)
 {
-    _graphicLoader = new DLLoader<IGraphic>(ENTRY_POINT);
+    _graphicLoader = new DLLoader<std::unique_ptr<IGraphic>>(ENTRY_POINT_GRAPHIC);
     _graphic = _graphicLoader->getInstance(graphicPath);
     if (_graphic == nullptr) {
         exit(84);
     }
-    _gameLoader = new DLLoader<IGame>(ENTRY_POINT);
+    _gameLoader = new DLLoader<std::unique_ptr<Arcade::IGame>>(ENTRY_POINT_GAME);
+    _game = _gameLoader->getInstance("lib/arcade_snake.so");
+    if (_game == nullptr) {
+        exit(84);
+    }
 }
 
 Arcade::Core::~Core()
@@ -30,25 +35,25 @@ Arcade::Core::~Core()
 void Arcade::Core::run()
 {
     while (5) {
-        _key_event = _graphic->getKeyEvent();
+        _key_event = _graphic->get()->getKeyEvent();
         if (_key_event == Keys::O || _key_event == Keys::P
             || _key_event == Keys::L || _key_event == Keys::M) {
-        } else {
-            _game->catchKeyEvent(_key_event);
+        } else if (_key_event != Keys::UNKNOWN) {
+            _game->get()->catchKeyEvent(_key_event);
         }
-        _graphic->displayWindow();
-        _graphic->displayEntities(_game->getEntities());
-        _graphic->displayText(_game->getTexts());
-        _graphic->playSound(_game->getSounds());
-        if (_game->simulate() == -1) {
-            if (_game->stopGame() == -1) {
+        _graphic->get()->displayWindow();
+        _graphic->get()->displayEntities(_game->get()->getEntities());
+        _graphic->get()->displayText(_game->get()->getTexts());
+        _graphic->get()->playSound(_game->get()->getSounds());
+        if (_game->get()->simulate() == -1) {
+            if (_game->get()->stopGame() == -1) {
                 if (_isMenu == false) {
                     quitGame();
                 } else {
                     exit(84);
                 }
             }
-            if (_game->startGame() == -1) {
+            if (_game->get()->startGame() == -1) {
                 if (_isMenu == false) {
                     quitGame();
                 } else {

@@ -26,11 +26,15 @@ T *Arcade::DLLoader<T>::getInstance(std::string const &libname) {
     if (handle != nullptr)
         dlclose(handle);
     handle = dlopen(libname.c_str(), RTLD_LAZY);
-    if (!handle) {
-        std::cerr << "Error: " << dlerror() << std::endl;
+    if (dlerror() != NULL || !handle) {
+        std::cerr << "Error: " << libname << " " << entryPoint << dlerror() << std::endl;
         return nullptr;
     }
     T *(*object)(void) = (T*(*)())dlsym(handle, entryPoint.c_str());
+    if (dlerror() != NULL || !object) {
+        std::cerr << "Error: "  << libname << " " << entryPoint << dlerror() << std::endl;
+        return nullptr;
+    }
     T *tmp = object();
     return tmp;
 }
@@ -41,5 +45,7 @@ void Arcade::DLLoader<T>::setEntryPoint(std::string const &entryPoint) {
 }
 
 template class Arcade::DLLoader<int>;
-template class Arcade::DLLoader<IGame>;
-template class Arcade::DLLoader<IGraphic>;
+template class Arcade::DLLoader<Arcade::IGame>;
+template class Arcade::DLLoader<Arcade::IGraphic>;
+template class Arcade::DLLoader<std::unique_ptr<Arcade::IGame>>;
+template class Arcade::DLLoader<std::unique_ptr<Arcade::IGraphic>>;

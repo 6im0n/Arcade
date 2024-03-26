@@ -5,7 +5,77 @@
 ** ncurses.cpp
 */
 
+#include "ncurses.hpp"
+#include "includes/keys.hpp"
+#include <memory>
+
 int init(void)
 {
     return 0;
+}
+
+Arcade::Ncurses::Ncurses()
+{
+
+}
+
+Arcade::Ncurses::~Ncurses()
+{
+
+}
+
+bool Arcade::Ncurses::isWindowOpen() const
+{
+    return false;
+}
+
+void Arcade::Ncurses::closeWindow()
+{
+
+}
+
+void Arcade::Ncurses::clearWindow()
+{
+
+}
+
+int Arcade::Ncurses::getKeyEvent()
+{
+    return Keys::A;
+}
+
+void Arcade::Ncurses::displayWindow()
+{
+
+}
+
+void Arcade::Ncurses::displayEntities(std::vector<std::shared_ptr<IEntity>> entities)
+{
+    (void)entities;
+}
+
+void Arcade::Ncurses::displayText(std::vector<std::shared_ptr<IText>> texts)
+{
+    (void)texts;
+}
+
+void Arcade::Ncurses::playSound(std::vector<std::shared_ptr<ISound>> sounds)
+{
+    (void)sounds;
+}
+
+extern "C"
+{
+    __attribute__((constructor))
+    void constructor()
+    {
+    }
+    __attribute__((destructor))
+    void destructor()
+    {
+    }
+    std::unique_ptr<Arcade::Ncurses> loadGraphicInstance()
+    {
+        return std::make_unique<Arcade::Ncurses>();
+    }
 }

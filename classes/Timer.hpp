@@ -9,16 +9,18 @@
 
 #include <chrono>
 
-class Timer {
-    public:
-        Timer();
-        ~Timer() = default;
+namespace Arcade {
+    class Timer {
+        public:
+            Timer();
+            ~Timer() = default;
 
-        void start();
-        void reset();
-        float getElapsedTime();
+            void start();
+            void reset();
+            float getElapsedTime();
 
-    protected:
-    private:
-        std::chrono::time_point<std::chrono::system_clock> _start;
-};
+        protected:
+        private:
+            std::chrono::time_point<std::chrono::system_clock> _start;
+    };
+}

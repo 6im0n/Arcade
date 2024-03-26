@@ -11,30 +11,30 @@
 #include "Entities/Food.hpp"
 #include "includes/keys.hpp"
 
-void generateWallLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
+void generateWallLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
 {
     for (int i = 0; i < size; i++) {
-        std::shared_ptr<Wall> wall = std::make_shared<Wall>(i + START_WIDTH, y + START_HEIGHT);
+        std::shared_ptr<Arcade::Wall> wall = std::make_shared<Arcade::Wall>(i + START_WIDTH, y + START_HEIGHT);
         line.push_back(wall);
     }
 }
 
-void generateLine(std::vector<std::shared_ptr<IEntity>> &line, int y, int size)
+void generateLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
 {
-    std::shared_ptr<Wall> wall = std::make_shared<Wall>(START_WIDTH, y + START_HEIGHT);
+    std::shared_ptr<Arcade::Wall> wall = std::make_shared<Arcade::Wall>(START_WIDTH, y + START_HEIGHT);
     line.push_back(wall);
     for (int i = 1; i < size - 1; i++) {
-        std::shared_ptr<Void> void_case = std::make_shared<Void>(i + START_WIDTH, y + START_HEIGHT);
+        std::shared_ptr<Arcade::Void> void_case = std::make_shared<Arcade::Void>(i + START_WIDTH, y + START_HEIGHT);
         line.push_back(void_case);
     }
-    std::shared_ptr<Wall> wall2 = std::make_shared<Wall>(size - 1 + START_WIDTH, y + START_HEIGHT);
+    std::shared_ptr<Arcade::Wall> wall2 = std::make_shared<Arcade::Wall>(size - 1 + START_WIDTH, y + START_HEIGHT);
     line.push_back(wall2);
 }
 
-SnakeGame::SnakeGame()
+Arcade::SnakeGame::SnakeGame()
 {
     for (int i = 0; i < 15; i++) {
-        std::vector<std::shared_ptr<IEntity>> line;
+        std::vector<std::shared_ptr<Arcade::IEntity>> line;
         _map.push_back(line);
     }
     generateWallLine(_map[0], 0, 20);
@@ -51,7 +51,7 @@ SnakeGame::SnakeGame()
     srand(time(NULL));
 }
 
-int SnakeGame::startGame()
+int Arcade::SnakeGame::startGame()
 {
     _snake = Snake();
     auto new_food = std::make_shared<Food>(_snake);
@@ -60,19 +60,19 @@ int SnakeGame::startGame()
     return 0;
 }
 
-int SnakeGame::stopGame()
+int Arcade::SnakeGame::stopGame()
 {
     _foods.clear();
     _entities.clear();
     return 0;
 }
 
-int SnakeGame::getScore()
+int Arcade::SnakeGame::getScore()
 {
     return _score;
 }
 
-int SnakeGame::simulate()
+int Arcade::SnakeGame::simulate()
 {
     _entities.clear();
     for (auto &line : _map) {
@@ -104,7 +104,7 @@ int SnakeGame::simulate()
     return 0;
 }
 
-void SnakeGame::catchKeyEvent(int key)
+void Arcade::SnakeGame::catchKeyEvent(int key)
 {
     if (key == Arcade::Keys::LEFT) {
         _snake.setDirection(Direction::D_LEFT);
@@ -117,17 +117,17 @@ void SnakeGame::catchKeyEvent(int key)
     }
 }
 
-std::vector<std::shared_ptr<IEntity>> SnakeGame::getEntities()
+std::vector<std::shared_ptr<Arcade::IEntity>> Arcade::SnakeGame::getEntities()
 {
     return _entities;
 }
 
-std::vector<std::shared_ptr<IText>> SnakeGame::getTexts()
+std::vector<std::shared_ptr<Arcade::IText>> Arcade::SnakeGame::getTexts()
 {
     return _texts;
 }
 
-std::vector<std::shared_ptr<ISound>> SnakeGame::getSounds()
+std::vector<std::shared_ptr<Arcade::ISound>> Arcade::SnakeGame::getSounds()
 {
     return _sounds;
 }
@@ -142,8 +142,8 @@ extern "C"
     void destructor()
     {
     }
-    std::unique_ptr<SnakeGame> loadGameInstance()
+    std::unique_ptr<Arcade::SnakeGame> loadGameInstance()
     {
-        return std::make_unique<SnakeGame>();
+        return std::make_unique<Arcade::SnakeGame>();
     }
 }

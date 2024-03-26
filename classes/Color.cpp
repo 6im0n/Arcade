@@ -7,12 +7,12 @@
 
 #include "Color.hpp"
 
-Color::Color(short r, short g, short b, short a)
+Arcade::Color::Color(short r, short g, short b, short a)
     : _r(r), _g(g), _b(b), _a(a)
 {
 }
 
-void Color::setColor(short r, short g, short b, short a)
+void Arcade::Color::setColor(short r, short g, short b, short a)
 {
     _r = r;
     _g = g;
@@ -20,22 +20,22 @@ void Color::setColor(short r, short g, short b, short a)
     _a = a;
 }
 
-short Color::getR()
+short Arcade::Color::getR()
 {
     return _r;
 }
 
-short Color::getG()
+short Arcade::Color::getG()
 {
     return _g;
 }
 
-short Color::getB()
+short Arcade::Color::getB()
 {
     return _b;
 }
 
-short Color::getA()
+short Arcade::Color::getA()
 {
     return _a;
 }

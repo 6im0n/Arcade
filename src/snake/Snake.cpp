@@ -9,7 +9,7 @@
 #include "Entities/Wall.hpp"
 #include "SnakeGame.hpp"
 
-Snake::Snake()
+Arcade::Snake::Snake()
 {
     _snake.push_back(std::make_shared<SnakeBody>(14, 17));
     _snake.push_back(std::make_shared<SnakeBody>(14, 18));
@@ -21,12 +21,12 @@ Snake::Snake()
     _speed = 0.4;
 }
 
-bool checkCollision(std::vector<std::vector<std::shared_ptr<IEntity>>> map,
-    std::vector<std::shared_ptr<SnakeBody>> snake,
+bool checkCollision(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map,
+    std::vector<std::shared_ptr<Arcade::SnakeBody>> snake,
     std::size_t x, std::size_t y)
 {
-    IEntity *mapElement = map[y][x].get();
-    if (typeid(*mapElement) == typeid(Wall))
+    Arcade::IEntity *mapElement = map[y][x].get();
+    if (typeid(*mapElement) == typeid(Arcade::Wall))
         return false;
     for (auto &part : snake) {
         if (part->getPos()[0] == x + START_WIDTH && part->getPos()[1] == y + START_HEIGHT)
@@ -35,12 +35,12 @@ bool checkCollision(std::vector<std::vector<std::shared_ptr<IEntity>>> map,
     return true;
 }
 
-void moveSnakePart(SnakeBody *part, std::size_t x, std::size_t y)
+void moveSnakePart(Arcade::SnakeBody *part, std::size_t x, std::size_t y)
 {
     part->setPos(x + START_WIDTH, y + START_HEIGHT);
 }
 
-int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
+int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
 {
     if (_timer.getElapsedTime() < _speed)
         return 0;
@@ -81,7 +81,7 @@ int Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
     return 0;
 }
 
-void Snake::growSnake()
+void Arcade::Snake::growSnake()
 {
     SnakeBody *end = _snake.back().get();
     std::size_t x = end->getPos()[0];
@@ -90,7 +90,7 @@ void Snake::growSnake()
     _snake.push_back(std::make_shared<SnakeBody>(x, y));
 }
 
-void Snake::setDirection(Direction dir)
+void Arcade::Snake::setDirection(Direction dir)
 {
     if ((_dirrection == D_UP && dir == D_DOWN) ||
         (_dirrection == D_DOWN && dir == D_UP) ||
@@ -100,7 +100,7 @@ void Snake::setDirection(Direction dir)
     _dirrection = dir;
 }
 
-std::vector<std::shared_ptr<SnakeBody>> Snake::getSnake() const
+std::vector<std::shared_ptr<Arcade::SnakeBody>> Arcade::Snake::getSnake() const
 {
     return _snake;
 }

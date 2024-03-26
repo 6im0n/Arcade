@@ -10,7 +10,8 @@
 #include "DLLoader.hpp"
 #include <memory>
 
-#define ENTRY_POINT "loadInstance"
+#define ENTRY_POINT_GRAPHIC "loadGraphicInstance"
+#define ENTRY_POINT_GAME "loadGameInstance"
 
 //key O = previous game
 //key P = next game
@@ -28,11 +29,11 @@ namespace Arcade {
             void loadGraphic(const std::string &graphicPath);
             void quitGame();
         private :
-            IGame *_menu;
-            IGame *_game;
-            IGraphic *_graphic;
-            DLLoader<IGame> *_gameLoader;
-            DLLoader<IGraphic> *_graphicLoader;
+            std::unique_ptr<IGame> *_menu;
+            std::unique_ptr<Arcade::IGame> *_game;
+            std::unique_ptr<IGraphic> *_graphic;
+            DLLoader<std::unique_ptr<IGame>> *_gameLoader;
+            DLLoader<std::unique_ptr<IGraphic>> *_graphicLoader;
             int _key_event;
             bool _isMenu;
     };
