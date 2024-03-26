@@ -9,6 +9,7 @@
 
 #include "Interfaces/IGame.hpp"
 #include "Snake.hpp"
+#include "Score.hpp"
 #include "Entities/Food.hpp"
 
 #define AREA_GAME_WIDTH 17
@@ -43,7 +44,7 @@ class SnakeGame : public IGame {
         std::vector<std::shared_ptr<ISound>> _sounds;
         std::vector<std::vector<std::shared_ptr<IEntity>>> _map;
 
-        int _score;
+        std::shared_ptr<Score> _score;
         Snake _snake;
         std::vector<std::shared_ptr<Food>> _foods;
 };

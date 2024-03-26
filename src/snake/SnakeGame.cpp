@@ -47,7 +47,7 @@ SnakeGame::SnakeGame()
             _entities.push_back(entity);
         }
     }
-    _score = 0;
+    _score = std::make_shared<Score>();
     srand(time(NULL));
 }
 
@@ -56,7 +56,7 @@ int SnakeGame::startGame()
     _snake = Snake();
     auto new_food = std::make_shared<Food>(_snake);
     _foods.push_back(new_food);
-    _score = 0;
+    _score.get()->resetScore();
     return 0;
 }
 
@@ -69,7 +69,7 @@ int SnakeGame::stopGame()
 
 int SnakeGame::getScore()
 {
-    return _score;
+    return _score.get()->getScore();
 }
 
 int SnakeGame::simulate()
@@ -85,7 +85,7 @@ int SnakeGame::simulate()
     for (std::size_t i = 0; i < _foods.size(); i++) {
         std::vector<std::size_t> pos = _foods[i].get()->getPos();
         if (head->getPos()[0] == pos[0] && head->getPos()[1] == pos[1]) {
-            _score += 1;
+            _score.get()->incrementScore();
             _snake.growSnake();
 
             _foods.erase(_foods.begin() + i);
@@ -124,6 +124,8 @@ std::vector<std::shared_ptr<IEntity>> SnakeGame::getEntities()
 
 std::vector<std::shared_ptr<IText>> SnakeGame::getTexts()
 {
+    _texts.clear();
+    _texts.push_back(_score);
     return _texts;
 }
 
