@@ -7,13 +7,14 @@
 
 #include "Void.hpp"
 #include "classes/Color.hpp"
+#include "src/snake/SnakeGame.hpp"
 
 Void::Void(std::size_t x, std::size_t y)
 {
     _pos = {x, y};
     _char = ' ';
-    _size = {17, 17};
-    _path = "assets/void";
+    _size = {29, 29};
+    _path = VOID_PATH;
     _rotation = 0;
     _color = std::make_unique<Color>(66, 242, 17, 255);
 }
