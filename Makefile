@@ -135,7 +135,7 @@ $(NAME) : $(OBJ_CORE)
 
 #-----------------Graphics Rules------------------
 
-graphics: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
+graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 
 %.o: 	%.cpp
 	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
