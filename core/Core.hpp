@@ -7,12 +7,14 @@
 
 #include "Interfaces/IGame.hpp"
 #include "Interfaces/IGraphic.hpp"
+#include "menu/Menu.hpp"
 #include "DLLoader.hpp"
 #include <memory>
 
 #define ENTRY_POINT_GRAPHIC "loadGraphicInstance"
 #define ENTRY_POINT_GAME "loadGameInstance"
 
+#define IM_HERE std::cout << "I'm here " << __LINE__ << " on " << __FILE__ << std::endl;
 //key O = previous game
 //key P = next game
 //key L = previous graphic
@@ -29,11 +31,13 @@ namespace Arcade {
             void loadGraphic(const std::string &graphicPath);
             void quitGame();
         private :
-            std::unique_ptr<IGame> *_menu;
-            std::unique_ptr<Arcade::IGame> *_game;
-            std::unique_ptr<IGraphic> *_graphic;
-            DLLoader<std::unique_ptr<IGame>> *_gameLoader;
-            DLLoader<std::unique_ptr<IGraphic>> *_graphicLoader;
+            std::unique_ptr<Menu> _menu;
+            std::unique_ptr<IGame> _game;
+            std::unique_ptr<IGraphic> _graphic;
+            DLLoader<IGame> _gameLoader;
+            DLLoader<IGraphic> _graphicLoader;
+            std::string _gameLib;
+            std::string _graphicLib;
             int _key_event;
             bool _isMenu;
     };

@@ -142,8 +142,8 @@ extern "C"
     void destructor()
     {
     }
-    std::unique_ptr<Arcade::SnakeGame> loadGameInstance()
+    Arcade::SnakeGame *loadGameInstance()
     {
-        return std::make_unique<Arcade::SnakeGame>();
+        return new Arcade::SnakeGame();
     }
 }

@@ -6,9 +6,15 @@
 */
 
 #include "Color.hpp"
+#include <iostream>
+#define IM_HERE std::cout << "I'm here " << __LINE__ << " on " << __FILE__ << std::endl;
 
 Arcade::Color::Color(short r, short g, short b, short a)
     : _r(r), _g(g), _b(b), _a(a)
+{
+}
+
+Arcade::Color::~Color()
 {
 }
 

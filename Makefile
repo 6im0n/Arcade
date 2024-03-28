@@ -17,6 +17,10 @@ NAME_SDL 	 	= lib/arcade_sdl.so
 SRC_CORE      	= core/main.cpp \
 		          core/DLLoader.cpp \
 				  core/Core.cpp \
+				  core/menu/Menu.cpp \
+				  core/menu/Button.cpp \
+				  abstract/AGame.cpp \
+				  classes/Color.cpp \
 
 PACMAN_SRC   	= src/pacman/pacman.cpp \
 
@@ -88,7 +92,7 @@ NCURSES_FLAGS	= -lncurses
 INC				= -I.
 
 #Compiler
-CC				= g++
+CC				= g++ -std=c++20
 LINKER			= g++
 
 #Colors
