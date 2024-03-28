@@ -159,3 +159,10 @@ bool Arcade::Menu::isExit()
 {
     return _exit;
 }
+
+void Arcade::Menu::restart()
+{
+    _isRunning = true;
+    _exit = false;
+    _currentButton = _runButtons;
+}

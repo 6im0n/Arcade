@@ -29,7 +29,7 @@ Arcade::Button::~Button()
     if (destroy)
         return;
     destroy = true;
-    while (_nextButton->destroy == false) {
+    while (_nextButton != nullptr && _nextButton->destroy == false) {
         if (_nextButton == nullptr || _nextButton->destroy == true)
             break;
         delete _nextButton;

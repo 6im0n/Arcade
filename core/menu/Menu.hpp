@@ -48,6 +48,7 @@ namespace Arcade {
             void setScore(int score, int gameIndex);
             bool isRunning();
             bool isExit();
+            void restart();
         private :
             bool _isRunning;
             bool _exit;
