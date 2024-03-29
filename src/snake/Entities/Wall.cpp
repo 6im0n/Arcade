@@ -7,14 +7,15 @@
 
 #include "Wall.hpp"
 #include "classes/Color.hpp"
+#include "src/snake/SnakeGame.hpp"
 
 Arcade::Wall::Wall(std::size_t x, std::size_t y)
 {
     _pos = {x, y};
     _char = 'x';
-    _size = {17, 17};
+    _size = {29, 29};
     _color = std::make_unique<Color>(39, 122, 16, 255);
-    _path = "assets/wall";
+    _path = WALL_PATH;
     _rotation = 0;
 }
 

@@ -18,6 +18,13 @@
 #define WINDOW_HEIGHT 29
 #define START_WIDTH (WINDOW_WIDTH - AREA_GAME_WIDTH) / 2
 #define START_HEIGHT (WINDOW_HEIGHT - AREA_GAME_HEIGHT) / 2
+#define WALL_PATH "assets/snake/wall"
+#define VOID_PATH "assets/snake/void"
+#define FOOD_PATH "assets/snake/apple"
+#define SNAKE_BODY_PATH "assets/snake/body"
+#define SNAKE_CORNER_PATH "assets/snake/body_corner"
+#define SNAKE_HEAD_PATH "assets/snake/head"
+#define SNAKE_TAIL_PATH "assets/snake/tail"
 
 namespace Arcade {
     class SnakeGame : public IGame {
