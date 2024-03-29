@@ -54,7 +54,7 @@ Arcade::SnakeGame::SnakeGame()
 int Arcade::SnakeGame::startGame()
 {
     _snake = Snake();
-    auto new_food = std::make_shared<Food>(_snake);
+    auto new_food = std::make_shared<Arcade::Food>(_snake);
     _foods.push_back(new_food);
     _score.get()->resetScore();
     return 0;
