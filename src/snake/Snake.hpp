@@ -33,7 +33,8 @@ class Snake {
     protected:
     private:
         std::vector<std::shared_ptr<SnakeBody>> _snake;
-        Direction _dirrection;
+        Direction _direction;
+        Direction _lastDirection;
         Timer _timer;
         float _speed;
 };

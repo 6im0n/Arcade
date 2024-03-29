@@ -8,11 +8,11 @@
 #include "SnakeBody.hpp"
 #include "classes/Color.hpp"
 
-SnakeBody::SnakeBody(std::size_t x, std::size_t y)
+SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path)
 {
     _pos = {x, y};
-    _size = {17, 17};
-    _path = "assets/body";
+    _size = {29, 29};
+    _path = path;
     _char = '=';
     _rotation = 0;
     _color = std::make_unique<Color>(39, 122, 16, 255);

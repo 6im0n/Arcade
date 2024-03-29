@@ -35,9 +35,9 @@ std::vector<std::size_t> randomPos(Snake snake)
 
 Food::Food(Snake snake)
 {
-    _size = {17, 17};
+    _size = {29, 29};
     _pos = randomPos(snake);
-    _path = "assets/apple";
+    _path = FOOD_PATH;
     _rotation = 0;
     _char = 'O';
     _color = std::make_unique<Color>(40, 79, 42, 255);
