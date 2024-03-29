@@ -9,7 +9,6 @@
 
 #include <string>
 #include <vector>
-
 #include "IEntity.hpp"
 
 namespace Arcade {

@@ -21,6 +21,7 @@ SRC_CORE      	= core/main.cpp \
 				  core/menu/Button.cpp \
 				  abstract/AGame.cpp \
 				  classes/Color.cpp \
+				  classes/Text.cpp \
 
 PACMAN_SRC   	= src/pacman/pacman.cpp \
 
@@ -160,6 +161,7 @@ $(NAME_SDL) : $(OBJ_SDL)
 	$(call YELLOW,"❌ $@")
 
 clean:
+	@rm -f $(NAME)
 	@rm -f $(OBJ_CORE)
 	@rm -f $(OBJ_PACMAN)
 	@rm -f $(OBJ_SNAKE)

@@ -9,6 +9,7 @@
 #include "abstract/AGame.hpp"
 #include "Button.hpp"
 #include "includes/keys.hpp"
+#include "classes/Text.hpp"
 
 const std::vector<std::string> libs {
     "lib/arcade_sfml.so",
@@ -49,9 +50,11 @@ namespace Arcade {
             bool isRunning();
             bool isExit();
             void restart();
+            void addToPlayerName(Keys key);
         private :
             bool _isRunning;
             bool _exit;
+            bool _changePlayer;
             Keys _lastKey;
             std::vector<int> _gamesScore;
             std::string _selectedGame;
@@ -60,6 +63,7 @@ namespace Arcade {
             Button *_runButtons;
             Button *_gameButtons;
             Button *_graphicButtons;
-            std::shared_ptr<IText> _score;
+            std::string _playerName;
+            std::vector<std::shared_ptr<Text>> _texts;
     };
 }

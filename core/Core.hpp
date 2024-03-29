@@ -33,6 +33,7 @@ namespace Arcade {
             void quitGame();
             void saveTopScores();
             void loadTopScores();
+            void updateTopScores();
         private :
             std::unique_ptr<Menu> _menu;
             std::unique_ptr<IGame> _game;
