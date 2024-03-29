@@ -12,8 +12,8 @@
 
 Test(Wall, DefaultConstructor)
 {
-    Snake snake = Snake();
-    Wall elem = Wall(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Wall elem = Arcade::Wall(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -32,8 +32,8 @@ Test(Wall, DefaultConstructor)
 
 Test(Wall, SetSizeAndGetSize)
 {
-    Snake snake = Snake();
-    Wall elem = Wall(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Wall elem = Arcade::Wall(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -56,8 +56,8 @@ Test(Wall, SetSizeAndGetSize)
 
 Test(Wall, SetPosAndGetPos)
 {
-    Snake snake = Snake();
-    Wall elem = Wall(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Wall elem = Arcade::Wall(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -80,8 +80,8 @@ Test(Wall, SetPosAndGetPos)
 
 Test(Wall, SetCharAndGetChar)
 {
-    Snake snake = Snake();
-    Wall elem = Wall(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Wall elem = Arcade::Wall(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -103,8 +103,8 @@ Test(Wall, SetCharAndGetChar)
 
 Test(Wall, SetColorAndGetColor)
 {
-    Snake snake = Snake();
-    Wall elem = Wall(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Wall elem = Arcade::Wall(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -120,7 +120,7 @@ Test(Wall, SetColorAndGetColor)
     cr_assert_eq(elem.getColor()->getB(), 16);
     cr_assert_eq(elem.getColor()->getA(), 255);
 
-    elem.setColor(std::make_unique<Color>(10, 10, 10, 10));
+    elem.setColor(std::make_unique<Arcade::Color>(10, 10, 10, 10));
     cr_assert_eq(elem.getColor()->getR(), 10);
     cr_assert_eq(elem.getColor()->getG(), 10);
     cr_assert_eq(elem.getColor()->getB(), 10);
@@ -129,8 +129,8 @@ Test(Wall, SetColorAndGetColor)
 
 Test(Wall, SetPathAndGetPath)
 {
-    Snake snake = Snake();
-    Wall elem = Wall(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Wall elem = Arcade::Wall(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -152,8 +152,8 @@ Test(Wall, SetPathAndGetPath)
 
 Test(Wall, SetRotationAndGetRotation)
 {
-    Snake snake = Snake();
-    Wall elem = Wall(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Wall elem = Arcade::Wall(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);

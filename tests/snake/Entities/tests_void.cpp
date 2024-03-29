@@ -12,8 +12,8 @@
 
 Test(Void, DefaultConstructor)
 {
-    Snake snake = Snake();
-    Void elem = Void(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Void elem = Arcade::Void(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -32,8 +32,8 @@ Test(Void, DefaultConstructor)
 
 Test(Void, SetSizeAndGetSize)
 {
-    Snake snake = Snake();
-    Void elem = Void(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Void elem = Arcade::Void(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -56,8 +56,8 @@ Test(Void, SetSizeAndGetSize)
 
 Test(Void, SetPosAndGetPos)
 {
-    Snake snake = Snake();
-    Void elem = Void(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Void elem = Arcade::Void(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -80,8 +80,8 @@ Test(Void, SetPosAndGetPos)
 
 Test(Void, SetCharAndGetChar)
 {
-    Snake snake = Snake();
-    Void elem = Void(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Void elem = Arcade::Void(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -103,8 +103,8 @@ Test(Void, SetCharAndGetChar)
 
 Test(Void, SetColorAndGetColor)
 {
-    Snake snake = Snake();
-    Void elem = Void(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Void elem = Arcade::Void(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -120,7 +120,7 @@ Test(Void, SetColorAndGetColor)
     cr_assert_eq(elem.getColor()->getB(), 17);
     cr_assert_eq(elem.getColor()->getA(), 255);
 
-    elem.setColor(std::make_unique<Color>(10, 10, 10, 10));
+    elem.setColor(std::make_unique<Arcade::Color>(10, 10, 10, 10));
     cr_assert_eq(elem.getColor()->getR(), 10);
     cr_assert_eq(elem.getColor()->getG(), 10);
     cr_assert_eq(elem.getColor()->getB(), 10);
@@ -129,8 +129,8 @@ Test(Void, SetColorAndGetColor)
 
 Test(Void, SetPathAndGetPath)
 {
-    Snake snake = Snake();
-    Void elem = Void(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Void elem = Arcade::Void(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
@@ -152,8 +152,8 @@ Test(Void, SetPathAndGetPath)
 
 Test(Void, SetRotationAndGetRotation)
 {
-    Snake snake = Snake();
-    Void elem = Void(10, 10);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Void elem = Arcade::Void(10, 10);
 
     cr_assert_eq(elem.getPos().size(), 2);
     cr_assert_eq(elem.getPos()[0], 10);
