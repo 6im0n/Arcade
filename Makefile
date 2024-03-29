@@ -29,6 +29,7 @@ SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 				src/snake/Entities/Wall.cpp			\
 				src/snake/Entities/SnakeBody.cpp	\
 				src/snake/Entities/Food.cpp			\
+				src/snake/Score.cpp						\
 				src/snake/SnakeGame.cpp				\
 				src/snake/Snake.cpp					\
 				classes/Timer.cpp					\
@@ -53,7 +54,8 @@ SRC_TEST     	= tests/tests_color.cpp		\
 				  src/snake/Entities/Food.cpp				\
 				  src/snake/Entities/Wall.cpp				\
 				  src/snake/Snake.cpp						\
-				  src/snake/SnakeGame.cpp						\
+				  src/snake/Score.cpp						\
+				  src/snake/SnakeGame.cpp					\
 				  src/snake/Entities/SnakeBody.cpp			\
 				  src/snake/Entities/Void.cpp				\
 
@@ -101,7 +103,7 @@ GREEN 			= /bin/echo -e "\x1b[32m $1\x1b[0m"
 YELLOW 			= /bin/echo -e "\x1b[33m $1\x1b[0m"
 
 #Rules
-all: core games graphics
+all: core games graphicals
 
 #-----------------Games Rules--------------------
 
@@ -138,7 +140,7 @@ $(NAME) : $(OBJ_CORE)
 
 #-----------------Graphics Rules------------------
 
-graphics: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
+graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 
 %.o: 	%.cpp
 	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \

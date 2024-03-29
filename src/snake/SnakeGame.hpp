@@ -9,6 +9,7 @@
 
 #include "Interfaces/IGame.hpp"
 #include "Snake.hpp"
+#include "Score.hpp"
 #include "Entities/Food.hpp"
 
 #define AREA_GAME_WIDTH 17
