@@ -6,7 +6,7 @@
 */
 
 #include "ncurses.hpp"
-#include "includes/keys.hpp"
+#include "includes/Keys.hpp"
 #include <memory>
 #include <iostream>
 

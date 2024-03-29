@@ -8,7 +8,7 @@
 #pragma once
 
 #include "Interfaces/IGraphic.hpp"
-#include "includes/keys.hpp"
+#include "includes/Keys.hpp"
 
 namespace Arcade {
     class Ncurses : public IGraphic {

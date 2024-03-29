@@ -8,7 +8,7 @@
 #pragma once
 #include "abstract/AGame.hpp"
 #include "Button.hpp"
-#include "includes/keys.hpp"
+#include "includes/Keys.hpp"
 #include "classes/Text.hpp"
 
 const std::vector<std::string> libs {
