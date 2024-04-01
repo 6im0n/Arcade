@@ -36,14 +36,14 @@ bool checkCollision(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> m
     return true;
 }
 
-void moveSnakePart(SnakeBody *part, std::size_t x, std::size_t y, std::size_t rotation, std::string path)
+void moveSnakePart(Arcade::SnakeBody *part, std::size_t x, std::size_t y, std::size_t rotation, std::string path)
 {
     part->setPos(x + START_WIDTH, y + START_HEIGHT);
     part->setRotation(rotation);
     part->setPath(path);
 }
 
-int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map)
+int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map)
 {
     if (_timer.getElapsedTime() < _speed)
         return 0;

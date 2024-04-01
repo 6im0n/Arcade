@@ -14,10 +14,6 @@ Arcade::Color::Color(short r, short g, short b, short a)
 {
 }
 
-Arcade::Color::~Color()
-{
-}
-
 void Arcade::Color::setColor(short r, short g, short b, short a)
 {
     _r = r;

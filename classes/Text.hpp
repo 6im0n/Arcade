@@ -14,7 +14,7 @@ namespace Arcade {
     class Text : public IText {
         public:
             Text(std::string text, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c);
-            ~Text() override;
+            ~Text() = default;
 
             void setFontPath(const std::string &fontPath);
             void setText(const std::string &text);

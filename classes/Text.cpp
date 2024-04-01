@@ -15,10 +15,6 @@ Arcade::Text::Text(std::string text, std::vector<std::size_t> pos, std::vector<s
     _c = c;
 }
 
-Arcade::Text::~Text()
-{
-}
-
 void Arcade::Text::setFontPath(const std::string &fontPath)
 {
     _fontPath = fontPath;

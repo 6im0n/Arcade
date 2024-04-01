@@ -31,11 +31,12 @@ namespace Arcade {
             void setDirection(Direction dir);
             std::vector<std::shared_ptr<SnakeBody>> getSnake() const;
 
-    protected:
-    private:
-        std::vector<std::shared_ptr<SnakeBody>> _snake;
-        Direction _direction;
-        Direction _lastDirection;
-        Timer _timer;
-        float _speed;
-};
+        protected:
+        private:
+            std::vector<std::shared_ptr<SnakeBody>> _snake;
+            Direction _direction;
+            Direction _lastDirection;
+            Timer _timer;
+            float _speed;
+    };
+}

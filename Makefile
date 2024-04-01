@@ -96,7 +96,7 @@ NCURSES_FLAGS	= -lncurses
 INC				= -I.
 
 #Compiler
-CC				= g++ -std=c++20
+CC				= g++
 LINKER			= g++
 
 #Colors
@@ -164,7 +164,6 @@ $(NAME_SDL) : $(OBJ_SDL)
 	$(call YELLOW,"❌ $@")
 
 clean:
-	@rm -f $(NAME)
 	@rm -f $(OBJ_CORE)
 	@rm -f $(OBJ_PACMAN)
 	@rm -f $(OBJ_SNAKE)
@@ -173,7 +172,7 @@ clean:
 	@rm -f $(OBJ_SDL)
 	@$(call GREEN,"✅ [$@] done !")
 
-fclean: clean tests_fclean
+fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(NAME_PACMAN)
 	@rm -f $(NAME_SNAKE)

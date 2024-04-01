@@ -8,7 +8,7 @@
 #include "SnakeBody.hpp"
 #include "classes/Color.hpp"
 
-Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y)
+Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path)
 {
     _pos = {x, y};
     _size = {29, 29};
