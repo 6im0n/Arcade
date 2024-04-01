@@ -9,6 +9,7 @@
 #include "src/snake/Entities/Food.hpp"
 #include "src/snake/Snake.hpp"
 #include "classes/Color.hpp"
+#include "src/snake/SnakeGame.hpp"
 
 Test(Food, DefaultConstructor)
 {
@@ -17,9 +18,9 @@ Test(Food, DefaultConstructor)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -35,9 +36,9 @@ Test(Food, SetSizeAndGetSize)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -57,9 +58,9 @@ Test(Food, SetPosAndGetPos)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -79,9 +80,9 @@ Test(Food, SetCharAndGetChar)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -100,9 +101,9 @@ Test(Food, SetColorAndGetColor)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -124,9 +125,9 @@ Test(Food, SetPathAndGetPath)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -145,9 +146,9 @@ Test(Food, SetRotationAndGetRotation)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);

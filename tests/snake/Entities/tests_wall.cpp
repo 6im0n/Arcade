@@ -9,6 +9,7 @@
 #include "src/snake/Entities/Wall.hpp"
 #include "src/snake/Snake.hpp"
 #include "classes/Color.hpp"
+#include "src/snake/SnakeGame.hpp"
 
 Test(Wall, DefaultConstructor)
 {
@@ -19,9 +20,9 @@ Test(Wall, DefaultConstructor)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 17);
-    cr_assert_eq(elem.getSize()[1], 17);
-    cr_assert_eq(elem.getPath(), "assets/wall");
+    cr_assert_eq(elem.getSize()[0], 29);
+    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
     cr_assert_eq(elem.getColor()->getR(), 39);
@@ -39,9 +40,9 @@ Test(Wall, SetSizeAndGetSize)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 17);
-    cr_assert_eq(elem.getSize()[1], 17);
-    cr_assert_eq(elem.getPath(), "assets/wall");
+    cr_assert_eq(elem.getSize()[0], 29);
+    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
     cr_assert_eq(elem.getColor()->getR(), 39);
@@ -63,9 +64,9 @@ Test(Wall, SetPosAndGetPos)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 17);
-    cr_assert_eq(elem.getSize()[1], 17);
-    cr_assert_eq(elem.getPath(), "assets/wall");
+    cr_assert_eq(elem.getSize()[0], 29);
+    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
     cr_assert_eq(elem.getColor()->getR(), 39);
@@ -87,9 +88,9 @@ Test(Wall, SetCharAndGetChar)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 17);
-    cr_assert_eq(elem.getSize()[1], 17);
-    cr_assert_eq(elem.getPath(), "assets/wall");
+    cr_assert_eq(elem.getSize()[0], 29);
+    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
     cr_assert_eq(elem.getColor()->getR(), 39);
@@ -110,9 +111,9 @@ Test(Wall, SetColorAndGetColor)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 17);
-    cr_assert_eq(elem.getSize()[1], 17);
-    cr_assert_eq(elem.getPath(), "assets/wall");
+    cr_assert_eq(elem.getSize()[0], 29);
+    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
     cr_assert_eq(elem.getColor()->getR(), 39);
@@ -136,9 +137,9 @@ Test(Wall, SetPathAndGetPath)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 17);
-    cr_assert_eq(elem.getSize()[1], 17);
-    cr_assert_eq(elem.getPath(), "assets/wall");
+    cr_assert_eq(elem.getSize()[0], 29);
+    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
     cr_assert_eq(elem.getColor()->getR(), 39);
@@ -159,9 +160,9 @@ Test(Wall, SetRotationAndGetRotation)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 17);
-    cr_assert_eq(elem.getSize()[1], 17);
-    cr_assert_eq(elem.getPath(), "assets/wall");
+    cr_assert_eq(elem.getSize()[0], 29);
+    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
     cr_assert_eq(elem.getColor()->getR(), 39);
