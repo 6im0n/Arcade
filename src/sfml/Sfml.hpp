@@ -15,6 +15,7 @@
 #include <string>
 #include <memory>
 #include "Interfaces/IGraphic.hpp"
+#include "includes/Keys.hpp"
 
 namespace Arcade {
     class Sfml: public Arcade::IGraphic {
