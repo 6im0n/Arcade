@@ -49,11 +49,11 @@ void Arcade::Core::run()
                 _game.get()->catchKeyEvent(_key_event);
         }
         if (!_isMenu) {
-            _graphic.get()->displayWindow();
+            _graphic.get()->clearWindow();
             _graphic.get()->displayEntities(_game.get()->getEntities());
             _graphic.get()->displayText(_game.get()->getTexts());
             _graphic.get()->playSound(_game.get()->getSounds());
-            _graphic.get()->clearWindow();
+            _graphic.get()->displayWindow();
             if (_game.get()->simulate() == -1) {
                 if (_game.get()->stopGame() == -1) {
                     if (_isMenu == false) {

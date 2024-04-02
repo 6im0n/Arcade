@@ -45,6 +45,7 @@ namespace Arcade {
             std::vector<sf::Text> _texts;
             std::vector<sf::SoundBuffer> _soundBuffers;
             std::vector<sf::Sound> _sounds;
+            std::map<std::string, sf::Texture> _entitiesPath;
 
             void loadTexture(std::vector<std::shared_ptr<IEntity>> entities);
             void loadSound(std::vector<std::shared_ptr<IEntity>> entities);

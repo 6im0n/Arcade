@@ -11,7 +11,7 @@
 
 Arcade::Sfml::Sfml()
 {
-    this->_window.create(sf::VideoMode(800, 600), "Arcade");
+    this->_window.create(sf::VideoMode(1920, 1080), "Arcade");
     this->_window.setFramerateLimit(60);
 }
 
@@ -148,13 +148,18 @@ void Arcade::Sfml::displayWindow()
 void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entities)
 {
     this->loadTexture(entities);
-    for (auto &_texture : this->_textures) {
+    for (auto &entity : entities) {
+        if (entity->getPath().empty())
+            continue;
         sf::Sprite sprite;
-        sprite.setTexture(_texture);
-        this->_sprites.push_back(sprite);
+        sf::Texture texture;
+        texture.loadFromFile(entity->getPath() + ".png");
+        sprite.setTexture(texture);
+        sprite.setPosition(entity->getPos()[0] * 29, entity->getPos()[1] * 29);
+        //sprite.setRotation(entity->getRotation());
         this->_window.draw(sprite);
-        this->_sprites.clear();
-        this->_textures.clear();
+        texture.~Texture();
+        sprite.~Sprite();
     }
 }
 
@@ -200,6 +205,11 @@ void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
         if (!std::filesystem::exists(entity->getPath() + ".png")) // add the extension
             continue;
         sf::Texture texture;
+        if (this->_entitiesPath.find(entity->getPath() + ".png") != this->_entitiesPath.end()) {
+            this->_textures.push_back(this->_entitiesPath[entity->getPath() + ".png"]);
+            continue;
+        }
+        _entitiesPath[entity->getPath() + ".png"] = texture;
         texture.loadFromFile(entity->getPath() + ".png");
         this->_textures.push_back(texture);
     }
