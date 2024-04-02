@@ -14,10 +14,10 @@ namespace Arcade {
     class Ncurses : public IGraphic {
         public:
             Ncurses();
-            ~Ncurses();
+            ~Ncurses() = default;
             bool isWindowOpen() const override;
-            void closeWindow() override;
-            void clearWindow() override;
+            void closeWindow();
+            void clearWindow();
 
             //Event
             int getKeyEvent() override;

@@ -24,7 +24,7 @@
 namespace Arcade {
     class Core {
         public :
-            Core(std::string graphicPath);
+            Core(const std::string &graphicPath);
             ~Core();
             void run();
             void loadGame(const std::string &gamePath);
@@ -46,7 +46,7 @@ namespace Arcade {
             std::vector<std::string> _GamesName;
             std::vector<int> _topScores;
             std::string _playerName;
-            int indexGame;
+            int _indexGame;
             int _key_event;
             bool _isMenu;
     };

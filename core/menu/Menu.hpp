@@ -44,11 +44,11 @@ namespace Arcade {
             int stopGame() override;
             void setGraphic(std::string graphic);
             void setGame(std::string game);
-            std::string getSelectedGame();
-            std::string getSelectedGraphic();
+            std::string getSelectedGame() const;
+            std::string getSelectedGraphic() const;
             void setScore(int score, int gameIndex);
-            bool isRunning();
-            bool isExit();
+            bool isRunning() const;
+            bool isExit() const;
             void restart();
             void addToPlayerName(Keys key);
         private :

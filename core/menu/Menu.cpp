@@ -42,6 +42,12 @@ Arcade::Menu::Menu(std::string graphicLib)
     _texts.at(2)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _playerName = "";
     _changePlayer = false;
+    _gamesScore.push_back(0);
+    _gamesScore.push_back(0);
+    _entities.push_back(std::shared_ptr<IEntity>(_runButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(_gameButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons));
+    _sounds = std::vector<std::shared_ptr<ISound>>();
 }
 
 Arcade::Menu::~Menu()
@@ -162,12 +168,12 @@ void Arcade::Menu::setGame(std::string game)
     _selectedGame = game;
 }
 
-std::string Arcade::Menu::getSelectedGame()
+std::string Arcade::Menu::getSelectedGame() const
 {
     return _selectedGame;
 }
 
-std::string Arcade::Menu::getSelectedGraphic()
+std::string Arcade::Menu::getSelectedGraphic() const
 {
     return _selectedGraphic;
 }
@@ -177,12 +183,12 @@ void Arcade::Menu::setScore(int score, int gameIndex)
     _gamesScore.at(gameIndex) = score;
 }
 
-bool Arcade::Menu::isRunning()
+bool Arcade::Menu::isRunning() const
 {
     return _isRunning;
 }
 
-bool Arcade::Menu::isExit()
+bool Arcade::Menu::isExit() const
 {
     return _exit;
 }
