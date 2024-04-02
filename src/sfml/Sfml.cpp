@@ -147,29 +147,27 @@ void Arcade::Sfml::displayWindow()
 void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entities)
 {
     this->loadTexture(entities);
-    for (auto &entity : entities) {
+    for (auto &_texture : this->_textures) {
         sf::Sprite sprite;
-        sprite.setTexture(this->_textures[0]);
-        sprite.setPosition(entity->getPos()[0], entity->getPos()[1]);
-        this->_window.draw(sprite);
+        sprite.setTexture(_texture);
+        this->_sprites.push_back(sprite);
     }
-    (void)entities;
 }
 
 void Arcade::Sfml::displayText(std::vector<std::shared_ptr<IText>> texts)
 {
     (void)texts;
-    // for (auto &text : texts) {
-    //     sf::Text sfmlText;
-    //     sf::Font font;
-    //     font.loadFromFile(text->getFontPath());
-    //     sfmlText.setFont(font);
-    //     sfmlText.setString(text->getText());
-    //     sfmlText.setCharacterSize(text->getSize());
-    //     sfmlText.setFillColor(sf::Color::Black);
-    //     sfmlText.setPosition(text->getPos()[0], text->getPos()[1]);
-    //     this->_window.draw(sfmlText);
-    // }
+    for (auto &text : texts) {
+        sf::Text sfmlText;
+        sf::Font font;
+        font.loadFromFile(text->getFontPath());
+        sfmlText.setFont(font);
+        sfmlText.setString(text->getText());
+        sfmlText.setCharacterSize(text->getSize());
+        sfmlText.setFillColor(sf::Color::Red);
+        sfmlText.setPosition(text->getPos()[0], text->getPos()[1]);
+        this->_window.draw(sfmlText);
+    }
 }
 
 void Arcade::Sfml::playSound(std::vector<std::shared_ptr<ISound>> sounds)
@@ -192,6 +190,8 @@ void Arcade::Sfml::playSound(std::vector<std::shared_ptr<ISound>> sounds)
 void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
 {
     for (auto &entity : entities) {
+        if (entity->getPath().empty())
+            continue;
         sf::Texture texture;
         texture.loadFromFile(entity->getPath());
         this->_textures.push_back(texture);
