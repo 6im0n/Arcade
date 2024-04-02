@@ -136,7 +136,7 @@ int Arcade::Sfml::getKeyEvent() //while loop
                 return Arcade::Keys::NINE;
         }
     }
-    return 0;
+    return -1;
 }
 
 void Arcade::Sfml::displayWindow()
