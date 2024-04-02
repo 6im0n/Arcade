@@ -191,7 +191,6 @@ void Arcade::Sfml::playSound(std::vector<std::shared_ptr<ISound>> sounds)
 
 void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
 {
-    char *path;
     for (auto &entity : entities) {
         if (entity->getPath().empty()) // Check if the path is empty or does not exist
             continue;
