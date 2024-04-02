@@ -41,6 +41,7 @@ class Button : public IEntity {
             Button *getPrevButton() const;
             Button *getUpButton() const;
             Button *getDownButton() const;
+            std::string getLib() const;
         private :
             std::vector<std::size_t> _pos;
             std::vector<std::size_t> _size;
@@ -56,5 +57,6 @@ class Button : public IEntity {
             Button *_upButton;
             Button *_downButton;
             bool _destroy;
+            std::string _lib;
     };
 }

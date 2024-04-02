@@ -31,9 +31,6 @@ Arcade::Core::Core(const std::string &graphicPath)
 Arcade::Core::~Core()
 {
     saveTopScores();
-    _graphic.reset();
-    _game.reset();
-    _menu.reset();
 }
 
 void Arcade::Core::run()
@@ -118,6 +115,8 @@ void Arcade::Core::loadGame(const std::string &gamePath)
     } else {
         _indexGame = 1;
     }
+    std::cout << "indexGame: " << _indexGame << std::endl;
+    std::cout << "menu text: " << _menu->getTexts().size() << std::endl;
     _menu->getTexts().at(_indexGame)->setText(_GamesName.at(_indexGame) + " " + _topPlayers.at(_indexGame) + " " + std::to_string(_topScores.at(_indexGame)));
     _gameLib = gamePath;
     _game.reset();
@@ -173,6 +172,18 @@ void Arcade::Core::loadTopScores()
         _GamesName.push_back(game);
         _topPlayers.push_back(player);
         _topScores.push_back(std::stoi(score));
+    }
+    if (_topPlayers.size() == 0) {
+        _topPlayers.push_back("");
+        _topPlayers.push_back("");
+    }
+    if (_topScores.size() == 0) {
+        _topScores.push_back(0);
+        _topScores.push_back(0);
+    }
+    if (_GamesName.size() == 0) {
+        _GamesName.push_back("");
+        _GamesName.push_back("");
     }
     file.close();
 }

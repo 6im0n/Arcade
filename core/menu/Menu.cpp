@@ -40,6 +40,7 @@ Arcade::Menu::Menu(std::string graphicLib)
     _texts.at(1)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(16, 14), std::vector<std::size_t>(3, 2), ' '));
     _texts.at(2)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    std::cout << "menu text size: " << _texts.size() << std::endl;
     _playerName = "";
     _changePlayer = false;
     _gamesScore.push_back(0);

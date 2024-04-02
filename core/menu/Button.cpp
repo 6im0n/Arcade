@@ -15,7 +15,7 @@ Arcade::Button::Button(std::string label, std::vector<std::size_t> pos, std::vec
     _size = size;
     _char = c;
     _color = std::make_shared<Color>(255, 255, 255, 0);
-    _path = path;
+    _lib = path;
     _rotation = rotation;
     _nextButton = nullptr;
     _prevButton = nullptr;
@@ -153,4 +153,9 @@ Arcade::Button *Arcade::Button::getUpButton() const
 Arcade::Button *Arcade::Button::getDownButton() const
 {
     return _downButton;
+}
+
+std::string Arcade::Button::getLib() const
+{
+    return _lib;
 }

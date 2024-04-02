@@ -64,6 +64,5 @@ namespace Arcade {
             Button *_gameButtons;
             Button *_graphicButtons;
             std::string _playerName;
-            std::vector<std::shared_ptr<Text>> _texts;
     };
 }
