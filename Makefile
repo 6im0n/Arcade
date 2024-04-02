@@ -32,7 +32,7 @@ SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 
 NCURSES_SRC  	= src/ncurses/ncurses.cpp \
 
-SFML_SRC     	= src/sfml/sfml.cpp \
+SFML_SRC     	= src/sfml/Sfml.cpp \
 
 SDL_SRC      	= src/sdl/sdl.cpp \
 
