@@ -19,10 +19,6 @@ Arcade::Ncurses::Ncurses()
 {
 }
 
-Arcade::Ncurses::~Ncurses()
-{
-}
-
 bool Arcade::Ncurses::isWindowOpen() const
 {
     return false;
