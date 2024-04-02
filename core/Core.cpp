@@ -39,9 +39,7 @@ Arcade::Core::~Core()
 void Arcade::Core::run()
 {
     while (5) {
-        std::cout << "test" << std::endl;
         _key_event = _graphic->getKeyEvent();
-        std::cout << "test" << std::endl;
         if (_key_event == Keys::O || _key_event == Keys::P
             || _key_event == Keys::L || _key_event == Keys::M) {
                 _menu->catchKeyEvent(_key_event);
@@ -78,10 +76,10 @@ void Arcade::Core::run()
             if (_menu->isExit()) {
                 return;
             }
-            // _graphic.get()->displayWindow();
-            // _graphic.get()->displayEntities(_menu->getEntities());
-            // _graphic.get()->displayText(_menu->getTexts());
-            // _graphic.get()->playSound(_menu->getSounds());
+            _graphic.get()->displayWindow();
+            _graphic.get()->displayEntities(_menu->getEntities());
+            _graphic.get()->displayText(_menu->getTexts());
+            _graphic.get()->playSound(_menu->getSounds());
             if (_menu->simulate() == -1) {
                 if (_menu->stopGame() == -1) {
                     if (_isMenu == false) {
