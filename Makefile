@@ -14,14 +14,16 @@ NAME_SFML 	 	= lib/arcade_sfml.so
 NAME_SDL 	 	= lib/arcade_sdl.so
 
 #Sources
+
+CLASSES_SRC		= classes/Color.cpp \
+				  classes/Text.cpp \
+
 SRC_CORE      	= core/main.cpp \
 		          core/DLLoader.cpp \
 				  core/Core.cpp \
 				  core/menu/Menu.cpp \
 				  core/menu/Button.cpp \
 				  abstract/AGame.cpp \
-				  classes/Color.cpp \
-				  classes/Text.cpp \
 
 PACMAN_SRC   	= src/pacman/pacman.cpp \
 
@@ -32,25 +34,21 @@ SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 				src/snake/Score.cpp						\
 				src/snake/SnakeGame.cpp				\
 				src/snake/Snake.cpp					\
-				classes/Timer.cpp					\
-				classes/Color.cpp					\
 
 NCURSES_SRC  	= src/ncurses/ncurses.cpp \
 
-SFML_SRC     	= src/sfml/sfml.cpp \
+SFML_SRC     	= src/sfml/Sfml.cpp \
 
-SDL_SRC      	= src/sdl/sdl.cpp \
+SDL_SRC      	= src/sdl/Sdl.cpp \
 
-SRC_TEST     	= tests/tests_color.cpp		\
-				  classes/Color.cpp			\
-				  tests/tests_timer.cpp		\
-				  classes/Timer.cpp			\
+SRC_TEST     	= tests/tests_color.cpp						\
+				  tests/tests_timer.cpp						\
 				  tests/snake/Entities/tests_food.cpp		\
 				  tests/snake/Entities/tests_void.cpp		\
 				  tests/snake/Entities/tests_wall.cpp		\
 				  tests/snake/Entities/tests_snake_body.cpp	\
-				  tests/snake/tests_snake.cpp	\
-				  tests/snake/tests_SnakeGame.cpp	\
+				  tests/snake/tests_snake.cpp				\
+				  tests/snake/tests_SnakeGame.cpp			\
 				  src/snake/Entities/Food.cpp				\
 				  src/snake/Entities/Wall.cpp				\
 				  src/snake/Snake.cpp						\
@@ -59,8 +57,8 @@ SRC_TEST     	= tests/tests_color.cpp		\
 				  src/snake/Entities/SnakeBody.cpp			\
 				  src/snake/Entities/Void.cpp				\
 
-
 #Objects
+OBJ_CLASSES		= $(CLASSES_SRC:.cpp=.o)
 OBJ_CORE		= $(SRC_CORE:.cpp=.o)
 OBJ_PACMAN		= $(PACMAN_SRC:.cpp=.o)
 OBJ_SNAKE		= $(SNAKE_SRC:.cpp=.o)
@@ -88,9 +86,9 @@ GCNO_TEST		= $(SRC_TEST:.cpp=.gcno)
 GCNO_FILES		= $(GCNO_CORE) $(GCNO_PACMAN) $(GCNO_SNAKE) $(GCNO_NCURSES) $(GCNO_SFML) $(GCNO_SDL) $(GCNO_TEST)
 
 #flags
-CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
-CXXFLAGS += -fprofile-arcs -ftest-coverage
-SFML_FlAGS		= -lsfml-graphics -lsfml-window -lsfml-system
+CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20 \
+				  -fprofile-arcs -ftest-coverage
+SFML_FLAGS		= -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
 NCURSES_FLAGS	= -lncurses
 INC				= -I.
@@ -106,60 +104,83 @@ YELLOW 			= /bin/echo -e "\x1b[33m $1\x1b[0m"
 #Rules
 all: core games graphicals
 
+#-----------------Classes Rules--------------------
+
+$(OBJ_CLASSES):%.o: 	%.cpp
+	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
+	$(call YELLOW,"🆗 $<") || \
+	$(call YELLOW,"❌ $<")
+
 #-----------------Games Rules--------------------
 
-games: $(NAME_PACMAN) $(NAME_SNAKE)
+games: $(OBJ_CLASSES) $(NAME_PACMAN) $(NAME_SNAKE)
 
-%.o: 	%.cpp
+$(OBJ_SNAKE):%.o: 	%.cpp
+	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
+	$(call YELLOW,"🆗 $<") || \
+	$(call YELLOW,"❌ $<")
+
+$(OBJ_PACMAN):%.o: 	%.cpp
 	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
 	$(call YELLOW,"🆗 $<") || \
 	$(call YELLOW,"❌ $<")
 
 $(NAME_PACMAN) : $(OBJ_PACMAN)
-	@$(LINKER) -shared -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
+	@$(LINKER) -shared -fPIC -o  $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
+
 $(NAME_SNAKE) : $(OBJ_SNAKE)
-	@$(LINKER) -shared -o $(NAME_SNAKE) $(OBJ_SNAKE) $(CXXFLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_SNAKE) $(OBJ_SNAKE) $(OBJ_CLASSES) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 #------------------Core Rules--------------------
 
-core: $(NAME)
+core: $(OBJ_CLASSES) $(NAME)
 
-%.o: 	%.cpp
+$(OBJ_CORE):%.o: 	%.cpp
 	@$(CC) $(INC) $(CXXFLAGS) -c -o $@ $< && \
 	$(call YELLOW,"🆗 $<") || \
 	$(call YELLOW,"❌ $<")
 
 $(NAME) : $(OBJ_CORE)
-	@$(LINKER) -o $(NAME) $(OBJ_CORE) $(CXXFLAGS) && \
+	@$(LINKER) -o $(NAME) $(OBJ_CORE) $(OBJ_CLASSES) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 #-----------------Graphics Rules------------------
 
-graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
+graphicals: classes $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 
-%.o: 	%.cpp
-	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
+$(OBJ_SFML):%.o: 	%.cpp
+	@$(CC) $(INC) $(CXXFLAGS) $(SFML_FLAGS) -fPIC -c -o $@ $< && \
+	$(call YELLOW,"🆗 $<") || \
+	$(call YELLOW,"❌ $<")
+
+$(OBJ_NCURSES):%.o: 	%.cpp
+	@$(CC) $(INC) $(CXXFLAGS) $(NCURSES_FLAGS) -fPIC -c -o $@ $< && \
+	$(call YELLOW,"🆗 $<") || \
+	$(call YELLOW,"❌ $<")
+
+$(OBJ_SDL):%.o: 	%.cpp
+	@$(CC) $(INC) $(CXXFLAGS) $(SDL_FLAGS) -fPIC -c -o $@ $< && \
 	$(call YELLOW,"🆗 $<") || \
 	$(call YELLOW,"❌ $<")
 
 $(NAME_NCURSES) : $(OBJ_NCURSES)
-	@$(LINKER) -shared -o $(NAME_NCURSES) $(OBJ_NCURSES) $(CXXFLAGS) $(NCURSES_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_NCURSES) $(OBJ_NCURSES) $(CXXFLAGS) $(NCURSES_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SFML) : $(OBJ_SFML)
-	@$(LINKER) -shared -o $(NAME_SFML) $(OBJ_SFML) $(CXXFLAGS) $(SFML_FLAGS) && \
-	$(call YELLOW,"✅ $@") || \
-	$(call YELLOW,"❌ $@")
+	@$(LINKER) -shared -fPIC -o $(NAME_SFML) $(OBJ_SFML) $(CXXFLAGS) $(SFML_FLAGS) && \
+    $(call YELLOW,"✅ $@") || \
+    $(call YELLOW,"❌ $@")
 
 $(NAME_SDL) : $(OBJ_SDL)
-	@$(LINKER) -shared -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
@@ -179,6 +200,7 @@ fclean: clean
 	@rm -f $(NAME_NCURSES)
 	@rm -f $(NAME_SFML)
 	@rm -f $(NAME_SDL)
+	@rm -f $(CLASSES_SRC:.cpp=.o)
 	@$(call GREEN,"✅ [$@] done !")
 
 tests_fclean:
@@ -197,7 +219,9 @@ test_obj: $(OBJ_TEST)
 tests_run: fclean
 	$(MAKE) obj CXXFLAGS+=--coverage -lcriterion
 	$(MAKE) test_obj CXXFLAGS+=-lcriterion
-	g++ -o unit_tests $(OBJ_TEST) $(CXXFLAGS) -lcriterion --coverage
+	g++ -o unit_tests $(OBJ_TEST) $(OBJ_CLASSES) $(CXXFLAGS) -lcriterion --coverage
 	./unit_tests
 	gcovr --exclude tests/
 	gcovr -b --exclude tests/
+
+.PHONY: all clean fclean re tests_run tests_fclean obj test_obj classes
