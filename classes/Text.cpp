@@ -15,12 +15,12 @@ Arcade::Text::Text(std::string text, std::vector<std::size_t> pos, std::vector<s
     _c = c;
 }
 
-void Arcade::Text::setFontPath(std::string &fontPath)
+void Arcade::Text::setFontPath(const std::string &fontPath)
 {
     _fontPath = fontPath;
 }
 
-void Arcade::Text::setText(std::string &text)
+void Arcade::Text::setText(const std::string &text)
 {
     _text = text;
 }
@@ -46,12 +46,12 @@ void Arcade::Text::setRotation(float rotation)
     _rotation = rotation;
 }
 
-std::string Arcade::Text::getFontPath() const
+std::string Arcade::Text::getFontPath()
 {
     return _fontPath;
 }
 
-std::string Arcade::Text::getText() const
+std::string Arcade::Text::getText()
 {
     return _text;
 }

@@ -24,8 +24,8 @@ namespace Arcade {
             void setRotation(float rotation);
 
             //getters
-            std::string getFontPath() const;
-            std::string getText() const;
+            std::string getFontPath();
+            std::string getText();
             std::shared_ptr<IColor> getColor() const;
             std::vector<std::size_t> getPos() const;
             std::size_t getSize() const;
