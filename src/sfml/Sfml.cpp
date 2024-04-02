@@ -156,8 +156,9 @@ void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entitie
 
 void Arcade::Sfml::displayText(std::vector<std::shared_ptr<IText>> texts)
 {
-    (void)texts;
     for (auto &text : texts) {
+        if (text->getFontPath().empty())
+            continue;
         sf::Text sfmlText;
         sf::Font font;
         font.loadFromFile(text->getFontPath());
