@@ -32,15 +32,15 @@ class Button : public IEntity {
             float getRotation() const override;
 
             //methods
-            std::string getLabel();
+            std::string getLabel() const;
             void setNextButton(Button *nextButton);
             void setPrevButton(Button *prevButton);
             void setUpButton(Button *upButton);
             void setDownButton(Button *downButton);
-            Button *getNextButton();
-            Button *getPrevButton();
-            Button *getUpButton();
-            Button *getDownButton();
+            Button *getNextButton() const;
+            Button *getPrevButton() const;
+            Button *getUpButton() const;
+            Button *getDownButton() const;
         private :
             std::vector<std::size_t> _pos;
             std::vector<std::size_t> _size;
@@ -55,6 +55,6 @@ class Button : public IEntity {
             Button *_prevButton;
             Button *_upButton;
             Button *_downButton;
-            bool destroy;
+            bool _destroy;
     };
 }

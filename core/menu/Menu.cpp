@@ -168,12 +168,12 @@ void Arcade::Menu::setGame(std::string game)
     _selectedGame = game;
 }
 
-std::string Arcade::Menu::getSelectedGame()
+std::string Arcade::Menu::getSelectedGame() const
 {
     return _selectedGame;
 }
 
-std::string Arcade::Menu::getSelectedGraphic()
+std::string Arcade::Menu::getSelectedGraphic() const
 {
     return _selectedGraphic;
 }
@@ -183,12 +183,12 @@ void Arcade::Menu::setScore(int score, int gameIndex)
     _gamesScore.at(gameIndex) = score;
 }
 
-bool Arcade::Menu::isRunning()
+bool Arcade::Menu::isRunning() const
 {
     return _isRunning;
 }
 
-bool Arcade::Menu::isExit()
+bool Arcade::Menu::isExit() const
 {
     return _exit;
 }

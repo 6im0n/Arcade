@@ -21,16 +21,16 @@ Arcade::Button::Button(std::string label, std::vector<std::size_t> pos, std::vec
     _prevButton = nullptr;
     _upButton = nullptr;
     _downButton = nullptr;
-    destroy = false;
+    _destroy = false;
 }
 
 Arcade::Button::~Button()
 {
-    if (destroy)
+    if (_destroy)
         return;
-    destroy = true;
-    while (_nextButton != nullptr && _nextButton->destroy == false) {
-        if (_nextButton == nullptr || _nextButton->destroy == true)
+    _destroy = true;
+    while (_nextButton != nullptr && _nextButton->_destroy == false) {
+        if (_nextButton == nullptr || _nextButton->_destroy == true)
             break;
         delete _nextButton;
     }
@@ -96,7 +96,7 @@ float Arcade::Button::getRotation() const
     return _rotation;
 }
 
-std::string Arcade::Button::getLabel()
+std::string Arcade::Button::getLabel() const
 {
     return _label;
 }
@@ -135,22 +135,22 @@ void Arcade::Button::setDownButton(Button *downButton)
     downButton->setUpButton(this);
 }
 
-Arcade::Button *Arcade::Button::getNextButton()
+Arcade::Button *Arcade::Button::getNextButton() const
 {
     return _nextButton;
 }
 
-Arcade::Button *Arcade::Button::getPrevButton()
+Arcade::Button *Arcade::Button::getPrevButton() const
 {
     return _prevButton;
 }
 
-Arcade::Button *Arcade::Button::getUpButton()
+Arcade::Button *Arcade::Button::getUpButton() const
 {
     return _upButton;
 }
 
-Arcade::Button *Arcade::Button::getDownButton()
+Arcade::Button *Arcade::Button::getDownButton() const
 {
     return _downButton;
 }
