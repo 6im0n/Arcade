@@ -62,17 +62,18 @@ void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entitie
 
 void Arcade::Sfml::displayText(std::vector<std::shared_ptr<IText>> texts)
 {
-    for (auto &text : texts) {
-        sf::Text sfmlText;
-        sf::Font font;
-        font.loadFromFile(text->getFontPath());
-        sfmlText.setFont(font);
-        sfmlText.setString(text->getText());
-        sfmlText.setCharacterSize(text->getSize());
-        sfmlText.setFillColor(sf::Color::White);
-        sfmlText.setPosition(text->getPos()[0], text->getPos()[1]);
-        this->_window.draw(sfmlText);
-    }
+    (void)texts;
+    // for (auto &text : texts) {
+    //     sf::Text sfmlText;
+    //     sf::Font font;
+    //     font.loadFromFile(text->getFontPath());
+    //     sfmlText.setFont(font);
+    //     sfmlText.setString(text->getText());
+    //     sfmlText.setCharacterSize(text->getSize());
+    //     sfmlText.setFillColor(sf::Color::Black);
+    //     sfmlText.setPosition(text->getPos()[0], text->getPos()[1]);
+    //     this->_window.draw(sfmlText);
+    // }
 }
 
 void Arcade::Sfml::playSound(std::vector<std::shared_ptr<ISound>> sounds)
@@ -117,6 +118,16 @@ void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
 // }
 
 extern "C" {
+    __attribute__((constructor))
+    void constructor()
+    {
+    }
+
+    __attribute__((destructor))
+    void destructor()
+    {
+    }
+
     Arcade::IGraphic *loadGraphicInstance()
     {
         return new Arcade::Sfml();
