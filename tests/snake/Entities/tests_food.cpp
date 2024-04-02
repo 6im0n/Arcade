@@ -9,17 +9,18 @@
 #include "src/snake/Entities/Food.hpp"
 #include "src/snake/Snake.hpp"
 #include "classes/Color.hpp"
+#include "src/snake/SnakeGame.hpp"
 
 Test(Food, DefaultConstructor)
 {
-    Snake snake = Snake();
-    Food food = Food(snake);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Food food = Arcade::Food(snake);
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -30,14 +31,14 @@ Test(Food, DefaultConstructor)
 
 Test(Food, SetSizeAndGetSize)
 {
-    Snake snake = Snake();
-    Food food = Food(snake);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Food food = Arcade::Food(snake);
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -52,14 +53,14 @@ Test(Food, SetSizeAndGetSize)
 
 Test(Food, SetPosAndGetPos)
 {
-    Snake snake = Snake();
-    Food food = Food(snake);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Food food = Arcade::Food(snake);
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -74,14 +75,14 @@ Test(Food, SetPosAndGetPos)
 
 Test(Food, SetCharAndGetChar)
 {
-    Snake snake = Snake();
-    Food food = Food(snake);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Food food = Arcade::Food(snake);
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -95,14 +96,14 @@ Test(Food, SetCharAndGetChar)
 
 Test(Food, SetColorAndGetColor)
 {
-    Snake snake = Snake();
-    Food food = Food(snake);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Food food = Arcade::Food(snake);
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -110,7 +111,7 @@ Test(Food, SetColorAndGetColor)
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
 
-    food.setColor(std::make_unique<Color>(10, 10, 10, 10));
+    food.setColor(std::make_unique<Arcade::Color>(10, 10, 10, 10));
     cr_assert_eq(food.getColor()->getR(), 10);
     cr_assert_eq(food.getColor()->getG(), 10);
     cr_assert_eq(food.getColor()->getB(), 10);
@@ -119,14 +120,14 @@ Test(Food, SetColorAndGetColor)
 
 Test(Food, SetPathAndGetPath)
 {
-    Snake snake = Snake();
-    Food food = Food(snake);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Food food = Arcade::Food(snake);
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);
@@ -140,14 +141,14 @@ Test(Food, SetPathAndGetPath)
 
 Test(Food, SetRotationAndGetRotation)
 {
-    Snake snake = Snake();
-    Food food = Food(snake);
+    Arcade::Snake snake = Arcade::Snake();
+    Arcade::Food food = Arcade::Food(snake);
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 17);
-    cr_assert_eq(food.getSize()[1], 17);
-    cr_assert_eq(food.getPath(), "assets/apple");
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
+    cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
     cr_assert_eq(food.getColor()->getR(), 40);

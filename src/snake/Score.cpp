@@ -8,89 +8,89 @@
 #include "Score.hpp"
 #include "classes/Color.hpp"
 
-Score::Score()
+Arcade::Score::Score()
 {
     _pos = {8, 25};
     _size = 25;
     _rotation = 0;
-    _color = std::make_shared<Color>(255, 255, 255, 255);
+    _color = std::make_shared<Arcade::Color>(255, 255, 255, 255);
     _fontPath = "assets/Roboto-Regular";
     _text = "Score:";
     _score = 0;
 }
 
-void Score::setFontPath(const std::string &fontPath)
+void Arcade::Score::setFontPath(const std::string &fontPath)
 {
     _fontPath = fontPath;
 }
 
-void Score::setText(const std::string &text)
+void Arcade::Score::setText(const std::string &text)
 {
     _text = text;
 }
 
-void Score::setColor(std::unique_ptr<IColor> color)
+void Arcade::Score::setColor(std::unique_ptr<Arcade::IColor> color)
 {
     _color = std::move(color);
 }
 
-void Score::setPos(std::size_t x, std::size_t y)
+void Arcade::Score::setPos(std::size_t x, std::size_t y)
 {
     _pos = {x, y};
 }
 
-void Score::setSize(std::size_t x)
+void Arcade::Score::setSize(std::size_t x)
 {
     _size = x;
 }
 
-void Score::setRotation(float rotation)
+void Arcade::Score::setRotation(float rotation)
 {
     _rotation = rotation;
 }
 
-std::string Score::getFontPath()
+std::string Arcade::Score::getFontPath()
 {
     return _fontPath;
 }
 
-std::string Score::getText()
+std::string Arcade::Score::getText()
 {
     _text = "Score: " + std::to_string(_score);
     return _text;
 }
 
-std::shared_ptr<IColor> Score::getColor() const
+std::shared_ptr<Arcade::IColor> Arcade::Score::getColor() const
 {
     return _color;
 }
 
-std::vector<std::size_t> Score::getPos() const
+std::vector<std::size_t> Arcade::Score::getPos() const
 {
     return _pos;
 }
 
-std::size_t Score::getSize() const
+std::size_t Arcade::Score::getSize() const
 {
     return _size;
 }
 
-float Score::getRotation() const
+float Arcade::Score::getRotation() const
 {
     return _rotation;
 }
 
-int Score::getScore() const
+int Arcade::Score::getScore() const
 {
     return _score;
 }
 
-void Score::incrementScore()
+void Arcade::Score::incrementScore()
 {
     _score ++;
 }
 
-void Score::resetScore()
+void Arcade::Score::resetScore()
 {
     _score = 0;
 }

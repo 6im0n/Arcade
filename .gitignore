@@ -9,3 +9,4 @@ arcade
 *.gcno
 unit_tests
 .vscode
+vg*

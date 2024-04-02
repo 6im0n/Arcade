@@ -5,17 +5,21 @@
 ** dlLoader.hpp
 */
 
-#include <vector>
-#include <string>
+#pragma once
+#include "../Interfaces/IGame.hpp"
+#include "../Interfaces/IGraphic.hpp"
+#include <iostream>
+#include <dlfcn.h>
+#include <memory>
 
 namespace Arcade {
     template <typename T>
     class DLLoader {
         public :
             DLLoader();
-            DLLoader(std::string const &entryPoint);
+            DLLoader(const std::string &entryPoint);
             ~DLLoader();
-            T *getInstance(std::string const &libname);
+            T *getInstance(const std::string &libname);
             void setEntryPoint(std::string const &entryPoint);
         private :
             void *handle;
