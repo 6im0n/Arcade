@@ -116,7 +116,7 @@ Test(Snake, MoveNormalyDown)
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
     snake.setDirection(Arcade::D_DOWN);
-    cr_assert_eq(snake.moveSnake(map), -1);
+    cr_assert_eq(snake.moveSnake(map), -1); // hit a snake part
     std::vector<std::shared_ptr<Arcade::SnakeBody>> snakeEntities2 = snake.getSnake();
     cr_assert_eq(snakeEntities.size(), 4);
     cr_assert_eq(snakeEntities2.size(), 4);
