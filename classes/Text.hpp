@@ -2,22 +2,20 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** Score
+** Text
 */
 
 #pragma once
 
-#include <string>
-
 #include "Interfaces/IText.hpp"
+#include "Color.hpp"
 
 namespace Arcade {
-    class Score : public IText {
+    class Text : public IText {
         public:
-            Score();
-            ~Score() = default;
+            Text(std::string text, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c);
+            ~Text() = default;
 
-            // setters
             void setFontPath(const std::string &fontPath);
             void setText(const std::string &text);
             void setColor(std::unique_ptr<IColor> color);
@@ -25,25 +23,20 @@ namespace Arcade {
             void setSize(std::size_t x);
             void setRotation(float rotation);
 
-            // getters
+            //getters
             std::string getFontPath();
             std::string getText();
             std::shared_ptr<IColor> getColor() const;
             std::vector<std::size_t> getPos() const;
             std::size_t getSize() const;
             float getRotation() const;
-            int getScore() const;
-
-            void incrementScore();
-            void resetScore();
-
         private:
-            std::string _fontPath;
             std::string _text;
-            std::shared_ptr<IColor> _color;
             std::vector<std::size_t> _pos;
-            std::size_t _size;
+            std::vector<std::size_t> _size;
+            std::unique_ptr<IColor> _color;
+            std::string _fontPath;
             float _rotation;
-            int _score;
+            char _c;
     };
 }

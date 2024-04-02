@@ -11,7 +11,7 @@
 #include <memory>
 #include <vector>
 
-//namespace Arcade {
+namespace Arcade {
     class IColor {
         public:
             virtual ~IColor() = default;
@@ -46,4 +46,4 @@
             virtual std::string getPath() const = 0;
             virtual float getRotation() const = 0;
     };
-//}
+}

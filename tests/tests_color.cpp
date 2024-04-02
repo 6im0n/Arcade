@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** tests_color
+** tests_Color
 */
 
 #include <criterion/criterion.h>
@@ -10,7 +10,7 @@
 
 Test(Color, DefaultConstructor)
 {
-    Color color = Color(0, 0, 0, 255);
+    Arcade::Color color = Arcade::Color(0, 0, 0, 255);
 
     cr_assert_eq(color.getR(), 0);
     cr_assert_eq(color.getG(), 0);
@@ -20,7 +20,7 @@ Test(Color, DefaultConstructor)
 
 Test(Color, CustomConstructor)
 {
-    Color color(255, 0, 0, 128);
+    Arcade::Color color(255, 0, 0, 128);
 
     cr_assert_eq(color.getR(), 255);
     cr_assert_eq(color.getG(), 0);
@@ -30,7 +30,7 @@ Test(Color, CustomConstructor)
 
 Test(Color, SettersAndGetters)
 {
-    Color color = Color(0, 0, 0, 0);
+    Arcade::Color color = Arcade::Color(0, 0, 0, 0);
 
     color.setColor(128, 64, 32, 192);
 

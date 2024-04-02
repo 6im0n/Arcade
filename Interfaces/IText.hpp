@@ -9,10 +9,9 @@
 
 #include <string>
 #include <vector>
-
 #include "IEntity.hpp"
 
-//namespace Arcade {
+namespace Arcade {
     class IText {
         public:
             virtual ~IText() = default;
@@ -33,4 +32,4 @@
             virtual std::size_t getSize() const = 0;
             virtual float getRotation() const = 0;
     };
-//}
+}

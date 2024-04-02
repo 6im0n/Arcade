@@ -17,6 +17,11 @@ NAME_SDL 	 	= lib/arcade_sdl.so
 SRC_CORE      	= core/main.cpp \
 		          core/DLLoader.cpp \
 				  core/Core.cpp \
+				  core/menu/Menu.cpp \
+				  core/menu/Button.cpp \
+				  abstract/AGame.cpp \
+				  classes/Color.cpp \
+				  classes/Text.cpp \
 
 PACMAN_SRC   	= src/pacman/pacman.cpp \
 
@@ -84,6 +89,7 @@ GCNO_FILES		= $(GCNO_CORE) $(GCNO_PACMAN) $(GCNO_SNAKE) $(GCNO_NCURSES) $(GCNO_S
 
 #flags
 CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
+CXXFLAGS += -fprofile-arcs -ftest-coverage
 SFML_FlAGS		= -lsfml-graphics -lsfml-window -lsfml-system
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
 NCURSES_FLAGS	= -lncurses
@@ -98,7 +104,7 @@ GREEN 			= /bin/echo -e "\x1b[32m $1\x1b[0m"
 YELLOW 			= /bin/echo -e "\x1b[33m $1\x1b[0m"
 
 #Rules
-all: core games graphics
+all: core games graphicals
 
 #-----------------Games Rules--------------------
 
@@ -135,7 +141,7 @@ $(NAME) : $(OBJ_CORE)
 
 #-----------------Graphics Rules------------------
 
-graphics: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
+graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 
 %.o: 	%.cpp
 	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
@@ -166,7 +172,7 @@ clean:
 	@rm -f $(OBJ_SDL)
 	@$(call GREEN,"✅ [$@] done !")
 
-fclean: clean tests_fclean
+fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(NAME_PACMAN)
 	@rm -f $(NAME_SNAKE)

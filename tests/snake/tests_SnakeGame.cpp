@@ -10,7 +10,7 @@
 
 Test(SnakeGame, StartGame)
 {
-    SnakeGame game;
+    Arcade::SnakeGame game;
     int result = game.startGame();
 
     cr_assert_eq(game.getScore(), 0);
@@ -19,21 +19,21 @@ Test(SnakeGame, StartGame)
 
 Test(SnakeGame, StopGame)
 {
-    SnakeGame game;
+    Arcade::SnakeGame game;
     int result = game.stopGame();
     cr_assert_eq(result, 0);
 }
 
 Test(SnakeGame, GetScore)
 {
-    SnakeGame game;
+    Arcade::SnakeGame game;
     int score = game.getScore();
     cr_assert_eq(score, 0, "Expected 0, got %d", score);
 }
 
 Test(SnakeGame, Simulate)
 {
-    SnakeGame game;
+    Arcade::SnakeGame game;
     int result = game.simulate();
 
     auto entities = game.getEntities();
