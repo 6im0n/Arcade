@@ -48,12 +48,9 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
     if (_timer.getElapsedTime() < _speed)
         return 0;
 
-    _snake.pop_back();
     SnakeBody *head = _snake[0].get();
     head->setPath(SNAKE_BODY_PATH);
     auto newHead = std::make_shared<SnakeBody>(0, 0, SNAKE_HEAD_PATH);
-    _snake.insert(_snake.begin(), newHead);
-    _snake.back()->setPath(SNAKE_TAIL_PATH);
 
     if (_direction == D_UP) {
         if (checkCollision(map, _snake, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == false)
@@ -112,6 +109,9 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
         moveSnakePart(newHead.get(), head->getPos()[0] + 1 - START_WIDTH, head->getPos()[1] - START_HEIGHT, 90, SNAKE_HEAD_PATH);
     }
 
+    _snake.pop_back();
+    _snake.insert(_snake.begin(), newHead);
+    _snake.back()->setPath(SNAKE_TAIL_PATH);
     _timer.reset();
     return 0;
 }
