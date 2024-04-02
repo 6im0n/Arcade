@@ -152,6 +152,9 @@ void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entitie
         sf::Sprite sprite;
         sprite.setTexture(_texture);
         this->_sprites.push_back(sprite);
+        this->_window.draw(sprite);
+        this->_sprites.clear();
+        this->_textures.clear();
     }
 }
 
