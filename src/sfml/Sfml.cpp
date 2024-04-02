@@ -162,7 +162,7 @@ void Arcade::Sfml::displayText(std::vector<std::shared_ptr<IText>> texts)
             continue;
         sf::Text sfmlText;
         sf::Font font;
-        font.loadFromFile(text->getFontPath());
+        font.loadFromFile(text->getFontPath() + ".ttf"); // Load the font
         sfmlText.setFont(font);
         sfmlText.setString(text->getText());
         sfmlText.setCharacterSize(text->getSize());
@@ -176,7 +176,7 @@ void Arcade::Sfml::playSound(std::vector<std::shared_ptr<ISound>> sounds)
 {
     for (auto &sound : sounds) {
         sf::SoundBuffer buffer;
-        if (!buffer.loadFromFile(sound->getPathSound())) {
+        if (!buffer.loadFromFile(sound->getPathSound() + ".mp3")) {
             std::cerr << "Error loading sound file" << std::endl;
             continue;
         }
@@ -194,7 +194,7 @@ void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
     for (auto &entity : entities) {
         if (entity->getPath().empty()) // Check if the path is empty or does not exist
             continue;
-        if (!std::filesystem::exists(entity->getPath() + ".png"))
+        if (!std::filesystem::exists(entity->getPath() + ".png")) // add the extension
             continue;
         sf::Texture texture;
         texture.loadFromFile(entity->getPath() + ".png");
