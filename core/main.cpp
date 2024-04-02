@@ -16,7 +16,7 @@ int main(int argc, char **argv)
         std::cerr << "Usage: ./arcade path_to_graphic_library" << std::endl;
         return 84;
     }
-    Arcade::Core *core = new Arcade::Core(argv[1]);
-    core->run();
+    Arcade::Core core(argv[1]);
+    core.run();
     return 0;
 }

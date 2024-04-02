@@ -24,7 +24,7 @@
 namespace Arcade {
     class Core {
         public :
-            Core(std::string graphicPath);
+            Core(const std::string &graphicPath);
             ~Core();
             void run();
             void loadGame(const std::string &gamePath);

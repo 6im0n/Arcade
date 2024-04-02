@@ -17,14 +17,10 @@
 #include <vector>
 #include <iostream>
 
-Arcade::Core::Core(std::string graphicPath)
+Arcade::Core::Core(const std::string &graphicPath)
 {
     _graphicLoader = DLLoader<IGraphic>(ENTRY_POINT_GRAPHIC);
-    _graphic = _graphicLoader.getInstance(graphicPath);
-    if (_graphic == nullptr || _graphic.get() == nullptr) {
-        std::cerr << "Error: " << graphicPath << " " << ENTRY_POINT_GRAPHIC << " returned nullptr" << std::endl;
-        exit(84);
-    }
+    _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
     indexGame = 1;
     _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
     _menu = std::make_unique<Menu>(graphicPath);
@@ -43,7 +39,9 @@ Arcade::Core::~Core()
 void Arcade::Core::run()
 {
     while (5) {
-        _key_event = _graphic.get()->getKeyEvent();
+        std::cout << "test" << std::endl;
+        _key_event = _graphic->getKeyEvent();
+        std::cout << "test" << std::endl;
         if (_key_event == Keys::O || _key_event == Keys::P
             || _key_event == Keys::L || _key_event == Keys::M) {
                 _menu->catchKeyEvent(_key_event);
@@ -80,10 +78,10 @@ void Arcade::Core::run()
             if (_menu->isExit()) {
                 return;
             }
-            _graphic.get()->displayWindow();
-            _graphic.get()->displayEntities(_menu->getEntities());
-            _graphic.get()->displayText(_menu->getTexts());
-            _graphic.get()->playSound(_menu->getSounds());
+            // _graphic.get()->displayWindow();
+            // _graphic.get()->displayEntities(_menu->getEntities());
+            // _graphic.get()->displayText(_menu->getTexts());
+            // _graphic.get()->playSound(_menu->getSounds());
             if (_menu->simulate() == -1) {
                 if (_menu->stopGame() == -1) {
                     if (_isMenu == false) {
@@ -124,7 +122,8 @@ void Arcade::Core::loadGame(const std::string &gamePath)
     }
     _menu->getTexts().at(indexGame)->setText(_GamesName.at(indexGame) + " " + _topPlayers.at(indexGame) + " " + std::to_string(_topScores.at(indexGame)));
     _gameLib = gamePath;
-    _game.reset(_gameLoader.getInstance(gamePath).release());
+    _game.reset();
+    _game = std::unique_ptr<IGame>(_gameLoader.getInstance(gamePath));
     _GamesName.at(indexGame) = gamePath;
     _isMenu = false;
 }
@@ -134,7 +133,8 @@ void Arcade::Core::loadGraphic(const std::string &graphicPath)
     if (_graphicLib == graphicPath)
         return;
     _graphicLib = graphicPath;
-    _graphic.reset(_graphicLoader.getInstance(graphicPath).release());
+    _graphic.reset();
+    _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
 }
 
 void Arcade::Core::quitGame()

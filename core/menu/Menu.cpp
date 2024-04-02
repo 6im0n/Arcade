@@ -42,6 +42,12 @@ Arcade::Menu::Menu(std::string graphicLib)
     _texts.at(2)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _playerName = "";
     _changePlayer = false;
+    _gamesScore.push_back(0);
+    _gamesScore.push_back(0);
+    _entities.push_back(std::shared_ptr<IEntity>(_runButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(_gameButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons));
+    _sounds = std::vector<std::shared_ptr<ISound>>();
 }
 
 Arcade::Menu::~Menu()
