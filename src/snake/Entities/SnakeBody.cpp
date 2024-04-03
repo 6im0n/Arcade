@@ -11,7 +11,7 @@
 Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path)
 {
     _pos = {x, y};
-    _size = {29, 29};
+    _size = {1, 1};
     _path = path;
     _char = '=';
     _rotation = 0;
