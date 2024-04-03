@@ -13,7 +13,7 @@ Arcade::Void::Void(std::size_t x, std::size_t y)
 {
     _pos = {x, y};
     _char = ' ';
-    _size = {29, 29};
+    _size = {1, 1};
     _path = VOID_PATH;
     _rotation = 0;
     _color = std::make_unique<Color>(66, 242, 17, 255);

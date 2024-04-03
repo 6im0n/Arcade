@@ -5,6 +5,10 @@
 ** Core.hpp
 */
 
+#define BUTTON_PATH "assets/core/button"
+#define BUTTON_SELECTED_PATH "assets/core/buttonSelect"
+#define FONT_PATH "assets/core/Roboto-Regular"
+
 #pragma once
 #include "abstract/AGame.hpp"
 #include "Button.hpp"
@@ -46,6 +50,7 @@ namespace Arcade {
             void setGame(std::string game);
             std::string getSelectedGame() const;
             std::string getSelectedGraphic() const;
+            std::string getPlayerName() const;
             void setScore(int score, int gameIndex);
             bool isRunning() const;
             bool isExit() const;
@@ -63,7 +68,7 @@ namespace Arcade {
             Button *_runButtons;
             Button *_gameButtons;
             Button *_graphicButtons;
+            Button *_selectButton;
             std::string _playerName;
-            std::vector<std::shared_ptr<Text>> _texts;
     };
 }
