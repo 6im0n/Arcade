@@ -6,7 +6,6 @@
 */
 
 #include "Text.hpp"
-#include <iostream>
 
 Arcade::Text::Text(std::string text, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c)
 {
