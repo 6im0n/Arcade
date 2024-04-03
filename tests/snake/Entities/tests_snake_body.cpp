@@ -18,8 +18,8 @@ Test(Snake, snake_constructor)
     cr_assert_eq(snake.getPos()[0], 10);
     cr_assert_eq(snake.getPos()[1], 10);
     cr_assert_eq(snake.getSize().size(), 2);
-    cr_assert_eq(snake.getSize()[0], 29);
-    cr_assert_eq(snake.getSize()[1], 29);
+    cr_assert_eq(snake.getSize()[0], 1);
+    cr_assert_eq(snake.getSize()[1], 1);
     cr_assert_eq(snake.getChar(), '=');
     cr_assert_eq(snake.getColor()->getR(), 39);
     cr_assert_eq(snake.getColor()->getG(), 122);
@@ -45,8 +45,8 @@ Test(Snake, setSize)
     Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
 
     cr_assert_eq(snake.getSize().size(), 2);
-    cr_assert_eq(snake.getSize()[0], 29);
-    cr_assert_eq(snake.getSize()[1], 29);
+    cr_assert_eq(snake.getSize()[0], 1);
+    cr_assert_eq(snake.getSize()[1], 1);
     snake.setSize(20, 20);
     cr_assert_eq(snake.getSize().size(), 2);
     cr_assert_eq(snake.getSize()[0], 20);
