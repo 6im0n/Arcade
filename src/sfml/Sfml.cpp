@@ -11,7 +11,7 @@
 
 Arcade::Sfml::Sfml()
 {
-    this->_window.create(sf::VideoMode(1920, 1080), "Arcade");
+    this->_window.create(sf::VideoMode(725, 899), "Arcade");
     this->_window.setFramerateLimit(60);
 }
 
