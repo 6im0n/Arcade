@@ -12,7 +12,7 @@
 namespace Arcade {
 class Button : public IEntity {
         public :
-            Button(std::string label, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c, std::string path = "", float rotation = 0);
+            Button(std::string label, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c, std::string lib = "", std::string path = "", float rotation = 0);
             ~Button() override;
 
             //setters

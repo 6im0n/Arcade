@@ -78,6 +78,7 @@ void Arcade::Core::run()
             _graphic.get()->displayEntities(_menu->getEntities());
             _graphic.get()->displayText(_menu->getTexts());
             _graphic.get()->playSound(_menu->getSounds());
+            _graphic.get()->displayWindow();
             if (_menu->simulate() == -1) {
                 if (_menu->stopGame() == -1) {
                     if (_isMenu == false) {

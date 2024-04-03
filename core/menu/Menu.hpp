@@ -5,6 +5,10 @@
 ** Core.hpp
 */
 
+#define BUTTON_PATH "assets/core/button"
+#define BUTTON_SELECTED_PATH "assets/core/bouttonSelect"
+#define FONT_PATH "assets/core/Roboto-Regular"
+
 #pragma once
 #include "abstract/AGame.hpp"
 #include "Button.hpp"
@@ -63,6 +67,7 @@ namespace Arcade {
             Button *_runButtons;
             Button *_gameButtons;
             Button *_graphicButtons;
+            Button *_selectButton;
             std::string _playerName;
     };
 }

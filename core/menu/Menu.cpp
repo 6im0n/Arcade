@@ -16,38 +16,75 @@ Arcade::Menu::Menu(std::string graphicLib)
     setGraphic(graphicLib);
     setGame("");
     _isRunning = true;
-    _runButtons = new Button("Run", std::vector<std::size_t>(3, 2), std::vector<std::size_t>(3, 2), 'R');
-    _runButtons->setNextButton(new Button(std::string("Exit"), std::vector<std::size_t>(0, 20), std::vector<std::size_t>(3, 2), 'E'));
-    _runButtons->setPrevButton(new Button(std::string("Player"), std::vector<std::size_t>(0, 20), std::vector<std::size_t>(3, 2), 'E'));
+    _runButtons = new Button("Run", std::vector<std::size_t>(2, 2), std::vector<std::size_t>(1, 1), 'R', "", BUTTON_PATH);
+    _runButtons->setNextButton(new Button(std::string("Exit"), std::vector<std::size_t>(4, 2), std::vector<std::size_t>(1, 1), 'E', "", BUTTON_PATH));
+    _runButtons->setPrevButton(new Button(std::string("Player"), std::vector<std::size_t>(6, 2), std::vector<std::size_t>(1, 1), 'E', "", BUTTON_PATH));
     _runButtons->getPrevButton()->setPrevButton(_runButtons->getNextButton());
 
-    _gameButtons = new Button(games.at(0), std::vector<std::size_t>(5, 12), std::vector<std::size_t>(3, 2), gamesLabel.at(0), games.at(0));
-    _gameButtons->setNextButton(new Button(games.at(1), std::vector<std::size_t>(5, 16), std::vector<std::size_t>(3, 2), gamesLabel.at(1), games.at(1)));
+    _gameButtons = new Button(games.at(0), std::vector<std::size_t>(3, 4), std::vector<std::size_t>(1, 1), gamesLabel.at(0), games.at(0), BUTTON_PATH);
+    _gameButtons->setNextButton(new Button(games.at(1), std::vector<std::size_t>(5, 4), std::vector<std::size_t>(1, 1), gamesLabel.at(1), games.at(1), BUTTON_PATH));
     _gameButtons->setPrevButton(_gameButtons->getNextButton());
     _gameButtons->setUpButton(_runButtons);
 
-    _graphicButtons = new Button(libs.at(0), std::vector<std::size_t>(10, 14), std::vector<std::size_t>(3, 2), libsLabel.at(0), libs.at(0));
-    _graphicButtons->setNextButton(new Button(libs.at(1), std::vector<std::size_t>(10, 18), std::vector<std::size_t>(3, 2), libsLabel.at(0), libs.at(1)));
-    _graphicButtons->setPrevButton(new Button(libs.at(2), std::vector<std::size_t>(10, 22), std::vector<std::size_t>(3, 2), libsLabel.at(0), libs.at(2)));
+    _graphicButtons = new Button(libs.at(0), std::vector<std::size_t>(2, 6), std::vector<std::size_t>(1, 1), libsLabel.at(0), libs.at(0), BUTTON_PATH);
+    _graphicButtons->setNextButton(new Button(libs.at(1), std::vector<std::size_t>(4, 6), std::vector<std::size_t>(1, 1), libsLabel.at(0), libs.at(1), BUTTON_PATH));
+    _graphicButtons->setPrevButton(new Button(libs.at(2), std::vector<std::size_t>(4, 6), std::vector<std::size_t>(1, 1), libsLabel.at(0), libs.at(2), BUTTON_PATH));
     _graphicButtons->getNextButton()->setNextButton(_graphicButtons->getPrevButton());
     _graphicButtons->setDownButton(_runButtons);
     _graphicButtons->setUpButton(_gameButtons);
+
+    _selectButton = new Button("Select", std::vector<std::size_t>(20, 20), std::vector<std::size_t>(1, 1), '\0', "", BUTTON_SELECTED_PATH);
+
     _currentButton = _runButtons;
+    _selectButton->setPos(_currentButton->getPos().at(0), _currentButton->getPos().at(1));
     _exit = false;
-    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(10, 10), std::vector<std::size_t>(3, 2), ' '));
+    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(10, 10), std::vector<std::size_t>(1, 1), ' '));
     _texts.at(0)->setColor(std::make_unique<Color>(255, 255, 255, 255));
-    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(13, 12), std::vector<std::size_t>(3, 2), ' '));
+    _texts.at(0)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(13, 12), std::vector<std::size_t>(1, 1), ' '));
     _texts.at(1)->setColor(std::make_unique<Color>(255, 255, 255, 255));
-    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(16, 14), std::vector<std::size_t>(3, 2), ' '));
+    _texts.at(1)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(16, 14), std::vector<std::size_t>(1, 1), ' '));
     _texts.at(2)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(2)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>("Run", std::vector<std::size_t>(19, 16), std::vector<std::size_t>(1, 1), 'R'));
+    _texts.at(3)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(3)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>("Exit", std::vector<std::size_t>(19, 18), std::vector<std::size_t>(1, 1), 'E'));
+    _texts.at(4)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(4)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>("Player", std::vector<std::size_t>(19, 20), std::vector<std::size_t>(1, 1), 'P'));
+    _texts.at(5)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(5)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>(games.at(0), std::vector<std::size_t>(19, 22), std::vector<std::size_t>(1, 1), gamesLabel.at(0)));
+    _texts.at(6)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(6)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>(games.at(1), std::vector<std::size_t>(19, 24), std::vector<std::size_t>(1, 1), gamesLabel.at(1)));
+    _texts.at(7)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(7)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>(libs.at(0), std::vector<std::size_t>(19, 26), std::vector<std::size_t>(1, 1), libsLabel.at(0)));
+    _texts.at(8)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(8)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>(libs.at(1), std::vector<std::size_t>(19, 28), std::vector<std::size_t>(1, 1), libsLabel.at(1)));
+    _texts.at(9)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(9)->setFontPath(FONT_PATH);
+    _texts.push_back(std::make_shared<Text>(libs.at(2), std::vector<std::size_t>(19, 30), std::vector<std::size_t>(1, 1), libsLabel.at(2)));
+    _texts.at(10)->setColor(std::make_unique<Color>(255, 255, 255, 255));
+    _texts.at(10)->setFontPath(FONT_PATH);
     std::cout << "menu text size: " << _texts.size() << std::endl;
     _playerName = "";
     _changePlayer = false;
     _gamesScore.push_back(0);
     _gamesScore.push_back(0);
     _entities.push_back(std::shared_ptr<IEntity>(_runButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(_runButtons->getNextButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(_runButtons->getPrevButton()));
     _entities.push_back(std::shared_ptr<IEntity>(_gameButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(_gameButtons->getNextButton()));
     _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons->getNextButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons->getPrevButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(_selectButton));
     _sounds = std::vector<std::shared_ptr<ISound>>();
 }
 
@@ -141,9 +178,9 @@ int Arcade::Menu::simulate()
         std::cout << "Current button is null" << std::endl;
         _currentButton = _runButtons;
     }
+    _selectButton->setPos(_currentButton->getPos().at(0), _currentButton->getPos().at(1));
     std::cout << "Current button: " << _currentButton->getLabel() << std::endl;
     _texts.at(0)->setText(_playerName);
-    std::cout << "player: " << _playerName << std::endl;
     return 0;
 }
 
