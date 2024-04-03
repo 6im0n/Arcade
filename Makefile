@@ -89,7 +89,7 @@ GCNO_FILES		= $(GCNO_CORE) $(GCNO_PACMAN) $(GCNO_SNAKE) $(GCNO_NCURSES) $(GCNO_S
 
 #flags
 CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
-CXXFLAGS += -fprofile-arcs -ftest-coverage
+CXXFLAGS 		+= -fprofile-arcs
 SFML_FLAGS		= -lsfml-graphics -lsfml-window -lsfml-system
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
 NCURSES_FLAGS	= -lncurses
