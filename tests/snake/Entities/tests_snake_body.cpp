@@ -12,7 +12,7 @@
 
 Test(Snake, snake_constructor)
 {
-    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
+    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", 0);
 
     cr_assert_eq(snake.getPos().size(), 2);
     cr_assert_eq(snake.getPos()[0], 10);
@@ -29,7 +29,7 @@ Test(Snake, snake_constructor)
 
 Test(Snake, setPos)
 {
-    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
+    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", 0);
 
     cr_assert_eq(snake.getPos().size(), 2);
     cr_assert_eq(snake.getPos()[0], 10);
@@ -42,7 +42,7 @@ Test(Snake, setPos)
 
 Test(Snake, setSize)
 {
-    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
+    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", 0);
 
     cr_assert_eq(snake.getSize().size(), 2);
     cr_assert_eq(snake.getSize()[0], 1);
@@ -55,7 +55,7 @@ Test(Snake, setSize)
 
 Test(Snake, setChar)
 {
-    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
+    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", 0);
 
     cr_assert_eq(snake.getChar(), '=');
     snake.setChar('O');
@@ -64,7 +64,7 @@ Test(Snake, setChar)
 
 Test(Snake, setColor)
 {
-    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
+    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", 0);
 
     cr_assert_eq(snake.getColor()->getR(), 39);
     cr_assert_eq(snake.getColor()->getG(), 122);
@@ -79,7 +79,7 @@ Test(Snake, setColor)
 
 Test(Snake, setPath)
 {
-    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
+    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", 0);
 
     cr_assert_eq(snake.getPath(), "assets/body");
     snake.setPath("assets/apple");
@@ -88,7 +88,7 @@ Test(Snake, setPath)
 
 Test(Snake, setRotation)
 {
-    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body");
+    Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", 0);
 
     cr_assert_eq(snake.getRotation(), 0);
     snake.setRotation(90);
