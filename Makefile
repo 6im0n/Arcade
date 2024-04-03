@@ -37,7 +37,7 @@ SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 
 NCURSES_SRC  	= src/ncurses/ncurses.cpp \
 
-SFML_SRC     	= src/sfml/sfml.cpp \
+SFML_SRC     	= src/sfml/Sfml.cpp \
 
 SDL_SRC      	= src/sdl/sdl.cpp \
 
@@ -89,8 +89,8 @@ GCNO_FILES		= $(GCNO_CORE) $(GCNO_PACMAN) $(GCNO_SNAKE) $(GCNO_NCURSES) $(GCNO_S
 
 #flags
 CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
-CXXFLAGS += -fprofile-arcs
-SFML_FlAGS		= -lsfml-graphics -lsfml-window -lsfml-system
+CXXFLAGS 		+= -fprofile-arcs
+SFML_FLAGS		= -lsfml-graphics -lsfml-window -lsfml-system
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
 NCURSES_FLAGS	= -lncurses
 INC				= -I.

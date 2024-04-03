@@ -9,12 +9,13 @@
 #include <iostream>
 #include "../Core.hpp"
 
-Arcade::Button::Button(std::string label, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c, std::string path, float rotation) : _label(label)
+Arcade::Button::Button(std::string label, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c, std::string lib, std::string path, float rotation) : _label(label)
 {
     _pos = pos;
     _size = size;
     _char = c;
     _color = std::make_shared<Color>(255, 255, 255, 0);
+    _lib = lib;
     _path = path;
     _rotation = rotation;
     _nextButton = nullptr;
@@ -153,4 +154,9 @@ Arcade::Button *Arcade::Button::getUpButton() const
 Arcade::Button *Arcade::Button::getDownButton() const
 {
     return _downButton;
+}
+
+std::string Arcade::Button::getLib() const
+{
+    return _lib;
 }

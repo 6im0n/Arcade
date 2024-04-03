@@ -35,7 +35,7 @@ std::vector<std::size_t> randomPos(Arcade::Snake snake)
 
 Arcade::Food::Food(Arcade::Snake snake)
 {
-    _size = {29, 29};
+    _size = {1, 1};
     _pos = randomPos(snake);
     _path = FOOD_PATH;
     _rotation = 0;

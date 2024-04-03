@@ -20,8 +20,8 @@ Test(Wall, DefaultConstructor)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 29);
-    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getSize()[0], 1);
+    cr_assert_eq(elem.getSize()[1], 1);
     cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
@@ -40,8 +40,8 @@ Test(Wall, SetSizeAndGetSize)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 29);
-    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getSize()[0], 1);
+    cr_assert_eq(elem.getSize()[1], 1);
     cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
@@ -64,8 +64,8 @@ Test(Wall, SetPosAndGetPos)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 29);
-    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getSize()[0], 1);
+    cr_assert_eq(elem.getSize()[1], 1);
     cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
@@ -88,8 +88,8 @@ Test(Wall, SetCharAndGetChar)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 29);
-    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getSize()[0], 1);
+    cr_assert_eq(elem.getSize()[1], 1);
     cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
@@ -111,8 +111,8 @@ Test(Wall, SetColorAndGetColor)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 29);
-    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getSize()[0], 1);
+    cr_assert_eq(elem.getSize()[1], 1);
     cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
@@ -137,8 +137,8 @@ Test(Wall, SetPathAndGetPath)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 29);
-    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getSize()[0], 1);
+    cr_assert_eq(elem.getSize()[1], 1);
     cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
@@ -160,8 +160,8 @@ Test(Wall, SetRotationAndGetRotation)
     cr_assert_eq(elem.getPos()[0], 10);
     cr_assert_eq(elem.getPos()[1], 10);
     cr_assert_eq(elem.getSize().size(), 2);
-    cr_assert_eq(elem.getSize()[0], 29);
-    cr_assert_eq(elem.getSize()[1], 29);
+    cr_assert_eq(elem.getSize()[0], 1);
+    cr_assert_eq(elem.getSize()[1], 1);
     cr_assert_eq(elem.getPath(), WALL_PATH);
     cr_assert_eq(elem.getRotation(), 0);
     cr_assert_eq(elem.getChar(), 'x');
