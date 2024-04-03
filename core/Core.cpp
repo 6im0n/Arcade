@@ -130,6 +130,7 @@ void Arcade::Core::loadGame(const std::string &gamePath)
     _gameLib = gamePath;
     _game.reset();
     _game = std::unique_ptr<IGame>(_gameLoader.getInstance(gamePath));
+    _game->startGame();
     _GamesName.at(_indexGame) = gamePath;
     _isMenu = false;
 }
@@ -146,6 +147,7 @@ void Arcade::Core::loadGraphic(const std::string &graphicPath)
 void Arcade::Core::quitGame()
 {
     _graphic->clearWindow();
+    _game->stopGame();
     updateTopScores();
     loadMenu();
 }

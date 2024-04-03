@@ -17,18 +17,25 @@ Arcade::Menu::Menu(std::string graphicLib)
     setGame("");
     _isRunning = true;
     _runButtons = new Button("Run", std::vector<std::size_t>(2, 2), std::vector<std::size_t>(10, 10), 'R', "", BUTTON_PATH);
-    _runButtons->setNextButton(new Button(std::string("Exit"), std::vector<std::size_t>(27, 2), std::vector<std::size_t>(10, 10), 'E', "", BUTTON_PATH));
-    _runButtons->setPrevButton(new Button(std::string("Player"), std::vector<std::size_t>(52, 2), std::vector<std::size_t>(10, 10), 'E', "", BUTTON_PATH));
+    _runButtons->setNextButton(new Button(std::string("Exit"), std::vector<std::size_t>(28, 2), std::vector<std::size_t>(10, 10), 'E', "", BUTTON_PATH));
+    _runButtons->getNextButton()->setPos(28, 2);
+    _runButtons->setPrevButton(new Button(std::string("Player"), std::vector<std::size_t>(54, 2), std::vector<std::size_t>(10, 10), 'E', "", BUTTON_PATH));
+    _runButtons->getPrevButton()->setPos(54, 2);
     _runButtons->getPrevButton()->setPrevButton(_runButtons->getNextButton());
 
-    _gameButtons = new Button(games.at(0), std::vector<std::size_t>(13, 14), std::vector<std::size_t>(10, 10), gamesLabel.at(0), games.at(0), BUTTON_PATH);
-    _gameButtons->setNextButton(new Button(games.at(1), std::vector<std::size_t>(15, 14), std::vector<std::size_t>(10, 10), gamesLabel.at(1), games.at(1), BUTTON_PATH));
+    _gameButtons = new Button(games.at(0), std::vector<std::size_t>(15, 14), std::vector<std::size_t>(10, 10), gamesLabel.at(0), games.at(0), BUTTON_PATH);
+    _gameButtons->setPos(15, 14);
+    _gameButtons->setNextButton(new Button(games.at(1), std::vector<std::size_t>(41, 14), std::vector<std::size_t>(10, 10), gamesLabel.at(1), games.at(1), BUTTON_PATH));
+    _gameButtons->getNextButton()->setPos(41, 14);
     _gameButtons->setPrevButton(_gameButtons->getNextButton());
     _gameButtons->setUpButton(_runButtons);
 
-    _graphicButtons = new Button(libs.at(0), std::vector<std::size_t>(12, 16), std::vector<std::size_t>(10, 10), libsLabel.at(0), libs.at(0), BUTTON_PATH);
-    _graphicButtons->setNextButton(new Button(libs.at(1), std::vector<std::size_t>(14, 16), std::vector<std::size_t>(10, 10), libsLabel.at(1), libs.at(1), BUTTON_PATH));
-    _graphicButtons->setPrevButton(new Button(libs.at(2), std::vector<std::size_t>(16, 16), std::vector<std::size_t>(10, 10), libsLabel.at(2), libs.at(2), BUTTON_PATH));
+    _graphicButtons = new Button(libs.at(0), std::vector<std::size_t>(2, 26), std::vector<std::size_t>(10, 10), libsLabel.at(0), libs.at(0), BUTTON_PATH);
+    _graphicButtons->setPos(2, 26);
+    _graphicButtons->setNextButton(new Button(libs.at(1), std::vector<std::size_t>(28, 26), std::vector<std::size_t>(10, 10), libsLabel.at(1), libs.at(1), BUTTON_PATH));
+    _graphicButtons->getNextButton()->setPos(28, 26);
+    _graphicButtons->setPrevButton(new Button(libs.at(2), std::vector<std::size_t>(54, 26), std::vector<std::size_t>(10, 10), libsLabel.at(2), libs.at(2), BUTTON_PATH));
+    _graphicButtons->getPrevButton()->setPos(54, 26);
     _graphicButtons->getNextButton()->setNextButton(_graphicButtons->getPrevButton());
     _graphicButtons->setDownButton(_runButtons);
     _graphicButtons->setUpButton(_gameButtons);
@@ -100,28 +107,28 @@ Arcade::Menu::Menu(std::string graphicLib)
     _changePlayer = false;
     _gamesScore.push_back(0);
     _gamesScore.push_back(0);
-    _entities.push_back(std::shared_ptr<IEntity>(_runButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button("Run", std::vector<std::size_t>(2, 2), std::vector<std::size_t>(10, 10), 'R', "", BUTTON_PATH)));
     _entities.back()->setPos(2, 2);
     _entities.back()->setSize(10, 10);
-    _entities.push_back(std::shared_ptr<IEntity>(_runButtons->getNextButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button("Exit", std::vector<std::size_t>(28, 2), std::vector<std::size_t>(10, 10), 'E', "", BUTTON_PATH)));
     _entities.back()->setPos(28, 2);
     _entities.back()->setSize(10, 10);
-    _entities.push_back(std::shared_ptr<IEntity>(_runButtons->getPrevButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button("Player", std::vector<std::size_t>(54, 2), std::vector<std::size_t>(10, 10), 'P', "", BUTTON_PATH)));
     _entities.back()->setPos(54, 2);
     _entities.back()->setSize(10, 10);
-    _entities.push_back(std::shared_ptr<IEntity>(_gameButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button(games.at(0), std::vector<std::size_t>(15, 14), std::vector<std::size_t>(10, 10), gamesLabel.at(0), games.at(0), BUTTON_PATH)));
     _entities.back()->setPos(15, 14);
     _entities.back()->setSize(10, 10);
-    _entities.push_back(std::shared_ptr<IEntity>(_gameButtons->getNextButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button(games.at(1), std::vector<std::size_t>(41, 14), std::vector<std::size_t>(10, 10), gamesLabel.at(1), games.at(1), BUTTON_PATH)));
     _entities.back()->setPos(41, 14);
     _entities.back()->setSize(10, 10);
-    _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button(libs.at(0), std::vector<std::size_t>(2, 26), std::vector<std::size_t>(10, 10), libsLabel.at(0), libs.at(0), BUTTON_PATH)));
     _entities.back()->setPos(2, 26);
     _entities.back()->setSize(10, 10);
-    _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons->getNextButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button(libs.at(1), std::vector<std::size_t>(28, 26), std::vector<std::size_t>(10, 10), libsLabel.at(1), libs.at(1), BUTTON_PATH)));
     _entities.back()->setPos(28, 26);
     _entities.back()->setSize(10, 10);
-    _entities.push_back(std::shared_ptr<IEntity>(_graphicButtons->getPrevButton()));
+    _entities.push_back(std::shared_ptr<IEntity>(new Button(libs.at(2), std::vector<std::size_t>(54, 26), std::vector<std::size_t>(10, 10), libsLabel.at(2), libs.at(2), BUTTON_PATH)));
     _entities.back()->setPos(54, 26);
     _entities.back()->setSize(10, 10);
     _entities.push_back(std::shared_ptr<IEntity>(_selectButton));
@@ -220,7 +227,7 @@ int Arcade::Menu::simulate()
         _currentButton = _runButtons;
     }
     _selectButton->setPos(_currentButton->getPos().at(0), _currentButton->getPos().at(1));
-    _texts.at(0)->setText(_playerName);
+w    _texts.at(0)->setText(_playerName);
     return 0;
 }
 
