@@ -37,6 +37,14 @@ void Arcade::Core::run()
 {
     while (5) {
         _key_event = _graphic->getKeyEvent();
+        if (_key_event == Keys::ESCAPE) {
+            if (_isMenu == false) {
+                _key_event = Keys::UNKNOWN;
+                quitGame();
+            } else {
+                return;
+            }
+        }
         if (_key_event == Keys::ONE || _key_event == Keys::TWO
             || _key_event == Keys::THREE || _key_event == Keys::FOUR) {
                 _menu->catchKeyEvent(_key_event);
@@ -74,7 +82,7 @@ void Arcade::Core::run()
             if (_menu->isExit()) {
                 return;
             }
-            _graphic.get()->displayWindow();
+            _graphic.get()->clearWindow();
             _graphic.get()->displayEntities(_menu->getEntities());
             _graphic.get()->displayText(_menu->getTexts());
             _graphic.get()->playSound(_menu->getSounds());
@@ -105,21 +113,20 @@ void Arcade::Core::run()
 void Arcade::Core::loadMenu()
 {
     _isMenu = true;
+    _game.reset();
+    _gameLib = "";
     _menu->restart();
 }
 
 void Arcade::Core::loadGame(const std::string &gamePath)
 {
-    if (_gameLib == gamePath)
+    if (_gameLib == gamePath || gamePath == "")
         return;
     if (_indexGame == 1) {
         _indexGame = 0;
     } else {
         _indexGame = 1;
     }
-    std::cout << "indexGame: " << _indexGame << std::endl;
-    std::cout << "menu text: " << _menu->getTexts().size() << std::endl;
-    _menu->getTexts().at(_indexGame)->setText(_GamesName.at(_indexGame) + " " + _topPlayers.at(_indexGame) + " " + std::to_string(_topScores.at(_indexGame)));
     _gameLib = gamePath;
     _game.reset();
     _game = std::unique_ptr<IGame>(_gameLoader.getInstance(gamePath));
@@ -138,8 +145,9 @@ void Arcade::Core::loadGraphic(const std::string &graphicPath)
 
 void Arcade::Core::quitGame()
 {
-    loadMenu();
+    _graphic->clearWindow();
     updateTopScores();
+    loadMenu();
 }
 
 void Arcade::Core::saveTopScores()
@@ -152,7 +160,15 @@ void Arcade::Core::saveTopScores()
     }
     file.clear();
     for (std::size_t i = 0; i < _topPlayers.size(); i++) {
-        file << _GamesName.at(i) << " " << _topPlayers.at(i) << " " << _topScores.at(i) << std::endl;
+        if (_topPlayers.at(i) != "") {
+            std::cout << _GamesName.at(i) << std::endl;
+            std::string game;
+            if (_GamesName.at(i).find("arcade_") != std::string::npos)
+                game = _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1, _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1).length() - 3);
+            else
+                game = _GamesName.at(i);
+            file << game << " " << _topPlayers.at(i) << " " << _topScores.at(i) << std::endl;
+        }
     }
     file.close();
 }
@@ -165,7 +181,8 @@ void Arcade::Core::loadTopScores()
         return;
     }
     std::string line;
-    while (std::getline(file, line)) {
+    int i = 0;
+    while (i < 2 && std::getline(file, line)) {
         std::string game = line.substr(0, line.find(" "));
         std::string tmp = line.substr(line.find(" ") + 1, line.length() - 1);
         std::string player = tmp.substr(0, tmp.find(" "));
@@ -174,29 +191,40 @@ void Arcade::Core::loadTopScores()
         _GamesName.push_back(game);
         _topPlayers.push_back(player);
         _topScores.push_back(std::stoi(score));
+        i++;
     }
-    if (_topPlayers.size() == 0) {
+    while (_topPlayers.size() < 2) {
         _topPlayers.push_back("");
-        _topPlayers.push_back("");
     }
-    if (_topScores.size() == 0) {
-        _topScores.push_back(0);
+    while (_topScores.size() < 2) {
         _topScores.push_back(0);
     }
-    if (_GamesName.size() == 0) {
-        _GamesName.push_back("");
+    while (_GamesName.size() < 2) {
         _GamesName.push_back("");
     }
+    if (_GamesName.at(0) != "")
+        _menu->getTexts().at(1)->setText(_GamesName.at(0) + "  " + _topPlayers.at(0) + "  " + std::to_string(_topScores.at(0)));
+    if (_GamesName.at(1) != "")
+        _menu->getTexts().at(2)->setText(_GamesName.at(1) + "  " + _topPlayers.at(1) + "  " + std::to_string(_topScores.at(1)));
     file.close();
 }
 
 void Arcade::Core::updateTopScores()
 {
     if (_game != nullptr) {
-        if (_game->getScore() > _topScores.at(_indexGame)) {
+        if (_game->getScore() > _topScores.at(_indexGame) || _topScores.at(_indexGame) == 0) {
+            std::string game = _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1, _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1).length() - 3);
+            if (_menu->getTexts().at(1)->getText().find(game) != std::string::npos) {
+                if (_topScores.at(0) >= _game->getScore())
+                    return;
+            }
+            if (_menu->getTexts().at(2)->getText().find(game) != std::string::npos) {
+                if (_topScores.at(1) >= _game->getScore())
+                    return;
+            }
             _topScores.at(_indexGame) = _game->getScore();
-            _topPlayers.at(_indexGame) = _playerName;
-            _menu->getTexts().at(_indexGame + 1)->setText(_GamesName.at(_indexGame) + " " + _topPlayers.at(_indexGame) + " " + std::to_string(_topScores.at(_indexGame)));
+            _topPlayers.at(_indexGame) = _menu->getPlayerName();
+            _menu->getTexts().at(_indexGame + 1)->setText(game + "  " + _topPlayers.at(_indexGame) + "  " + std::to_string(_topScores.at(_indexGame)));
         }
     }
 }

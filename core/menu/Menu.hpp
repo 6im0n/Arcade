@@ -6,7 +6,7 @@
 */
 
 #define BUTTON_PATH "assets/core/button"
-#define BUTTON_SELECTED_PATH "assets/core/bouttonSelect"
+#define BUTTON_SELECTED_PATH "assets/core/buttonSelect"
 #define FONT_PATH "assets/core/Roboto-Regular"
 
 #pragma once
@@ -50,6 +50,7 @@ namespace Arcade {
             void setGame(std::string game);
             std::string getSelectedGame() const;
             std::string getSelectedGraphic() const;
+            std::string getPlayerName() const;
             void setScore(int score, int gameIndex);
             bool isRunning() const;
             bool isExit() const;
