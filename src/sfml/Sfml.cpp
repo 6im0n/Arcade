@@ -215,21 +215,6 @@ void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
     }
 }
 
-// void Arcade::Sfml::loadSound(std::vector<std::shared_ptr<IEntity>> entities)
-// {
-//     (void)entities;
-// }
-
-// void Arcade::Sfml::loadFont(std::vector<std::shared_ptr<IEntity>> entities)
-// {
-//     (void)entities;
-// }
-
-// void Arcade::Sfml::loadText(std::shared_ptr<IText> text)
-// {
-//     (void)text;
-// }
-
 extern "C" {
     __attribute__((constructor))
     void constructor()
