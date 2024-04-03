@@ -227,7 +227,7 @@ int Arcade::Menu::simulate()
         _currentButton = _runButtons;
     }
     _selectButton->setPos(_currentButton->getPos().at(0), _currentButton->getPos().at(1));
-w    _texts.at(0)->setText(_playerName);
+    _texts.at(0)->setText(_playerName);
     return 0;
 }
 
