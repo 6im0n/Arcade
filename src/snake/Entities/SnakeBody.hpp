@@ -12,7 +12,7 @@
 namespace Arcade {
     class SnakeBody : public IEntity {
         public:
-            SnakeBody(std::size_t x, std::size_t y, std::string path);
+            SnakeBody(std::size_t x, std::size_t y, std::string path, float rotation);
             ~SnakeBody() = default;
 
             //setters

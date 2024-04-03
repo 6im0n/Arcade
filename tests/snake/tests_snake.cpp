@@ -116,11 +116,11 @@ Test(Snake, MoveNormalyDown)
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
     snake.setDirection(Arcade::D_DOWN);
-    cr_assert_eq(snake.moveSnake(map), -1); // hit a snake part
+    cr_assert_eq(snake.moveSnake(map), 0);
     std::vector<std::shared_ptr<Arcade::SnakeBody>> snakeEntities2 = snake.getSnake();
     cr_assert_eq(snakeEntities.size(), 4);
     cr_assert_eq(snakeEntities2.size(), 4);
-    cr_assert_eq(snakeEntities2[0]->getPos()[1], headpos[1], "Expected %d %d, got %d %d", headpos[0], headpos[1], snakeEntities2[0]->getPos()[0], snakeEntities2[0]->getPos()[1]);
+    cr_assert_eq(snakeEntities2[0]->getPos()[1], headpos[1] + 1, "Expected %d %d, got %d %d", headpos[0], headpos[1] + 1, snakeEntities2[0]->getPos()[0], snakeEntities2[0]->getPos()[1]);
 }
 
 Test(Snake, MoveNormalyUp)
@@ -145,7 +145,7 @@ Test(Snake, MoveWithWallDirRight)
     std::vector<std::shared_ptr<Arcade::SnakeBody>> snakeEntities = snake.getSnake();
     std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map = genMap();
 
-    map[17 - START_HEIGHT][15 - START_WIDTH] = std::make_shared<Arcade::Wall>(17, 15);
+    map[14 - START_HEIGHT][16 - START_WIDTH] = std::make_shared<Arcade::Wall>(16, 14);
 
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
@@ -163,7 +163,7 @@ Test(Snake, MoveWithWallDirLeft)
     std::vector<std::shared_ptr<Arcade::SnakeBody>> snakeEntities = snake.getSnake();
     std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map = genMap();
 
-    map[16 - START_HEIGHT][13 - START_WIDTH] = std::make_shared<Arcade::Wall>(16, 13);
+    map[13 - START_HEIGHT][14 - START_WIDTH] = std::make_shared<Arcade::Wall>(14, 13);
 
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
@@ -184,7 +184,7 @@ Test(Snake, MoveWithWallDirUp)
     std::vector<std::shared_ptr<Arcade::SnakeBody>> snakeEntities = snake.getSnake();
     std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map = genMap();
 
-    map[16 - START_HEIGHT][14 - START_WIDTH] = std::make_shared<Arcade::Wall>(16, 14);
+    map[13 - START_HEIGHT][15 - START_WIDTH] = std::make_shared<Arcade::Wall>(15, 13);
 
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
@@ -202,7 +202,7 @@ Test(Snake, MoveWithWallDirDown)
     std::vector<std::shared_ptr<Arcade::SnakeBody>> snakeEntities = snake.getSnake();
     std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map = genMap();
 
-    map[18 - START_HEIGHT][14 - START_WIDTH] = std::make_shared<Arcade::Wall>(18, 14);
+    map[15 - START_HEIGHT][15 - START_WIDTH] = std::make_shared<Arcade::Wall>(15, 15);
 
     auto headpos = snakeEntities[0]->getPos();
     sleep(1);
