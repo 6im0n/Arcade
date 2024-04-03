@@ -157,7 +157,8 @@ void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entitie
         sprite.setTexture(texture);
         sprite.setPosition(entity->getPos()[0] * 29, entity->getPos()[1] * 29);
         sprite.setScale(entity->getSize()[0], entity->getSize()[1]);
-        //sprite.setRotation(entity->getRotation());
+        sprite.setOrigin((sf::Vector2f)texture.getSize() / 2.f);
+        sprite.setRotation(entity->getRotation());
         this->_window.draw(sprite);
         texture.~Texture();
         sprite.~Sprite();
