@@ -137,9 +137,6 @@ Arcade::Menu::Menu(std::string graphicLib)
 
 Arcade::Menu::~Menu()
 {
-    delete _runButtons;
-    delete _gameButtons;
-    delete _graphicButtons;
 }
 
 void Arcade::Menu::catchKeyEvent(int key)
