@@ -150,7 +150,6 @@ void Arcade::Menu::catchKeyEvent(int key)
     _lastKey = static_cast<Keys>(key);
     if (_changePlayer) {
         addToPlayerName(_lastKey);
-        std::cout << "player: " << _playerName << std::endl;
         return;
     }
     if (_lastKey == Keys::ESCAPE) {

@@ -214,16 +214,19 @@ void Arcade::Core::loadTopScores()
 void Arcade::Core::updateTopScores()
 {
     if (_game != nullptr) {
-        if (_game->getScore() > _topScores.at(_indexGame) || _topScores.at(_indexGame) == 0) {
-            std::string game = _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1, _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1).length() - 3);
-            if (_menu->getTexts().at(1)->getText().find(game) != std::string::npos) {
-                if (_topScores.at(0) >= _game->getScore())
-                    return;
-            }
-            if (_menu->getTexts().at(2)->getText().find(game) != std::string::npos) {
-                if (_topScores.at(1) >= _game->getScore())
-                    return;
-            }
+        std::string game = _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1, _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1).length() - 3);
+        if (game == _GamesName.at(0)) {
+            _indexGame = 0;
+        } else if (game == _GamesName.at(1)) {
+            _indexGame = 1;
+        }
+        if (_GamesName.at(0) == _GamesName.at(1)) {
+            _indexGame = 0;
+            _GamesName.at(1) = "";
+            _topPlayers.at(1) = "";
+            _topScores.at(1) = 0;
+        }
+        if (_game->getScore() > _topScores.at(_indexGame) && _menu->getPlayerName() != "") {
             _topScores.at(_indexGame) = _game->getScore();
             _topPlayers.at(_indexGame) = _menu->getPlayerName();
             _menu->getTexts().at(_indexGame + 1)->setText(game + "  " + _topPlayers.at(_indexGame) + "  " + std::to_string(_topScores.at(_indexGame)));
