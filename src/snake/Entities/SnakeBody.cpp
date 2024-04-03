@@ -8,13 +8,13 @@
 #include "SnakeBody.hpp"
 #include "classes/Color.hpp"
 
-Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path)
+Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path, float rotation)
 {
     _pos = {x, y};
     _size = {1, 1};
     _path = path;
     _char = '=';
-    _rotation = 0;
+    _rotation = rotation;
     _color = std::make_unique<Color>(39, 122, 16, 255);
 }
 

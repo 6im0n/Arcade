@@ -11,10 +11,10 @@
 
 Arcade::Snake::Snake()
 {
-    _snake.push_back(std::make_shared<SnakeBody>(14, 17, SNAKE_HEAD_PATH));
-    _snake.push_back(std::make_shared<SnakeBody>(14, 18, SNAKE_BODY_PATH));
-    _snake.push_back(std::make_shared<SnakeBody>(14, 19, SNAKE_BODY_PATH));
-    _snake.push_back(std::make_shared<SnakeBody>(14, 20, SNAKE_TAIL_PATH));
+    _snake.push_back(std::make_shared<SnakeBody>(15, 14, SNAKE_HEAD_PATH, 90));
+    _snake.push_back(std::make_shared<SnakeBody>(14, 14, SNAKE_BODY_PATH, 90));
+    _snake.push_back(std::make_shared<SnakeBody>(13, 14, SNAKE_BODY_PATH, 90));
+    _snake.push_back(std::make_shared<SnakeBody>(12, 14, SNAKE_TAIL_PATH, 90));
     _direction = D_RIGHT;
     _lastDirection = D_RIGHT;
     _timer = Timer();
@@ -50,7 +50,7 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
 
     SnakeBody *head = _snake[0].get();
     head->setPath(SNAKE_BODY_PATH);
-    auto newHead = std::make_shared<SnakeBody>(0, 0, SNAKE_HEAD_PATH);
+    auto newHead = std::make_shared<SnakeBody>(0, 0, SNAKE_HEAD_PATH, 0);
 
     if (_direction == D_UP) {
         if (checkCollision(map, _snake, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == false)
@@ -123,7 +123,7 @@ void Arcade::Snake::growSnake()
     std::size_t y = end->getPos()[1];
     end->setPath(SNAKE_TAIL_PATH);
 
-    _snake.push_back(std::make_shared<SnakeBody>(x, y, SNAKE_TAIL_PATH));
+    _snake.push_back(std::make_shared<SnakeBody>(x, y, SNAKE_TAIL_PATH, 0));
 }
 
 void Arcade::Snake::setDirection(Direction dir)

@@ -18,6 +18,7 @@
 #define WINDOW_HEIGHT 29
 #define START_WIDTH (WINDOW_WIDTH - AREA_GAME_WIDTH) / 2
 #define START_HEIGHT (WINDOW_HEIGHT - AREA_GAME_HEIGHT) / 2
+
 #define WALL_PATH "assets/snake/wall"
 #define VOID_PATH "assets/snake/void"
 #define FOOD_PATH "assets/snake/apple"
