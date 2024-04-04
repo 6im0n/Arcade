@@ -22,7 +22,7 @@ const std::vector<std::string> libs {
 };
 
 const std::vector<std::string> games {
-    "lib/arcade_pacman.so",
+    "lib/arcade_centipede.so",
     "lib/arcade_snake.so",
 };
 
