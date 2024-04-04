@@ -34,15 +34,11 @@ T *Arcade::DLLoader<T>::getInstance(const std::string &libname) {
         dlclose(handle);
     handle = dlopen(libname.c_str(), RTLD_LAZY);
     if (!handle) {
-        std::cerr << libname << std::endl;
-        std::cerr << entryPoint << std::endl;
         std::cerr << "Error1: " << dlerror() << std::endl;
         return nullptr;
     }
     T *(*object)(void) = (T*(*)())dlsym(handle, entryPoint.c_str());
     if (!object) {
-        std::cerr << libname << std::endl;
-        std::cerr << entryPoint << std::endl;
         std::cerr << "Error2: "  << dlerror() << std::endl;
         return nullptr;
     }

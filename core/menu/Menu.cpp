@@ -43,11 +43,9 @@ Arcade::Menu::Menu(std::string graphicLib, std::vector<std::string> libsVector)
     libs.at(1) = libsVector.at(3);
     libs.at(2) = libsVector.at(4);
     for (std::size_t i = 0; i < games.size(); i++) {
-        std::cout << games.at(i) << std::endl;
         gamesLabel.at(i) = games.at(i).at(11) - 32;
     }
     for (std::size_t i = 0; i < libs.size(); i++) {
-        std::cout << libs.at(i) << std::endl;
         libsLabel.at(i) = libs.at(i).at(11) - 32;
     }
     _isRunning = true;

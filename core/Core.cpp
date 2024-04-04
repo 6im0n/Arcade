@@ -22,6 +22,10 @@ Arcade::Core::Core(const std::string &graphicPath)
 {
     _graphicLoader = DLLoader<IGraphic>(ENTRY_POINT_GRAPHIC);
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
+    if (_graphic == nullptr) {
+        std::cerr << "Error: can't load graphic library" << std::endl;
+        exit(84);
+    }
     _indexGame = 1;
     _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
     std::vector<std::string> libs = findLibs("lib/");
@@ -132,6 +136,10 @@ void Arcade::Core::loadGame(const std::string &gamePath)
     _gameLib = gamePath;
     _game.reset();
     _game = std::unique_ptr<IGame>(_gameLoader.getInstance(gamePath));
+    if (_game == nullptr) {
+        std::cerr << "Error: can't load game library" << std::endl;
+        exit(84);
+    }
     _game->startGame();
     _GamesName.at(_indexGame) = gamePath;
     _isMenu = false;
@@ -144,6 +152,10 @@ void Arcade::Core::loadGraphic(const std::string &graphicPath)
     _graphicLib = graphicPath;
     _graphic.reset();
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
+    if (_graphic == nullptr) {
+        std::cerr << "Error: can't load graphic library" << std::endl;
+        exit(84);
+    }
 }
 
 void Arcade::Core::quitGame()
