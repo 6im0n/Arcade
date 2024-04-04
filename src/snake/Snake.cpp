@@ -11,10 +11,10 @@
 
 Arcade::Snake::Snake()
 {
-    _snake.push_back(std::make_shared<SnakeBody>(15, 14, SNAKE_HEAD_PATH, 90));
-    _snake.push_back(std::make_shared<SnakeBody>(14, 14, SNAKE_BODY_PATH, 90));
-    _snake.push_back(std::make_shared<SnakeBody>(13, 14, SNAKE_BODY_PATH, 90));
-    _snake.push_back(std::make_shared<SnakeBody>(12, 14, SNAKE_TAIL_PATH, 90));
+    _snake.push_back(std::make_shared<SnakeBody>(15, 14, SNAKE_HEAD_PATH, D_RIGHT));
+    _snake.push_back(std::make_shared<SnakeBody>(14, 14, SNAKE_BODY_PATH, D_RIGHT));
+    _snake.push_back(std::make_shared<SnakeBody>(13, 14, SNAKE_BODY_PATH, D_RIGHT));
+    _snake.push_back(std::make_shared<SnakeBody>(12, 14, SNAKE_TAIL_PATH, D_RIGHT));
     _direction = D_RIGHT;
     _lastDirection = D_RIGHT;
     _timer = Timer();
@@ -48,19 +48,21 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
     if (_timer.getElapsedTime() < _speed)
         return 0;
 
-    SnakeBody *head = _snake[0].get();
+    SnakeBody *head = _snake.front().get();
     head->setPath(SNAKE_BODY_PATH);
-    auto newHead = std::make_shared<SnakeBody>(0, 0, SNAKE_HEAD_PATH, 0);
+    auto newHead = std::make_shared<SnakeBody>(0, 0, SNAKE_HEAD_PATH, _direction);
 
     if (_direction == D_UP) {
         if (checkCollision(map, _snake, head->getPos()[0] - START_WIDTH, head->getPos()[1] - 1 - START_HEIGHT) == false)
             return -1;
         if (_lastDirection == D_LEFT) {
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_UP);
             head->setRotation(0);
             _lastDirection = D_UP;
         } else if (_lastDirection == D_RIGHT) {
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_UP);
             head->setRotation(270);
             _lastDirection = D_UP;
         }
@@ -71,10 +73,12 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
             return -1;
         if (_lastDirection == D_LEFT) {
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_DOWN);
             head->setRotation(90);
             _lastDirection = D_DOWN;
         } else if (_lastDirection == D_RIGHT){
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_DOWN);
             head->setRotation(180);
             _lastDirection = D_DOWN;
         }
@@ -85,10 +89,12 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
             return -1;
         if (_lastDirection == D_UP) {
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_LEFT);
             head->setRotation(180);
             _lastDirection = D_LEFT;
         } else if (_lastDirection == D_DOWN) {
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_LEFT);
             head->setRotation(270);
             _lastDirection = D_LEFT;
         }
@@ -99,10 +105,12 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
             return -1;
         if (_lastDirection == D_UP) {
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_RIGHT);
             head->setRotation(90);
             _lastDirection = D_RIGHT;
         } else if (_lastDirection == D_DOWN) {
             head->setPath(SNAKE_CORNER_PATH);
+            head->setDirection(D_RIGHT);
             head->setRotation(0);
             _lastDirection = D_RIGHT;
         }
@@ -112,6 +120,7 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
     _snake.pop_back();
     _snake.insert(_snake.begin(), newHead);
     _snake.back()->setPath(SNAKE_TAIL_PATH);
+    _snake.back()->updateRotation();
     _timer.reset();
     return 0;
 }
@@ -123,7 +132,7 @@ void Arcade::Snake::growSnake()
     std::size_t y = end->getPos()[1];
     end->setPath(SNAKE_TAIL_PATH);
 
-    _snake.push_back(std::make_shared<SnakeBody>(x, y, SNAKE_TAIL_PATH, 0));
+    _snake.push_back(std::make_shared<SnakeBody>(x, y, SNAKE_TAIL_PATH, end->getDirection()));
 }
 
 void Arcade::Snake::setDirection(Direction dir)
