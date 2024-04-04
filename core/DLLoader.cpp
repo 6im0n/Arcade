@@ -37,21 +37,21 @@ T *Arcade::DLLoader<T>::getInstance(const std::string &libname) {
         std::cerr << libname << std::endl;
         std::cerr << entryPoint << std::endl;
         std::cerr << "Error1: " << dlerror() << std::endl;
-        exit(84);
+        return nullptr;
     }
     T *(*object)(void) = (T*(*)())dlsym(handle, entryPoint.c_str());
     if (!object) {
         std::cerr << libname << std::endl;
         std::cerr << entryPoint << std::endl;
         std::cerr << "Error2: "  << dlerror() << std::endl;
-        exit(84);
+        return nullptr;
     }
     T *tmp = object();
     if (tmp == nullptr) {
         std::cerr << libname << std::endl;
         std::cerr << entryPoint << std::endl;
         std::cerr << "Error3: " << libname << " " << entryPoint << " returned nullptr" << std::endl;
-        exit(84);
+        return nullptr;
     }
     return tmp;
 }

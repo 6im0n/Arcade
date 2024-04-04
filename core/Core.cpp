@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <filesystem>
 
 Arcade::Core::Core(const std::string &graphicPath)
 {
@@ -23,7 +24,8 @@ Arcade::Core::Core(const std::string &graphicPath)
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
     _indexGame = 1;
     _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
-    _menu = std::make_unique<Menu>(graphicPath);
+    std::vector<std::string> libs = findLibs("lib/");
+    _menu = std::make_unique<Menu>(graphicPath, libs);
     _isMenu = true;
     loadTopScores();
 }
@@ -163,7 +165,6 @@ void Arcade::Core::saveTopScores()
     file.clear();
     for (std::size_t i = 0; i < _topPlayers.size(); i++) {
         if (_topPlayers.at(i) != "") {
-            std::cout << _GamesName.at(i) << std::endl;
             std::string game;
             if (_GamesName.at(i).find("arcade_") != std::string::npos)
                 game = _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1, _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1).length() - 3);
@@ -232,4 +233,35 @@ void Arcade::Core::updateTopScores()
             _menu->getTexts().at(_indexGame + 1)->setText(game + "  " + _topPlayers.at(_indexGame) + "  " + std::to_string(_topScores.at(_indexGame)));
         }
     }
+}
+
+std::vector<std::string> Arcade::Core::findLibs(const std::string &path)
+{
+    std::vector<std::string> libs = std::vector<std::string>(5);
+    std::size_t iGraphic = 2;
+    std::size_t iGame = 0;
+
+    if (!std::filesystem::exists(path)) {
+        std::cerr << "Error: can't find libs" << std::endl;
+        exit(84);
+    }
+    for (const auto &entry : std::filesystem::directory_iterator(path)) {
+        if (entry.path().string().find(".so") != std::string::npos) {
+            if (_graphicLoader.getInstance(entry.path().string()) != nullptr) {
+                libs.at(iGraphic) = entry.path().string();
+                iGraphic++;
+            } else if (_gameLoader.getInstance(entry.path().string()) != nullptr) {
+                libs.at(iGame) = entry.path().string();
+                iGame++;
+            }
+        }
+    }
+    for (std::size_t i = 0; i < 5; i++) {
+        if (libs.at(i) == "") {
+            std::cerr << "Error: can't find all libs" << std::endl;
+            std::cerr << i << std::endl;
+            exit(84);
+        }
+    }
+    return libs;
 }
