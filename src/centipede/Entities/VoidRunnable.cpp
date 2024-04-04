@@ -7,7 +7,7 @@
 
 #include "VoidRunnable.hpp"
 #include "classes/Color.hpp"
-#include "src/snake/SnakeGame.hpp"
+#include "src/centipede/CentipedeGame.hpp"
 
 Arcade::VoidRunnable::VoidRunnable(std::size_t x, std::size_t y)
 {

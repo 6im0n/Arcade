@@ -12,7 +12,7 @@
 #include "src/snake/Entities/SnakeBody.hpp"
 #include "Interfaces/IEntity.hpp"
 #include "classes/Timer.hpp"
-#include "direction.hpp"
+#include "includes/Direction.hpp"
 
 namespace Arcade {
     class Snake {

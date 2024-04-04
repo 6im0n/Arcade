@@ -9,18 +9,12 @@
 
 #include <chrono>
 
-#include "src/snake/Entities/SnakeBody.hpp"
+#include "src/centipede/Entities/SnakeBody.hpp"
 #include "Interfaces/IEntity.hpp"
 #include "classes/Timer.hpp"
+#include "includes/Direction.hpp"
 
 namespace Arcade {
-    enum Direction {
-        D_LEFT,
-        D_DOWN,
-        D_RIGHT,
-        D_UP
-    };
-
     class Snake {
         public:
             Snake();

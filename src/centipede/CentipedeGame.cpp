@@ -11,6 +11,7 @@
 #include "Entities/VoidRunnable.hpp"
 #include "Entities/Bullet.hpp"
 #include "includes/Keys.hpp"
+#include "includes/Direction.hpp"
 
 void generateWallLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
 {

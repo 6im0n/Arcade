@@ -9,12 +9,12 @@
 
 #include "Interfaces/IEntity.hpp"
 
-#include "src/snake/direction.hpp"
+#include "includes/Direction.hpp"
 
 namespace Arcade {
     class SnakeBody : public IEntity {
         public:
-            SnakeBody(std::size_t x, std::size_t y, std::string path, Direction dir);
+            SnakeBody(std::size_t x, std::size_t y, std::string path, Arcade::Direction dir);
             ~SnakeBody() = default;
 
             //setters
@@ -24,7 +24,7 @@ namespace Arcade {
             void setColor(std::unique_ptr<IColor> color);
             void setPath(const std::string &path);
             void setRotation(float rotation);
-            void setDirection(Direction dir);
+            void setDirection(Arcade::Direction dir);
             void updateRotation();
 
             //getters
@@ -43,6 +43,6 @@ namespace Arcade {
             std::shared_ptr<IColor> _color;
             std::string _path;
             float _rotation;
-            Direction _direction;
+            Arcade::Direction _direction;
     };
 }
