@@ -55,6 +55,18 @@ The game was developed using the following technologies:
 - [🐟 Simon](https://github.com/6im0n)
 - [🦁 Quentin](https://github.com/Quentintnrl)
 
+### Shared interface teams
+[SOURCILIÈRE]
+- [🍑 Alban](https://github.com/Peralban) (alban.peralta@epitech.eu)
+- [🦁 Landry](https://github.com/landryarki)
+- [💪 Aubane](https://github.com/AubaneNourry)
+
+[Arrrrrcade]
+- [🦝 Mathieu](https://github.com/mathieurobert1) (mathieu1.robert@epitech.eu)
+- [🧸 Thomas](https://github.com/Thomaltarix)
+- [🏄‍♂️ Théophile](https://github.com/theophile-jr)
+
+
 ### **🍦 Design:**
 - (to be determined)
 
