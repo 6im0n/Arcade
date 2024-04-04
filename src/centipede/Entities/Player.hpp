@@ -9,6 +9,7 @@
 
 #include "Interfaces/IEntity.hpp"
 #include "Bullet.hpp"
+#include "includes/Direction.hpp"
 
 namespace Arcade {
     class Player : public IEntity {
@@ -33,6 +34,7 @@ namespace Arcade {
             float getRotation() const;
 
             void shoot(std::vector<std::shared_ptr<Bullet>> &bullets, Timer &timer);
+            void move(Direction dir);
 
         private:
             std::vector<std::size_t> _pos;

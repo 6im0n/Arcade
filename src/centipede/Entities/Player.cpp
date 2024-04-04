@@ -84,3 +84,15 @@ void Arcade::Player::shoot(std::vector<std::shared_ptr<Bullet>> &bullets, Timer 
     std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(_pos[0], _pos[1] - 1, timer.getElapsedTime());
     bullets.push_back(bullet);
 }
+
+void Arcade::Player::move(Direction dir)
+{
+    if (dir == Direction::D_UP && _pos[1] > 17)
+        _pos[1] -= 1;
+    if (dir == Direction::D_DOWN && _pos[1] < 20)
+        _pos[1] += 1;
+    if (dir == Direction::D_LEFT && _pos[0] > 5)
+        _pos[0] -= 1;
+    if (dir == Direction::D_RIGHT && _pos[0] < 22)
+        _pos[0] += 1;
+}

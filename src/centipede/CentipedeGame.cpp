@@ -113,13 +113,13 @@ int Arcade::CentipedeGame::simulate()
 void Arcade::CentipedeGame::catchKeyEvent(int key)
 {
     if (key == Arcade::Keys::LEFT) {
-        _snake.setDirection(Direction::D_LEFT);
+        _player.get()->move(Direction::D_LEFT);
     } else if (key == Arcade::Keys::RIGHT) {
-        _snake.setDirection(Direction::D_RIGHT);
+        _player.get()->move(Direction::D_RIGHT);
     } else if (key == Arcade::Keys::UP) {
-        _snake.setDirection(Direction::D_UP);
+        _player.get()->move(Direction::D_UP);
     } else if (key == Arcade::Keys::DOWN) {
-        _snake.setDirection(Direction::D_DOWN);
+        _player.get()->move(Direction::D_DOWN);
     } else if (key == Arcade::Keys::SPACE) {
         _player.get()->shoot(_bullets, _timer);
     }
