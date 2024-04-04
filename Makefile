@@ -202,7 +202,7 @@ re: fclean all
 
 obj: $(OBJ_CORE) $(OBJ_CENTIPEDE) $(OBJ_SNAKE) $(OBJ_NCURSES) $(OBJ_SFML) $(OBJ_SDL)
 
-test_obj: $(OBJ_TEST)
+tests_obj: $(OBJ_TEST)
 
 tests_run: fclean
 	$(MAKE) obj CXXFLAGS+=--coverage -lcriterion

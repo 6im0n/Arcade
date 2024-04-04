@@ -131,3 +131,8 @@ std::vector<std::shared_ptr<Arcade::SnakeBody>> Arcade::Snake::getSnake() const
 {
     return _snake;
 }
+
+bool Arcade::Snake::operator==(const Snake &other) const
+{
+    return _snake == other._snake;
+}

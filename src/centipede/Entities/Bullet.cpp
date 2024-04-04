@@ -9,6 +9,8 @@
 #include "classes/Color.hpp"
 #include "src/centipede/CentipedeGame.hpp"
 
+#include <algorithm>
+
 Arcade::Bullet::Bullet(std::size_t x, std::size_t y, float time)
 {
     _pos = {x, y};
@@ -80,9 +82,21 @@ float Arcade::Bullet::getRotation() const
     return _rotation;
 }
 
-void Arcade::Bullet::moveBullet(Timer &timer)
+int Arcade::Bullet::moveBullet(float time, std::vector<Snake> &snakes)
 {
-    if (timer.getElapsedTime() - _lastTime > BULLET_SPEED) {
+    if (time - _lastTime > BULLET_SPEED) {
         _pos[1] -= 1;
+        _lastTime = time;
     }
+    for (auto snake : snakes) {
+        for (auto snakePart : snake.getSnake()) {
+            if (snakePart.get()->getPos()[0] == _pos[0] && snakePart.get()->getPos()[1] == _pos[1]) {
+                snakes.erase(std::remove(snakes.begin(), snakes.end(), snake), snakes.end());
+                return -1;
+            }
+        }
+    }
+    if (_pos[1] <= 8)
+        return -1;
+    return 0;
 }

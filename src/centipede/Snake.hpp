@@ -15,7 +15,7 @@
 #include "includes/Direction.hpp"
 
 namespace Arcade {
-    class Snake {
+    class   Snake {
         public:
             Snake();
             ~Snake() = default;
@@ -24,6 +24,8 @@ namespace Arcade {
             void growSnake();
             void setDirection(Direction dir);
             std::vector<std::shared_ptr<SnakeBody>> getSnake() const;
+
+            bool operator==(const Snake& other) const;
 
         protected:
         private:

@@ -13,6 +13,8 @@
 #include "includes/Keys.hpp"
 #include "includes/Direction.hpp"
 
+#include <algorithm>
+
 void generateWallLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
 {
     for (int i = 0; i < size; i++) {
@@ -72,7 +74,7 @@ Arcade::CentipedeGame::CentipedeGame()
 
 int Arcade::CentipedeGame::startGame()
 {
-    _snake = Snake();
+    _snakes.push_back(Snake());
     _score.get()->resetScore();
     _timer.reset();
     return 0;
@@ -97,16 +99,19 @@ int Arcade::CentipedeGame::simulate()
             _entities.push_back(entity);
         }
     }
-    for (auto snakeBody : _snake.getSnake()) {
-        _entities.push_back(snakeBody);
+    for (std::size_t i = 0; i < _bullets.size(); i++) {
+        _entities.push_back(_bullets[i]);
+        if (_bullets[i]->moveBullet(_timer.getElapsedTime(), _snakes) == -1) {
+            _bullets.erase(std::remove(_bullets.begin(), _bullets.end(), _bullets[i]), _bullets.end());
+            i--;
+        }
     }
-    for (auto bullet : _bullets) {
-        bullet->moveBullet(_timer);
-        _entities.push_back(bullet);
+    for (auto &snake : _snakes) {snake.moveSnake(_map);
+        for (auto snakeBody : snake.getSnake()) {
+            _entities.push_back(snakeBody);
+        }
     }
     _entities.push_back(_player);
-    if (_snake.moveSnake(_map) == -1)
-        return -1;
     return 0;
 }
 

@@ -58,7 +58,7 @@ namespace Arcade {
             float _lastTime;
 
             std::shared_ptr<Score> _score;
-            Snake _snake;
+            std::vector<Snake> _snakes;
             Timer _timer;
     };
 }
