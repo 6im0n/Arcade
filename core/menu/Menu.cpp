@@ -59,18 +59,18 @@ Arcade::Menu::Menu(std::string graphicLib)
     _selectButton->setPos(_currentButton->getPos().at(0), _currentButton->getPos().at(1));
     _exit = false;
 
-    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(2, 2), std::vector<std::size_t>(130, 87), ' '));
+    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(2, 2), std::vector<std::size_t>(15,15), ' '));
     _texts.at(0)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.at(0)->setFontPath(FONT_PATH);
     _texts.at(0)->setPos(2, 2);
-    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(100, 2), std::vector<std::size_t>(130, 87), ' '));
+    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(3, 2), std::vector<std::size_t>(15,15), ' '));
     _texts.at(1)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.at(1)->setFontPath(FONT_PATH);
-    _texts.at(1)->setPos(100, 2);
-    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(100, 15), std::vector<std::size_t>(130, 87), ' '));
+    _texts.at(1)->setPos(3, 2);
+    _texts.push_back(std::make_shared<Text>("", std::vector<std::size_t>(3, 15), std::vector<std::size_t>(130, 87), ' '));
     _texts.at(2)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.at(2)->setFontPath(FONT_PATH);
-    _texts.at(2)->setPos(100, 15);
+    _texts.at(2)->setPos(3, 15);
     _texts.push_back(std::make_shared<Text>("Run", std::vector<std::size_t>(3, 3), std::vector<std::size_t>(30, 30), 'R'));
     _texts.at(3)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.at(3)->setFontPath(FONT_PATH);
