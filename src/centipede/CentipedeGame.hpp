@@ -62,7 +62,7 @@ namespace Arcade {
             std::vector<std::shared_ptr<IText>> _texts;
             std::vector<std::shared_ptr<ISound>> _sounds;
             std::vector<std::vector<std::shared_ptr<IEntity>>> _map;
-            std::vector<std::shared_ptr<Bullet>> _bullets;
+            std::shared_ptr<Bullet> _bullet;
             std::shared_ptr<Player> _player;
             float _lastTime;
 

@@ -13,13 +13,13 @@ Arcade::Snake::Snake(Direction dir, short size, std::vector<std::size_t> pos, bo
 {
     if (!headPos) {
         if (dir == D_RIGHT) {
-            pos[POSX] += (std::size_t)size;
+            pos[POSX] += (std::size_t)size -1;
         } else if (dir == D_DOWN) {
-            pos[POSY] += (std::size_t)size;
+            pos[POSY] += (std::size_t)size - 1;
         } else if (dir == D_LEFT) {
-            pos[POSX] -= (std::size_t)size;
+            pos[POSX] -= (std::size_t)size - 1;
         } else if (dir == D_UP) {
-            pos[POSY] -= (std::size_t)size;
+            pos[POSY] -= (std::size_t)size - 1;
         }
     }
     _snake.push_back(std::make_shared<SnakeBody>(pos[POSX], pos[POSY], SNAKE_HEAD_PATH, dir));
@@ -109,8 +109,6 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
         }
     }
     if (_direction == D_DOWN) {
-        if (checkCollision(map, _snake, head->getPos()[0] - START_WIDTH, head->getPos()[1] + 1 - START_HEIGHT) == false)
-            return -1;
         if (_lastDirection == D_LEFT) {
             head->setPath(SNAKE_CORNER_PATH);
             head->setDirection(D_DOWN);

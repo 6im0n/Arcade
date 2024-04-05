@@ -79,12 +79,12 @@ float Arcade::Player::getRotation() const
     return _rotation;
 }
 
-void Arcade::Player::shoot(std::vector<std::shared_ptr<Bullet>> &bullets, Timer &timer)
+void Arcade::Player::shoot(std::shared_ptr<Bullet> &bullet, Timer &timer)
 {
-    if (bullets.size() >= 1)
+    if (bullet != nullptr)
         return;
-    std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(_pos[POSX], _pos[POSY] - 1, timer.getElapsedTime());
-    bullets.push_back(bullet);
+    std::shared_ptr<Bullet> new_bullet = std::make_shared<Bullet>(_pos[POSX], _pos[POSY] - 1, timer.getElapsedTime());
+    bullet = new_bullet;
 }
 
 void Arcade::Player::move(Direction dir)

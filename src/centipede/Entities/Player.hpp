@@ -33,7 +33,7 @@ namespace Arcade {
             std::string getPath() const;
             float getRotation() const;
 
-            void shoot(std::vector<std::shared_ptr<Bullet>> &bullets, Timer &timer);
+            void shoot(std::shared_ptr<Bullet> &bullets, Timer &timer);
             void move(Direction dir);
 
         private:

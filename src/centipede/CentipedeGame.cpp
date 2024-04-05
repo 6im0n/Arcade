@@ -13,6 +13,9 @@
 #include "includes/Direction.hpp"
 
 #include <algorithm>
+#include <cmath>
+
+#include <iostream>
 
 void generateWallLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
 {
@@ -58,7 +61,7 @@ Arcade::CentipedeGame::CentipedeGame()
 
 int Arcade::CentipedeGame::startGame()
 {
-    _snakes.push_back(Snake(D_RIGHT, 4, {GET_POSXY_AREA(5, 1)}, true));
+    _snakes.push_back(Snake(D_RIGHT, 9, {GET_POSXY_AREA(1, 1)}, false));
     _score.get()->resetScore();
     _timer.reset();
     return 0;
@@ -83,16 +86,14 @@ int Arcade::CentipedeGame::simulate()
             _entities.push_back(entity);
         }
     }
-    for (std::size_t i = 0; i < _bullets.size(); i++) {
-        _entities.push_back(_bullets[i]);
-        auto resultMove = _bullets[i]->moveBullet(_timer.getElapsedTime(), _snakes);
+    if (_bullet != nullptr) {
+        _entities.push_back(_bullet);
+        auto resultMove = _bullet->moveBullet(_timer.getElapsedTime(), _snakes);
         if (resultMove[0] == 2) {
-            killSnake(_snakes[resultMove[3]], _bullets[i]->getPos());
-            i--;
+            killSnake(_snakes[resultMove[3]], _bullet->getPos());
         }
         if (resultMove[0] == 1 || resultMove[0] == 2) {
-            _bullets.erase(std::remove(_bullets.begin(), _bullets.end(), _bullets[i]), _bullets.end());
-            i--;
+            _bullet = nullptr;
         }
     }
     for (auto &snake : _snakes) {snake.moveSnake(_map);
@@ -106,16 +107,22 @@ int Arcade::CentipedeGame::simulate()
 
 void Arcade::CentipedeGame::killSnake(Snake snakeKilled, std::vector<std::size_t> pos)
 {
+    short size = 0;
+    std::vector<std::size_t> posSnake = {0, 0};
     for (std::size_t i = 0; i < _snakes.size(); i++) {
         if (_snakes[i] == snakeKilled) {
+            size = _snakes[i].getSnake().size();
+            posSnake = _snakes[i].getSnake().front()->getPos();
             _snakes.erase(_snakes.begin() + i);
             _score.get()->incrementScore();
             break;
         }
     }
     _map[pos[POSY] - START_HEIGHT][pos[POSX] - START_WIDTH] = std::make_shared<Arcade::Wall>(pos[POSX], pos[POSY]);
-    _snakes.push_back(Snake(D_RIGHT, 4, {pos[POSX], pos[POSY]}, true));
-    _snakes.push_back(Snake(D_LEFT, 4, {pos[POSX], pos[POSY]}, false));
+    if (size > 2) {
+        _snakes.push_back(Snake(D_RIGHT, (std::size_t)floor(size / 2), {pos[POSX], pos[POSY]}, true));
+        _snakes.push_back(Snake(D_LEFT, (std::size_t)floor(size / 2), {posSnake[POSX], posSnake[POSY]}, false));
+    }
 }
 
 void Arcade::CentipedeGame::catchKeyEvent(int key)
@@ -129,7 +136,7 @@ void Arcade::CentipedeGame::catchKeyEvent(int key)
     } else if (key == Arcade::Keys::DOWN) {
         _player.get()->move(Direction::D_DOWN);
     } else if (key == Arcade::Keys::SPACE) {
-        _player.get()->shoot(_bullets, _timer);
+        _player.get()->shoot(_bullet, _timer);
     }
 }
 
