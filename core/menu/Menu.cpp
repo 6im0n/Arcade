@@ -394,11 +394,7 @@ void Arcade::Menu::catchMousePosition(int x, int y)
 
 void Arcade::Menu::manageClick()
 {
-    std::cout << "Mouse clicked at " << _mousePos.first << " " << _mousePos.second << std::endl;
-    std::cout << "Button Exit at " << _runButtons->getPos().at(0) << " " << _runButtons->getPos().at(1) << std::endl;
-    std::cout << "Button Exit size " << _runButtons->getNextButton()->getSize().at(0) << " " << _runButtons->getNextButton()->getSize().at(1) << std::endl;
     if ((std::size_t)_mousePos.first >= _runButtons->getPos().at(0) - (_runButtons->getPos().at(0) / 2) && (std::size_t)_mousePos.first <= _runButtons->getPos().at(0) + (_runButtons->getSize().at(0) / 2) && (std::size_t)_mousePos.second >= _runButtons->getPos().at(1) - (_runButtons->getPos().at(1) / 2) && (std::size_t)_mousePos.second <= _runButtons->getPos().at(1) + (_runButtons->getSize().at(1) / 2)) {
-        std::cout << "run" << std::endl;
     }
     if ((std::size_t)_mousePos.first >= _runButtons->getNextButton()->getPos().at(0) - (_runButtons->getNextButton()->getPos().at(0) / 2) && (std::size_t)_mousePos.first <= _runButtons->getNextButton()->getPos().at(0) + (_runButtons->getNextButton()->getSize().at(0) / 2) && (std::size_t)_mousePos.second >= _runButtons->getNextButton()->getPos().at(1) - (_runButtons->getNextButton()->getPos().at(1) / 2) && (std::size_t)_mousePos.second <= _runButtons->getNextButton()->getPos().at(1) + (_runButtons->getNextButton()->getSize().at(1) / 2)) {
         _exit = true;

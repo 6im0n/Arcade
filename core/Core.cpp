@@ -170,7 +170,6 @@ void Arcade::Core::saveTopScores()
     file.clear();
     for (std::size_t i = 0; i < _topPlayers.size(); i++) {
         if (_topPlayers.at(i) != "") {
-            std::cout << _GamesName.at(i) << std::endl;
             std::string game;
             if (_GamesName.at(i).find("arcade_") != std::string::npos)
                 game = _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1, _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1).length() - 3);
