@@ -39,7 +39,7 @@ NCURSES_SRC  	= src/ncurses/ncurses.cpp \
 
 SFML_SRC     	= src/sfml/Sfml.cpp \
 
-SDL_SRC      	= src/sdl/sdl.cpp \
+SDL_SRC      	= src/sdl/Sdl.cpp \
 
 SRC_TEST     	= tests/tests_color.cpp		\
 				  classes/Color.cpp			\
