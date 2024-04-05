@@ -28,6 +28,13 @@ Arcade::Sdl::Sdl()
     }
 }
 
+Arcade::Sdl::~Sdl()
+{
+    SDL_DestroyRenderer(this->_renderer);
+    SDL_DestroyWindow(this->_window);
+    SDL_Quit();
+}
+
 bool Arcade::Sdl::isWindowOpen() const
 {
     return true;
