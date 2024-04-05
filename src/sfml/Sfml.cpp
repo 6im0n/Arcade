@@ -136,6 +136,14 @@ int Arcade::Sfml::getKeyEvent() //while loop
             if (this->_event.key.code == sf::Keyboard::Num9 || this->_event.key.code == sf::Keyboard::Numpad9)
                 return Arcade::Keys::NINE;
         }
+        if (_event.type == sf::Event::MouseButtonPressed) {
+            if (this->_event.mouseButton.button == sf::Mouse::Left) {
+                return Arcade::Keys::MOUSE_LEFT;
+            }
+            if (this->_event.mouseButton.button == sf::Mouse::Right) {
+                return Arcade::Keys::MOUSE_RIGHT;
+            }
+        }
     }
     return -1;
 }
@@ -151,14 +159,14 @@ void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entitie
     for (auto &entity : entities) {
         if (entity->getPath().empty())
             continue;
-        sf::Sprite sprite;
+        sf::RectangleShape sprite(sf::Vector2f(entity->getSize()[0], entity->getSize()[1]));
         sf::Texture texture;
         texture.loadFromFile(entity->getPath() + ".png");
-        sprite.setTexture(texture);
-        sprite.setPosition(entity->getPos()[0] * 29, entity->getPos()[1] * 29);
-        sprite.setScale(entity->getSize()[0], entity->getSize()[1]);
-        sprite.setOrigin((sf::Vector2f)texture.getSize() / 2.f);
+        sprite.setOrigin(entity->getSize()[0] / 2.f, entity->getSize()[1] / 2.f);
+        sprite.setTexture(&texture);
         sprite.setRotation(entity->getRotation());
+        sprite.setPosition(entity->getPos()[0] * 29 + entity->getSize()[0] / 2, entity->getPos()[1] * 29 + entity->getSize()[1] / 2);
+        // sprite.setSize(sf::Vector2f(entity->getSize()[0], entity->getSize()[1]));
         this->_window.draw(sprite);
     }
 }
@@ -175,7 +183,7 @@ void Arcade::Sfml::displayText(std::vector<std::shared_ptr<IText>> texts)
         sfmlText.setString(text->getText());
         sfmlText.setCharacterSize(text->getSize());
         sfmlText.setFillColor(sf::Color::Red);
-        sfmlText.setPosition(text->getPos()[0], text->getPos()[1]);
+        sfmlText.setPosition(text->getPos()[0] * 29, text->getPos()[1] * 29);
         this->_window.draw(sfmlText);
     }
 }
@@ -213,6 +221,12 @@ void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
         texture.loadFromFile(entity->getPath() + ".png");
         this->_textures.push_back(texture);
     }
+}
+
+std::pair<int, int> Arcade::Sfml::getMousePosition()
+{
+    sf::Vector2i mousePos = sf::Mouse::getPosition(this->_window);
+    return std::make_pair<int, int>(mousePos.x / 29, mousePos.y / 29);
 }
 
 extern "C" {
