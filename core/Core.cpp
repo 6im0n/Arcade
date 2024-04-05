@@ -21,14 +21,14 @@
 Arcade::Core::Core(const std::string &graphicPath)
 {
     _graphicLoader = DLLoader<IGraphic>(ENTRY_POINT_GRAPHIC);
+    _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
+    std::vector<std::string> libs = findLibs("lib/");
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
     if (_graphic == nullptr) {
         std::cerr << "Error: can't load graphic library" << std::endl;
         exit(84);
     }
     _indexGame = 1;
-    _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
-    std::vector<std::string> libs = findLibs("lib/");
     _menu = std::make_unique<Menu>(graphicPath, libs);
     _isMenu = true;
     loadTopScores();
@@ -262,9 +262,11 @@ std::vector<std::string> Arcade::Core::findLibs(const std::string &path)
             if (_graphicLoader.getInstance(entry.path().string()) != nullptr) {
                 libs.at(iGraphic) = entry.path().string();
                 iGraphic++;
+                _graphicLoader.close();
             } else if (_gameLoader.getInstance(entry.path().string()) != nullptr) {
                 libs.at(iGame) = entry.path().string();
                 iGame++;
+                _gameLoader.close();
             }
         }
     }
