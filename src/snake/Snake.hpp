@@ -12,15 +12,9 @@
 #include "src/snake/Entities/SnakeBody.hpp"
 #include "Interfaces/IEntity.hpp"
 #include "classes/Timer.hpp"
+#include "direction.hpp"
 
 namespace Arcade {
-    enum Direction {
-        D_LEFT,
-        D_DOWN,
-        D_RIGHT,
-        D_UP
-    };
-
     class Snake {
         public:
             Snake();
@@ -28,14 +22,14 @@ namespace Arcade {
 
             int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map);
             void growSnake();
-            void setDirection(Direction dir);
+            void setDirection(Arcade::Direction dir);
             std::vector<std::shared_ptr<SnakeBody>> getSnake() const;
 
         protected:
         private:
             std::vector<std::shared_ptr<SnakeBody>> _snake;
-            Direction _direction;
-            Direction _lastDirection;
+            Arcade::Direction _direction;
+            Arcade::Direction _lastDirection;
             Timer _timer;
             float _speed;
     };

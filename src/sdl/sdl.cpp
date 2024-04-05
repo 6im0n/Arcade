@@ -17,7 +17,7 @@ Arcade::Sdl::~Sdl()
 
 bool Arcade::Sdl::isWindowOpen() const
 {
-    return false;
+    return true;
 }
 
 void Arcade::Sdl::closeWindow()
@@ -30,11 +30,12 @@ void Arcade::Sdl::clearWindow()
 
 int Arcade::Sdl::getKeyEvent()
 {
-    return 0;
+    return -1;
 }
 
 void Arcade::Sdl::displayWindow()
 {
+    SDL_RenderPresent(this->_renderer);
 }
 
 void Arcade::Sdl::displayEntities(std::vector<std::shared_ptr<IEntity>> entities)
@@ -52,6 +53,11 @@ void Arcade::Sdl::playSound(std::vector<std::shared_ptr<ISound>> sounds)
     (void)sounds;
 }
 
+std::pair<int, int> Arcade::Sdl::getMousePosition()
+{
+    return std::make_pair(0, 0);
+}
+
 extern "C"
 {
     __attribute__((constructor))
@@ -63,7 +69,7 @@ extern "C"
     {
     }
 
-    Arcade::IGraphic *loadGraphicInstance()
+    Arcade::Sdl *loadGraphicInstance()
     {
         return new Arcade::Sdl();
     }

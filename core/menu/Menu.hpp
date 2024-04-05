@@ -34,6 +34,8 @@ namespace Arcade {
             bool isExit() const;
             void restart();
             void addToPlayerName(Keys key);
+            void catchMousePosition(int x, int y);
+            void manageClick();
         private :
             bool _isRunning;
             bool _exit;
@@ -48,5 +50,6 @@ namespace Arcade {
             Button *_graphicButtons;
             Button *_selectButton;
             std::string _playerName;
+            std::pair<int, int> _mousePos;
     };
 }

@@ -8,14 +8,17 @@
 #include "SnakeBody.hpp"
 #include "classes/Color.hpp"
 
-Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path, float rotation)
+#include "src/snake/SnakeGame.hpp"
+
+Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path, Direction dir)
 {
     _pos = {x, y};
     _size = {1, 1};
     _path = path;
     _char = '=';
-    _rotation = rotation;
     _color = std::make_unique<Color>(39, 122, 16, 255);
+    _direction = dir;
+    updateRotation();
 }
 
 void Arcade::SnakeBody::setPos(std::size_t x, std::size_t y)
@@ -48,6 +51,23 @@ void Arcade::SnakeBody::setRotation(float rotation)
     _rotation = rotation;
 }
 
+void Arcade::SnakeBody::setDirection(Direction dir)
+{
+    _direction = dir;
+}
+
+void Arcade::SnakeBody::updateRotation()
+{
+    if (_direction == D_LEFT)
+        _rotation = 270;
+    if (_direction == D_DOWN)
+        _rotation = 180;
+    if (_direction == D_RIGHT)
+        _rotation = 90;
+    if (_direction == D_UP)
+        _rotation = 0;
+}
+
 std::vector<std::size_t> Arcade::SnakeBody::getPos() const
 {
     return _pos;
@@ -76,4 +96,9 @@ std::string Arcade::SnakeBody::getPath() const
 float Arcade::SnakeBody::getRotation() const
 {
     return _rotation;
+}
+
+Arcade::Direction Arcade::SnakeBody::getDirection() const
+{
+    return _direction;
 }
