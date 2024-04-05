@@ -116,12 +116,12 @@ games: $(NAME_PACMAN) $(NAME_SNAKE)
 	$(call YELLOW,"❌ $<")
 
 $(NAME_PACMAN) : $(OBJ_PACMAN)
-	@$(LINKER) -shared -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
+	@$(LINKER) -shared -fPIC -fPIC -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SNAKE) : $(OBJ_SNAKE)
-	@$(LINKER) -shared -o $(NAME_SNAKE) $(OBJ_SNAKE) $(CXXFLAGS) && \
+	@$(LINKER) -shared -fPIC -fPIC -fPIC -o $(NAME_SNAKE) $(OBJ_SNAKE) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
@@ -149,17 +149,17 @@ graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 	$(call YELLOW,"❌ $<")
 
 $(NAME_NCURSES) : $(OBJ_NCURSES)
-	@$(LINKER) -shared -o $(NAME_NCURSES) $(OBJ_NCURSES) $(CXXFLAGS) $(NCURSES_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_NCURSES) $(OBJ_NCURSES) $(CXXFLAGS) $(NCURSES_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SFML) : $(OBJ_SFML)
-	@$(LINKER) -shared -o $(NAME_SFML) $(OBJ_SFML) $(CXXFLAGS) $(SFML_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_SFML) $(OBJ_SFML) $(CXXFLAGS) $(SFML_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SDL) : $(OBJ_SDL)
-	@$(LINKER) -shared -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
