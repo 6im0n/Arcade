@@ -30,6 +30,7 @@ namespace Arcade {
 
             //Event
             int getKeyEvent() override;
+            std::pair<int, int> getMousePosition() override;
 
             //Display
             void displayWindow() override;

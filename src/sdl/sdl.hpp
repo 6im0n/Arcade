@@ -2,19 +2,24 @@
 ** EPITECH PROJECT, 2024
 ** Arcade
 ** File description:
-** ncurses.hpp
+** Sdl.hpp
 */
 
 #pragma once
 
 #include "Interfaces/IGraphic.hpp"
 #include "includes/Keys.hpp"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
+#include <iostream>
 
 namespace Arcade {
-    class Ncurses : public IGraphic {
+    class Sdl : public IGraphic {
         public:
-            Ncurses();
-            ~Ncurses() = default;
+            Sdl();
+            ~Sdl() = default;
             bool isWindowOpen() const override;
             void closeWindow();
             void clearWindow();
@@ -33,5 +38,7 @@ namespace Arcade {
             std::vector<IText> _texts;
             std::vector<ISound> _sounds;
             Keys _key;
+            SDL_Window *_window;
+            SDL_Renderer *_renderer;
     };
 }

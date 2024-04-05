@@ -382,3 +382,9 @@ std::string Arcade::Menu::getPlayerName() const
 {
     return _playerName;
 }
+
+void Arcade::Menu::catchMousePosition(int x, int y)
+{
+    _mousePos.first = x;
+    _mousePos.second = y;
+}

@@ -35,6 +35,7 @@ Arcade::Core::~Core()
 
 void Arcade::Core::run()
 {
+    std::pair<int, int> mousePos;
     while (5) {
         _key_event = _graphic->getKeyEvent();
         if (_key_event == Keys::ESCAPE) {
@@ -56,7 +57,9 @@ void Arcade::Core::run()
             } else
                 _game.get()->catchKeyEvent(_key_event);
         }
+        //mousePos = _graphic->getMousePosition();
         if (!_isMenu) {
+            _game.get()->catchMousePosition(mousePos.first, mousePos.second);
             _graphic.get()->clearWindow();
             _graphic.get()->displayEntities(_game.get()->getEntities());
             _graphic.get()->displayText(_game.get()->getTexts());
@@ -82,6 +85,7 @@ void Arcade::Core::run()
             if (_menu->isExit()) {
                 return;
             }
+            _menu->catchMousePosition(mousePos.first, mousePos.second);
             _graphic.get()->clearWindow();
             _graphic.get()->displayEntities(_menu->getEntities());
             _graphic.get()->displayText(_menu->getTexts());

@@ -215,6 +215,12 @@ void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
     }
 }
 
+std::pair<int, int> Arcade::Sfml::getMousePosition()
+{
+    sf::Vector2i mousePos = sf::Mouse::getPosition(this->_window);
+    return std::make_pair(mousePos.x, mousePos.y);
+}
+
 extern "C" {
     __attribute__((constructor))
     void constructor()
