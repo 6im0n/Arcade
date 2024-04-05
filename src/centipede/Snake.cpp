@@ -9,14 +9,45 @@
 #include "Entities/Wall.hpp"
 #include "CentipedeGame.hpp"
 
-Arcade::Snake::Snake()
+#include <iostream>
+
+Arcade::Snake::Snake(Direction dir, short size, std::vector<std::size_t> pos, bool headPos)
 {
-    _snake.push_back(std::make_shared<SnakeBody>(8, 8, SNAKE_HEAD_PATH, D_RIGHT));
-    _snake.push_back(std::make_shared<SnakeBody>(7, 8, SNAKE_BODY_PATH, D_RIGHT));
-    _snake.push_back(std::make_shared<SnakeBody>(6, 8, SNAKE_BODY_PATH, D_RIGHT));
-    _snake.push_back(std::make_shared<SnakeBody>(5, 8, SNAKE_TAIL_PATH, D_RIGHT));
-    _direction = D_RIGHT;
-    _lastDirection = D_RIGHT;
+    if (!headPos) {
+        if (dir == D_RIGHT) {
+            pos[0] += (std::size_t)size;
+        } else if (dir == D_DOWN) {
+            pos[1] += (std::size_t)size;
+        } else if (dir == D_LEFT) {
+            pos[0] -= (std::size_t)size;
+        } else if (dir == D_UP) {
+            pos[1] -= (std::size_t)size;
+        }
+    }
+    std::cerr << "Snake pos: " << pos[0] << " " << pos[1] << std::endl;
+    _snake.push_back(std::make_shared<SnakeBody>(pos[1], pos[0], SNAKE_HEAD_PATH, dir));
+    for (short i = 1; i < size - 1; i++) {
+        if (dir == D_RIGHT) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[1] - i, pos[0], SNAKE_BODY_PATH, dir));
+        } else if (dir == D_DOWN) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[1], pos[0] - i, SNAKE_BODY_PATH, dir));
+        } else if (dir == D_LEFT) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[1] + i, pos[0], SNAKE_BODY_PATH, dir));
+        } else if (dir == D_UP) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[1], pos[0] + i, SNAKE_BODY_PATH, dir));
+        }
+    }
+    if (dir == D_RIGHT) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[1] - size + 1, pos[0], SNAKE_TAIL_PATH, dir));
+    } else if (dir == D_DOWN) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[1], pos[0] - size + 1, SNAKE_TAIL_PATH, dir));
+    } else if (dir == D_LEFT) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[1] + size - 1, pos[0], SNAKE_TAIL_PATH, dir));
+    } else if (dir == D_UP) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[1], pos[0] + size - 1, SNAKE_TAIL_PATH, dir));
+    }
+    _direction = dir;
+    _lastDirection = dir;
     _timer = Timer();
     _timer.start();
     _speed = 0.4;

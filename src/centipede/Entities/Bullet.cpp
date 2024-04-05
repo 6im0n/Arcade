@@ -82,21 +82,27 @@ float Arcade::Bullet::getRotation() const
     return _rotation;
 }
 
-int Arcade::Bullet::moveBullet(float time, std::vector<Snake> &snakes)
+std::vector<std::size_t> Arcade::Bullet::moveBullet(float time, std::vector<Snake> &snakes)
 {
+    std::vector<std::size_t> pos = _pos;
+
     if (time - _lastTime > BULLET_SPEED) {
         _pos[1] -= 1;
         _lastTime = time;
     }
-    for (auto snake : snakes) {
-        for (auto snakePart : snake.getSnake()) {
+    for (std::size_t i = 0; i < snakes.size(); i++ ) {
+        for (auto snakePart : snakes[i].getSnake()) {
             if (snakePart.get()->getPos()[0] == _pos[0] && snakePart.get()->getPos()[1] == _pos[1]) {
-                snakes.erase(std::remove(snakes.begin(), snakes.end(), snake), snakes.end());
-                return -1;
+                pos.insert(pos.begin(), 2);
+                pos.push_back(i);
+                return pos;
             }
         }
     }
-    if (_pos[1] <= 8)
-        return -1;
-    return 0;
+    if (_pos[1] <= 8) {
+        pos.insert(pos.begin(), 1);
+        return pos;
+    }
+    pos.insert(pos.begin(), 0);
+    return pos;
 }

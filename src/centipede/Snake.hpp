@@ -18,6 +18,7 @@ namespace Arcade {
     class   Snake {
         public:
             Snake();
+            Snake(Direction dir, short size, std::vector<std::size_t> pos, bool headPos);
             ~Snake() = default;
 
             int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map);

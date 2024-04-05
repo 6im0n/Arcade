@@ -74,7 +74,7 @@ Arcade::CentipedeGame::CentipedeGame()
 
 int Arcade::CentipedeGame::startGame()
 {
-    _snakes.push_back(Snake());
+    _snakes.push_back(Snake(D_RIGHT, 4, {8, 8}, true));
     _score.get()->resetScore();
     _timer.reset();
     return 0;
@@ -101,7 +101,12 @@ int Arcade::CentipedeGame::simulate()
     }
     for (std::size_t i = 0; i < _bullets.size(); i++) {
         _entities.push_back(_bullets[i]);
-        if (_bullets[i]->moveBullet(_timer.getElapsedTime(), _snakes) == -1) {
+        auto resultMove = _bullets[i]->moveBullet(_timer.getElapsedTime(), _snakes);
+        if (resultMove[0] == 2) {
+            killSnake(_snakes[resultMove[3]], _bullets[i]->getPos());
+            i--;
+        }
+        if (resultMove[0] == 1 || resultMove[0] == 2) {
             _bullets.erase(std::remove(_bullets.begin(), _bullets.end(), _bullets[i]), _bullets.end());
             i--;
         }
@@ -113,6 +118,20 @@ int Arcade::CentipedeGame::simulate()
     }
     _entities.push_back(_player);
     return 0;
+}
+
+void Arcade::CentipedeGame::killSnake(Snake snakeKilled, std::vector<std::size_t> pos)
+{
+    for (std::size_t i = 0; i < _snakes.size(); i++) {
+        if (_snakes[i] == snakeKilled) {
+            _snakes.erase(_snakes.begin() + i);
+            _score.get()->incrementScore();
+            break;
+        }
+    }
+    _map[pos[1] - START_HEIGHT][pos[0] - START_WIDTH] = std::make_shared<Arcade::Wall>(pos[0], pos[1]);
+    _snakes.push_back(Snake(D_RIGHT, 4, {pos[0], pos[1]}, true));
+    _snakes.push_back(Snake(D_LEFT, 4, {pos[0], pos[1]}, false));
 }
 
 void Arcade::CentipedeGame::catchKeyEvent(int key)

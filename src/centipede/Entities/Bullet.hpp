@@ -35,7 +35,7 @@ namespace Arcade {
             std::string getPath() const;
             float getRotation() const;
 
-            int moveBullet(float time, std::vector<Snake> &snakes);
+            std::vector<std::size_t> moveBullet(float time, std::vector<Snake> &snakes);
 
         private:
             float _lastTime;

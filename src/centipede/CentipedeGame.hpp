@@ -39,6 +39,7 @@ namespace Arcade {
             int stopGame();
             int getScore();
             int simulate();
+            void killSnake(Snake snakeKilled, std::vector<std::size_t> pos);
 
             //Event
             void catchKeyEvent(int key);
