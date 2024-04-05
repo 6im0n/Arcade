@@ -24,7 +24,6 @@ SRC_CORE      	= core/main.cpp \
 				  classes/Text.cpp \
 
 CENTIPEDE_SRC = 	src/centipede/Entities/Void.cpp			\
-					src/centipede/Entities/VoidRunnable.cpp	\
 					src/centipede/Entities/Wall.cpp			\
 					src/centipede/Entities/SnakeBody.cpp	\
 					src/centipede/Entities/Player.cpp		\
