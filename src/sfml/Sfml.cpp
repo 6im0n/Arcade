@@ -159,10 +159,12 @@ void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entitie
     for (auto &entity : entities) {
         if (entity->getPath().empty())
             continue;
-        sf::RectangleShape sprite(sf::Vector2f(entity->getSize()[0], entity->getSize()[1]));
+        float width = static_cast<int>(entity->getSize()[0]);
+        float height = static_cast<int>(entity->getSize()[1]);
+        sf::RectangleShape sprite(sf::Vector2f(width, height));
         sf::Texture texture;
         texture.loadFromFile(entity->getPath() + ".png");
-        sprite.setOrigin(entity->getSize()[0] / 2.f, entity->getSize()[1] / 2.f);
+        sprite.setOrigin(width / 2, height / 2);
         sprite.setTexture(&texture);
         sprite.setRotation(entity->getRotation());
         sprite.setPosition(entity->getPos()[0] * 29 + entity->getSize()[0] / 2, entity->getPos()[1] * 29 + entity->getSize()[1] / 2);
