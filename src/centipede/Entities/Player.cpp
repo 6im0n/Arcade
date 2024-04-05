@@ -81,6 +81,8 @@ float Arcade::Player::getRotation() const
 
 void Arcade::Player::shoot(std::vector<std::shared_ptr<Bullet>> &bullets, Timer &timer)
 {
+    if (bullets.size() >= 1)
+        return;
     std::shared_ptr<Bullet> bullet = std::make_shared<Bullet>(_pos[POSX], _pos[POSY] - 1, timer.getElapsedTime());
     bullets.push_back(bullet);
 }
