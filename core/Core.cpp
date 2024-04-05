@@ -252,6 +252,8 @@ std::vector<std::string> Arcade::Core::findLibs(const std::string &path)
     std::vector<std::string> libs = std::vector<std::string>(5);
     std::size_t iGraphic = 2;
     std::size_t iGame = 0;
+    IGame *game;
+    IGraphic *graphic;
 
     if (!std::filesystem::exists(path)) {
         std::cerr << "Error: can't find libs" << std::endl;
@@ -259,14 +261,18 @@ std::vector<std::string> Arcade::Core::findLibs(const std::string &path)
     }
     for (const auto &entry : std::filesystem::directory_iterator(path)) {
         if (entry.path().string().find(".so") != std::string::npos) {
-            if (_graphicLoader.getInstance(entry.path().string()) != nullptr) {
+            game = _gameLoader.getInstance(entry.path().string());
+            graphic = _graphicLoader.getInstance(entry.path().string());
+            if (graphic != nullptr) {
                 libs.at(iGraphic) = entry.path().string();
                 iGraphic++;
                 _graphicLoader.close();
-            } else if (_gameLoader.getInstance(entry.path().string()) != nullptr) {
+                delete graphic;
+            } else if (game != nullptr) {
                 libs.at(iGame) = entry.path().string();
                 iGame++;
                 _gameLoader.close();
+                delete game;
             }
         }
     }
