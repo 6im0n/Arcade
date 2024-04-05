@@ -8,7 +8,6 @@
 #include "CentipedeGame.hpp"
 #include "Entities/Wall.hpp"
 #include "Entities/Void.hpp"
-#include "Entities/VoidRunnable.hpp"
 #include "Entities/Bullet.hpp"
 #include "includes/Keys.hpp"
 #include "includes/Direction.hpp"
@@ -18,49 +17,34 @@
 void generateWallLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
 {
     for (int i = 0; i < size; i++) {
-        std::shared_ptr<Arcade::Wall> wall = std::make_shared<Arcade::Wall>(i + START_WIDTH, y + START_HEIGHT);
+        std::shared_ptr<Arcade::Wall> wall = std::make_shared<Arcade::Wall>(GET_POSXY_AREA(i, y));
         line.push_back(wall);
     }
 }
 
 void generateLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
 {
-    std::shared_ptr<Arcade::Wall> wall = std::make_shared<Arcade::Wall>(START_WIDTH, y + START_HEIGHT);
+    std::shared_ptr<Arcade::Wall> wall = std::make_shared<Arcade::Wall>(GET_POSXY_AREA(0, y));
     line.push_back(wall);
     for (int i = 1; i < size - 1; i++) {
-        std::shared_ptr<Arcade::Void> void_case = std::make_shared<Arcade::Void>(i + START_WIDTH, y + START_HEIGHT);
+        std::shared_ptr<Arcade::Void> void_case = std::make_shared<Arcade::Void>(GET_POSXY_AREA(i, y));
         line.push_back(void_case);
     }
-    std::shared_ptr<Arcade::Wall> wall2 = std::make_shared<Arcade::Wall>(size - 1 + START_WIDTH, y + START_HEIGHT);
-    line.push_back(wall2);
-}
-
-void generateLineRunnable(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, int size)
-{
-    std::shared_ptr<Arcade::Wall> wall = std::make_shared<Arcade::Wall>(START_WIDTH, y + START_HEIGHT);
-    line.push_back(wall);
-    for (int i = 1; i < size - 1; i++) {
-        std::shared_ptr<Arcade::VoidRunnable> void_case = std::make_shared<Arcade::VoidRunnable>(i + START_WIDTH, y + START_HEIGHT);
-        line.push_back(void_case);
-    }
-    std::shared_ptr<Arcade::Wall> wall2 = std::make_shared<Arcade::Wall>(size - 1 + START_WIDTH, y + START_HEIGHT);
+    std::shared_ptr<Arcade::Wall> wall2 = std::make_shared<Arcade::Wall>(GET_POSXY_AREA(size - 1, y));
     line.push_back(wall2);
 }
 
 void generateMap(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> &map)
 {
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < AREA_GAME_HEIGHT; i++) {
         std::vector<std::shared_ptr<Arcade::IEntity>> line;
         map.push_back(line);
     }
-    generateWallLine(map[0], 0, 20);
-    for (int i = 1; i < 11; i++) {
-        generateLine(map[i], i, 20);
+    generateWallLine(map[0], 0, AREA_GAME_WIDTH);
+    for (int i = 1; i < AREA_GAME_HEIGHT; i++) {
+        generateLine(map[i], i, AREA_GAME_WIDTH);
     }
-    for (int i = 11; i < 14; i++) {
-        generateLineRunnable(map[i], i, 20);
-    }
-    generateWallLine(map[14], 14, 20);
+    generateWallLine(map[AREA_GAME_HEIGHT - 1], AREA_GAME_HEIGHT, AREA_GAME_WIDTH);
 }
 
 Arcade::CentipedeGame::CentipedeGame()
@@ -74,7 +58,7 @@ Arcade::CentipedeGame::CentipedeGame()
 
 int Arcade::CentipedeGame::startGame()
 {
-    _snakes.push_back(Snake(D_RIGHT, 4, {8, 8}, true));
+    _snakes.push_back(Snake(D_RIGHT, 4, {GET_POSXY_AREA(5, 1)}, true));
     _score.get()->resetScore();
     _timer.reset();
     return 0;
@@ -129,9 +113,9 @@ void Arcade::CentipedeGame::killSnake(Snake snakeKilled, std::vector<std::size_t
             break;
         }
     }
-    _map[pos[1] - START_HEIGHT][pos[0] - START_WIDTH] = std::make_shared<Arcade::Wall>(pos[0], pos[1]);
-    _snakes.push_back(Snake(D_RIGHT, 4, {pos[0], pos[1]}, true));
-    _snakes.push_back(Snake(D_LEFT, 4, {pos[0], pos[1]}, false));
+    _map[pos[POSY] - START_HEIGHT][pos[POSX] - START_WIDTH] = std::make_shared<Arcade::Wall>(pos[POSX], pos[POSY]);
+    _snakes.push_back(Snake(D_RIGHT, 4, {pos[POSX], pos[POSY]}, true));
+    _snakes.push_back(Snake(D_LEFT, 4, {pos[POSX], pos[POSY]}, false));
 }
 
 void Arcade::CentipedeGame::catchKeyEvent(int key)

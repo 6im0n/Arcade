@@ -99,7 +99,7 @@ std::vector<std::size_t> Arcade::Bullet::moveBullet(float time, std::vector<Snak
             }
         }
     }
-    if (_pos[1] <= 8) {
+    if (_pos[1] <= GET_POSY_AREA(1)) {
         pos.insert(pos.begin(), 1);
         return pos;
     }
