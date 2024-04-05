@@ -46,6 +46,7 @@ void Arcade::Core::run()
                 return;
             }
         }
+        mousePos = _graphic->getMousePosition();
         if (_key_event == Keys::ONE || _key_event == Keys::TWO
             || _key_event == Keys::THREE || _key_event == Keys::FOUR) {
                 _menu->catchKeyEvent(_key_event);
@@ -53,11 +54,13 @@ void Arcade::Core::run()
                 _menu->getSelectedGraphic();
         } else if (_key_event != Keys::UNKNOWN) {
             if (_isMenu) {
+                _menu->catchMousePosition(mousePos.first, mousePos.second);
                 _menu->catchKeyEvent(_key_event);
-            } else
+            } else {
+                _game.get()->catchMousePosition(mousePos.first, mousePos.second);
                 _game.get()->catchKeyEvent(_key_event);
+            }
         }
-        mousePos = _graphic->getMousePosition();
         if (!_isMenu) {
             _game.get()->catchMousePosition(mousePos.first, mousePos.second);
             _graphic.get()->clearWindow();
