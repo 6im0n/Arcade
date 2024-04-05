@@ -57,7 +57,7 @@ void Arcade::Core::run()
             } else
                 _game.get()->catchKeyEvent(_key_event);
         }
-        //mousePos = _graphic->getMousePosition();
+        mousePos = _graphic->getMousePosition();
         if (!_isMenu) {
             _game.get()->catchMousePosition(mousePos.first, mousePos.second);
             _graphic.get()->clearWindow();

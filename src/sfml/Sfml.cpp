@@ -135,6 +135,15 @@ int Arcade::Sfml::getKeyEvent() //while loop
                 return Arcade::Keys::EIGHT;
             if (this->_event.key.code == sf::Keyboard::Num9 || this->_event.key.code == sf::Keyboard::Numpad9)
                 return Arcade::Keys::NINE;
+            if (_event.type == sf::Event::MouseButtonPressed) {
+                std::cout << "Mouse button pressed" << std::endl;
+                if (this->_event.mouseButton.button == sf::Mouse::Left) {
+                    return Arcade::Keys::MOUSE_LEFT;
+                }
+                if (this->_event.mouseButton.button == sf::Mouse::Right) {
+                    return Arcade::Keys::MOUSE_RIGHT;
+                }
+            }
         }
     }
     return -1;
@@ -218,7 +227,7 @@ void Arcade::Sfml::loadTexture(std::vector<std::shared_ptr<IEntity>> entities)
 std::pair<int, int> Arcade::Sfml::getMousePosition()
 {
     sf::Vector2i mousePos = sf::Mouse::getPosition(this->_window);
-    return std::make_pair(mousePos.x, mousePos.y);
+    return std::make_pair(mousePos.x / 29, mousePos.y / 29);
 }
 
 extern "C" {

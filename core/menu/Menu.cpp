@@ -152,19 +152,19 @@ void Arcade::Menu::catchKeyEvent(int key)
     if (_lastKey == Keys::ESCAPE) {
         _exit = true;
     }
-    if (_lastKey == Keys::O) {
+    if (_lastKey == Keys::ONE) {
         _gameButtons = _gameButtons->getPrevButton();
         setGame(_gameButtons->getLabel());
     }
-    if (_lastKey == Keys::P) {
+    if (_lastKey == Keys::TWO) {
         _gameButtons = _gameButtons->getNextButton();
         setGame(_gameButtons->getLabel());
     }
-    if (_lastKey == Keys::L) {
+    if (_lastKey == Keys::THREE) {
         _graphicButtons = _graphicButtons->getPrevButton();
         setGraphic(_graphicButtons->getLabel())   ;
     }
-    if (_lastKey == Keys::M) {
+    if (_lastKey == Keys::FOUR) {
         _graphicButtons = _graphicButtons->getNextButton();
         setGraphic(_graphicButtons->getLabel());
     }
@@ -196,16 +196,16 @@ void Arcade::Menu::catchKeyEvent(int key)
         }
     }
     if (!_changePlayer) {
-        if (_lastKey == Keys::UP) {
+        if (_lastKey == Keys::UP || _lastKey == Keys::Z) {
             _currentButton = _currentButton->getUpButton();
         }
-        if (_lastKey == Keys::DOWN) {
+        if (_lastKey == Keys::DOWN || _lastKey == Keys::S) {
             _currentButton = _currentButton->getDownButton();
         }
-        if (_lastKey == Keys::LEFT) {
+        if (_lastKey == Keys::LEFT || _lastKey == Keys::Q) {
             _currentButton = _currentButton->getPrevButton();
         }
-        if (_lastKey == Keys::RIGHT) {
+        if (_lastKey == Keys::RIGHT || _lastKey == Keys::D) {
             _currentButton = _currentButton->getNextButton();
         }
     }
@@ -376,6 +376,9 @@ void Arcade::Menu::addToPlayerName(Keys key)
     if (key == Keys::BACKSPACE) {
         _playerName = _playerName.substr(0, _playerName.size() - 1);
     }
+    if (key == Keys::MOUSE_LEFT || key == Keys::MOUSE_RIGHT) {
+        manageClick();
+    }
 }
 
 std::string Arcade::Menu::getPlayerName() const
@@ -387,4 +390,33 @@ void Arcade::Menu::catchMousePosition(int x, int y)
 {
     _mousePos.first = x;
     _mousePos.second = y;
+}
+
+void Arcade::Menu::manageClick()
+{
+    std::cout << "Mouse clicked at " << _mousePos.first << " " << _mousePos.second << std::endl;
+    if ((std::size_t)_mousePos.first >= _runButtons->getPos().at(0) && (std::size_t)_mousePos.first <= _runButtons->getPos().at(0) + _runButtons->getSize().at(0) && (std::size_t)_mousePos.second >= _runButtons->getPos().at(1) && (std::size_t)_mousePos.second <= _runButtons->getPos().at(1) + _runButtons->getSize().at(1)) {
+    }
+    if ((std::size_t)_mousePos.first >= _runButtons->getNextButton()->getPos().at(0) && (std::size_t)_mousePos.first <= _runButtons->getNextButton()->getPos().at(0) + _runButtons->getNextButton()->getSize().at(0) && (std::size_t)_mousePos.second >= _runButtons->getNextButton()->getPos().at(1) && (std::size_t)_mousePos.second <= _runButtons->getNextButton()->getPos().at(1) + _runButtons->getNextButton()->getSize().at(1)) {
+        _exit = true;
+    }
+    if ((std::size_t)_mousePos.first >= _runButtons->getPrevButton()->getPos().at(0) && (std::size_t)_mousePos.first <= _runButtons->getPrevButton()->getPos().at(0) + _runButtons->getPrevButton()->getSize().at(0) && (std::size_t)_mousePos.second >= _runButtons->getPrevButton()->getPos().at(1) && (std::size_t)_mousePos.second <= _runButtons->getPrevButton()->getPos().at(1) + _runButtons->getPrevButton()->getSize().at(1)) {
+        _changePlayer = true;
+        _playerName = "";
+    }
+    if ((std::size_t)_mousePos.first >= _gameButtons->getPos().at(0) && (std::size_t)_mousePos.first <= _gameButtons->getPos().at(0) + _gameButtons->getSize().at(0) && (std::size_t)_mousePos.second >= _gameButtons->getPos().at(1) && (std::size_t)_mousePos.second <= _gameButtons->getPos().at(1) + _gameButtons->getSize().at(1)) {
+        setGame(_gameButtons->getLabel());
+    }
+    if ((std::size_t)_mousePos.first >= _gameButtons->getNextButton()->getPos().at(0) && (std::size_t)_mousePos.first <= _gameButtons->getNextButton()->getPos().at(0) + _gameButtons->getNextButton()->getSize().at(0) && (std::size_t)_mousePos.second >= _gameButtons->getNextButton()->getPos().at(1) && (std::size_t)_mousePos.second <= _gameButtons->getNextButton()->getPos().at(1) + _gameButtons->getNextButton()->getSize().at(1)) {
+        setGame(_gameButtons->getNextButton()->getLabel());
+    }
+    if ((std::size_t)_mousePos.first >= _graphicButtons->getPos().at(0) && (std::size_t)_mousePos.first <= _graphicButtons->getPos().at(0) + _graphicButtons->getSize().at(0) && (std::size_t)_mousePos.second >= _graphicButtons->getPos().at(1) && (std::size_t)_mousePos.second <= _graphicButtons->getPos().at(1) + _graphicButtons->getSize().at(1)) {
+        setGraphic(_graphicButtons->getLabel());
+    }
+    if ((std::size_t)_mousePos.first >= _graphicButtons->getNextButton()->getPos().at(0) && (std::size_t)_mousePos.first <= _graphicButtons->getNextButton()->getPos().at(0) + _graphicButtons->getNextButton()->getSize().at(0) && (std::size_t)_mousePos.second >= _graphicButtons->getNextButton()->getPos().at(1) && (std::size_t)_mousePos.second <= _graphicButtons->getNextButton()->getPos().at(1) + _graphicButtons->getNextButton()->getSize().at(1)) {
+        setGraphic(_graphicButtons->getNextButton()->getLabel());
+    }
+    if ((std::size_t)_mousePos.first >= _graphicButtons->getPrevButton()->getPos().at(0) && (std::size_t)_mousePos.first <= _graphicButtons->getPrevButton()->getPos().at(0) + _graphicButtons->getPrevButton()->getSize().at(0) && (std::size_t)_mousePos.second >= _graphicButtons->getPrevButton()->getPos().at(1) && (std::size_t)_mousePos.second <= _graphicButtons->getPrevButton()->getPos().at(1) + _graphicButtons->getPrevButton()->getSize().at(1)) {
+        setGraphic(_graphicButtons->getPrevButton()->getLabel());
+    }
 }

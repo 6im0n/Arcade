@@ -57,6 +57,7 @@ namespace Arcade {
             void restart();
             void addToPlayerName(Keys key);
             void catchMousePosition(int x, int y);
+            void manageClick();
         private :
             bool _isRunning;
             bool _exit;
