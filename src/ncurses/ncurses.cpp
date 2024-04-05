@@ -56,6 +56,11 @@ void Arcade::Ncurses::playSound(std::vector<std::shared_ptr<ISound>> sounds)
     (void)sounds;
 }
 
+std::pair<int, int> Arcade::Ncurses::getMousePosition()
+{
+    return std::make_pair(0, 0);
+}
+
 extern "C"
 {
     __attribute__((constructor))

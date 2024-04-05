@@ -25,6 +25,7 @@ namespace Arcade {
 
                 //Event
                 virtual void catchKeyEvent(int key) = 0;
+                virtual void catchMousePosition(int x, int y) = 0;
 
                 //Display
                 virtual std::vector<std::shared_ptr<IEntity>> getEntities() = 0;

@@ -35,6 +35,7 @@ Arcade::Core::~Core()
 
 void Arcade::Core::run()
 {
+    std::pair<int, int> mousePos;
     while (5) {
         _key_event = _graphic->getKeyEvent();
         if (_key_event == Keys::ESCAPE) {
@@ -45,6 +46,7 @@ void Arcade::Core::run()
                 return;
             }
         }
+        mousePos = _graphic->getMousePosition();
         if (_key_event == Keys::ONE || _key_event == Keys::TWO
             || _key_event == Keys::THREE || _key_event == Keys::FOUR) {
                 _menu->catchKeyEvent(_key_event);
@@ -52,11 +54,15 @@ void Arcade::Core::run()
                 _menu->getSelectedGraphic();
         } else if (_key_event != Keys::UNKNOWN) {
             if (_isMenu) {
+                _menu->catchMousePosition(mousePos.first, mousePos.second);
                 _menu->catchKeyEvent(_key_event);
-            } else
+            } else {
+                _game.get()->catchMousePosition(mousePos.first, mousePos.second);
                 _game.get()->catchKeyEvent(_key_event);
+            }
         }
         if (!_isMenu) {
+            _game.get()->catchMousePosition(mousePos.first, mousePos.second);
             _graphic.get()->clearWindow();
             _graphic.get()->displayEntities(_game.get()->getEntities());
             _graphic.get()->displayText(_game.get()->getTexts());
@@ -82,6 +88,7 @@ void Arcade::Core::run()
             if (_menu->isExit()) {
                 return;
             }
+            _menu->catchMousePosition(mousePos.first, mousePos.second);
             _graphic.get()->clearWindow();
             _graphic.get()->displayEntities(_menu->getEntities());
             _graphic.get()->displayText(_menu->getTexts());
@@ -163,7 +170,6 @@ void Arcade::Core::saveTopScores()
     file.clear();
     for (std::size_t i = 0; i < _topPlayers.size(); i++) {
         if (_topPlayers.at(i) != "") {
-            std::cout << _GamesName.at(i) << std::endl;
             std::string game;
             if (_GamesName.at(i).find("arcade_") != std::string::npos)
                 game = _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1, _GamesName.at(i).substr(_GamesName.at(i).find("_") + 1).length() - 3);

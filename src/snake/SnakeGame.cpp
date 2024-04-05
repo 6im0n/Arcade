@@ -117,6 +117,12 @@ void Arcade::SnakeGame::catchKeyEvent(int key)
     }
 }
 
+void Arcade::SnakeGame::catchMousePosition(int x, int y)
+{
+    (void)x;
+    (void)y;
+}
+
 std::vector<std::shared_ptr<Arcade::IEntity>> Arcade::SnakeGame::getEntities()
 {
     return _entities;
