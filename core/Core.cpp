@@ -116,8 +116,10 @@ void Arcade::Core::run()
                     }
                 }
             }
-            if (_menu->isRunning())
+            if (_menu->isRunning()) {
                 loadGame(_menu->getSelectedGame());
+                loadGraphic(_menu->getSelectedGraphic());
+            }
         }
         _key_event = Keys::UNKNOWN;
     }
