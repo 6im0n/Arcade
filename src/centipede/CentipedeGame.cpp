@@ -114,9 +114,12 @@ int Arcade::CentipedeGame::simulate()
         }
     }
     for (std::size_t i = 0; i < _snakes.size(); i++) {
-        if (_snakes[i].moveSnake(_map) == -1) {
+        auto resultMove = _snakes[i].moveSnake(_map, *_player.get());
+        if (resultMove == -1) {
             _snakes.erase(_snakes.begin() + i);
             _score.get()->decrementScore(10);
+        } else if (resultMove == -2) {
+            return -1;
         }
     }
     if (_snakes.empty()) {

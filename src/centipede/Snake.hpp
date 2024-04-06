@@ -15,6 +15,8 @@
 #include "includes/Direction.hpp"
 
 namespace Arcade {
+    class Player;
+
     class   Snake {
         public:
             Snake();
@@ -22,7 +24,7 @@ namespace Arcade {
             Snake(Direction dir, short size, std::vector<std::size_t> pos, bool headPos);
             ~Snake() = default;
 
-            int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map);
+            int moveSnake(std::vector<std::vector<std::shared_ptr<IEntity>>> map, Player player);
             void growSnake();
             void setDirection(Direction dir);
             Direction getDirection() const;

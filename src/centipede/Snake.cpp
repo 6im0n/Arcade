@@ -118,7 +118,7 @@ void moveSnakePart(Arcade::SnakeBody *part, std::size_t x, std::size_t y, std::s
     part->setPath(path);
 }
 
-int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map)
+int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map, Player player)
 {
     if (_timer.getElapsedTime() < _speed)
         return 0;
@@ -173,6 +173,9 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
             _direction = D_LEFT;
         }
         moveSnakePart(newHead.get(), head->getPos()[0] - START_WIDTH, head->getPos()[1] + 1 - START_HEIGHT, 180, SNAKE_HEAD_PATH);
+    }
+    if (newHead.get()->getPos()[0] == player.getPos()[0] && newHead.get()->getPos()[1] == player.getPos()[1]) {
+        return -2;
     }
 
     _snake.pop_back();
