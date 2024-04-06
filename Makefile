@@ -7,7 +7,7 @@
 
 #Program Name
 NAME 		 	= arcade
-NAME_PACMAN  	= lib/arcade_pacman.so
+NAME_CENTIPEDE  	= lib/arcade_centipede.so
 NAME_SNAKE 	 	= lib/arcade_snake.so
 NAME_NCURSES 	= lib/arcade_ncurses.so
 NAME_SFML 	 	= lib/arcade_sfml.so
@@ -24,13 +24,22 @@ SRC_CORE      	= core/main.cpp \
 				  classes/Color.cpp \
 				  classes/Text.cpp \
 
-PACMAN_SRC   	= src/pacman/pacman.cpp \
+CENTIPEDE_SRC = 	src/centipede/Entities/Void.cpp			\
+					src/centipede/Entities/Wall.cpp			\
+					src/centipede/Entities/SnakeBody.cpp	\
+					src/centipede/Entities/Player.cpp		\
+					src/centipede/Entities/Bullet.cpp		\
+					src/centipede/Score.cpp					\
+					src/centipede/CentipedeGame.cpp			\
+					src/centipede/Snake.cpp					\
+					classes/Timer.cpp						\
+					classes/Color.cpp						\
 
 SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 				src/snake/Entities/Wall.cpp			\
 				src/snake/Entities/SnakeBody.cpp	\
 				src/snake/Entities/Food.cpp			\
-				src/snake/Score.cpp						\
+				src/snake/Score.cpp					\
 				src/snake/SnakeGame.cpp				\
 				src/snake/Snake.cpp					\
 				classes/Timer.cpp					\
@@ -65,7 +74,7 @@ SRC_TEST     	= tests/tests_color.cpp		\
 
 #Objects
 OBJ_CORE		= $(SRC_CORE:.cpp=.o)
-OBJ_PACMAN		= $(PACMAN_SRC:.cpp=.o)
+OBJ_CENTIPEDE		= $(CENTIPEDE_SRC:.cpp=.o)
 OBJ_SNAKE		= $(SNAKE_SRC:.cpp=.o)
 OBJ_NCURSES		= $(NCURSES_SRC:.cpp=.o)
 OBJ_SFML		= $(SFML_SRC:.cpp=.o)
@@ -75,23 +84,23 @@ OBJ_VULKAN		= $(VULKAN_SRC:.cpp=.o)
 
 #GCDA & GCNO
 GCDA_CORE		= $(SRC_CORE:.cpp=.gcda)
-GCDA_PACMAN		= $(PACMAN_SRC:.cpp=.gcda)
+GCDA_CENTIPEDE		= $(CENTIPEDE_SRC:.cpp=.gcda)
 GCDA_SNAKE		= $(SNAKE_SRC:.cpp=.gcda)
 GCDA_NCURSES	= $(NCURSES_SRC:.cpp=.gcda)
 GCDA_SFML		= $(SFML_SRC:.cpp=.gcda)
 GCDA_SDL		= $(SDL_SRC:.cpp=.gcda)
 GCDA_VULKAN		= $(VULKAN_SRC:.cpp=.gcda)
 GCDA_TEST		= $(SRC_TEST:.cpp=.gcda)
-GCDA_FILES		= $(GCDA_CORE) $(GCDA_PACMAN) $(GCDA_SNAKE) $(GCDA_NCURSES) $(GCDA_SFML) $(GCDA_SDL) $(GCDA_TEST)
+GCDA_FILES		= $(GCDA_CORE) $(GCDA_CENTIPEDE) $(GCDA_SNAKE) $(GCDA_NCURSES) $(GCDA_SFML) $(GCDA_SDL) $(GCDA_TEST)
 GCNO_CORE		= $(SRC_CORE:.cpp=.gcno)
-GCNO_PACMAN		= $(PACMAN_SRC:.cpp=.gcno)
+GCNO_CENTIPEDE	= $(CENTIPEDE_SRC:.cpp=.gcno)
 GCNO_SNAKE		= $(SNAKE_SRC:.cpp=.gcno)
 GCNO_NCURSES	= $(NCURSES_SRC:.cpp=.gcno)
 GCNO_SFML		= $(SFML_SRC:.cpp=.gcno)
 GCNO_SDL		= $(SDL_SRC:.cpp=.gcno)
 GCNO_VULKAN		= $(VULKAN_SRC:.cpp=.gcno)
 GCNO_TEST		= $(SRC_TEST:.cpp=.gcno)
-GCNO_FILES		= $(GCNO_CORE) $(GCNO_PACMAN) $(GCNO_SNAKE) $(GCNO_NCURSES) $(GCNO_SFML) $(GCNO_SDL) $(GCNO_TEST)
+GCNO_FILES		= $(GCNO_CORE) $(GCNO_CENTIPEDE) $(GCNO_SNAKE) $(GCNO_NCURSES) $(GCNO_SFML) $(GCNO_SDL) $(GCNO_TEST)
 
 #flags
 CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
@@ -115,15 +124,15 @@ all: core games graphicals
 
 #-----------------Games Rules--------------------
 
-games: $(NAME_PACMAN) $(NAME_SNAKE)
+games: $(NAME_CENTIPEDE) $(NAME_SNAKE)
 
 %.o: 	%.cpp
 	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
 	$(call YELLOW,"🆗 $<") || \
 	$(call YELLOW,"❌ $<")
 
-$(NAME_PACMAN) : $(OBJ_PACMAN)
-	@$(LINKER) -shared -fPIC -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
+$(NAME_CENTIPEDE) : $(OBJ_CENTIPEDE)
+	@$(LINKER) -shared -o $(NAME_CENTIPEDE) $(OBJ_CENTIPEDE) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
@@ -172,7 +181,7 @@ $(NAME_SDL) : $(OBJ_SDL)
 
 clean:
 	@rm -f $(OBJ_CORE)
-	@rm -f $(OBJ_PACMAN)
+	@rm -f $(OBJ_CENTIPEDE)
 	@rm -f $(OBJ_SNAKE)
 	@rm -f $(OBJ_NCURSES)
 	@rm -f $(OBJ_SFML)
@@ -181,7 +190,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(NAME_PACMAN)
+	@rm -f $(NAME_CENTIPEDE)
 	@rm -f $(NAME_SNAKE)
 	@rm -f $(NAME_NCURSES)
 	@rm -f $(NAME_SFML)
@@ -197,13 +206,13 @@ tests_fclean:
 
 re: fclean all
 
-obj: $(OBJ_CORE) $(OBJ_PACMAN) $(OBJ_SNAKE) $(OBJ_NCURSES) $(OBJ_SFML) $(OBJ_SDL)
+obj: $(OBJ_CORE) $(OBJ_CENTIPEDE) $(OBJ_SNAKE) $(OBJ_NCURSES) $(OBJ_SFML) $(OBJ_SDL)
 
-test_obj: $(OBJ_TEST)
+tests_obj: $(OBJ_TEST)
 
 tests_run: fclean
 	$(MAKE) obj CXXFLAGS+=--coverage -lcriterion
-	$(MAKE) test_obj CXXFLAGS+=-lcriterion
+	$(MAKE) tests_obj CXXFLAGS+=-lcriterion
 	g++ -o unit_tests $(OBJ_TEST) $(CXXFLAGS) -lcriterion --coverage
 	./unit_tests
 	gcovr --exclude tests/

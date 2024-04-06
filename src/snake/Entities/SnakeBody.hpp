@@ -9,7 +9,7 @@
 
 #include "Interfaces/IEntity.hpp"
 
-#include "src/snake/direction.hpp"
+#include "includes/Direction.hpp"
 
 namespace Arcade {
     class SnakeBody : public IEntity {
@@ -43,6 +43,6 @@ namespace Arcade {
             std::shared_ptr<IColor> _color;
             std::string _path;
             float _rotation;
-            Direction _direction;
+            Arcade::Direction _direction;
     };
 }
