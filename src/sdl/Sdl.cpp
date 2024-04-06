@@ -7,6 +7,7 @@
 
 #include "Sdl.hpp"
 #include "includes/Keys.hpp"
+#include <map>
 
 Arcade::Sdl::Sdl()
 {
@@ -46,77 +47,58 @@ void Arcade::Sdl::clearWindow()
 int Arcade::Sdl::getKeyEvent()
 {
     SDL_Event event;
+    static std::map<SDL_Keycode, int> keyMap = {
+        {SDLK_ESCAPE, Arcade::Keys::ESCAPE},
+        {SDLK_RETURN, Arcade::Keys::ENTER},
+        {SDLK_SPACE, Arcade::Keys::SPACE},
+        {SDLK_UP, Arcade::Keys::UP},
+        {SDLK_DOWN, Arcade::Keys::DOWN},
+        {SDLK_LEFT, Arcade::Keys::LEFT},
+        {SDLK_RIGHT, Arcade::Keys::RIGHT},
+        {SDLK_a, Arcade::Keys::A},
+        {SDLK_b, Arcade::Keys::B},
+        {SDLK_c, Arcade::Keys::C},
+        {SDLK_d, Arcade::Keys::D},
+        {SDLK_e, Arcade::Keys::E},
+        {SDLK_f, Arcade::Keys::F},
+        {SDLK_g, Arcade::Keys::G},
+        {SDLK_h, Arcade::Keys::H},
+        {SDLK_i, Arcade::Keys::I},
+        {SDLK_j, Arcade::Keys::J},
+        {SDLK_k, Arcade::Keys::K},
+        {SDLK_l, Arcade::Keys::L},
+        {SDLK_m, Arcade::Keys::M},
+        {SDLK_n, Arcade::Keys::N},
+        {SDLK_o, Arcade::Keys::O},
+        {SDLK_p, Arcade::Keys::P},
+        {SDLK_q, Arcade::Keys::Q},
+        {SDLK_r, Arcade::Keys::R},
+        {SDLK_s, Arcade::Keys::S},
+        {SDLK_t, Arcade::Keys::T},
+        {SDLK_u, Arcade::Keys::U},
+        {SDLK_v, Arcade::Keys::V},
+        {SDLK_w, Arcade::Keys::W},
+        {SDLK_x, Arcade::Keys::X},
+        {SDLK_y, Arcade::Keys::Y},
+        {SDLK_z, Arcade::Keys::Z},
+        {SDLK_0, Arcade::Keys::ZERO},
+        {SDLK_1, Arcade::Keys::ONE},
+        {SDLK_2, Arcade::Keys::TWO},
+        {SDLK_3, Arcade::Keys::THREE},
+        {SDLK_4, Arcade::Keys::FOUR},
+        {SDLK_5, Arcade::Keys::FIVE},
+        {SDLK_6, Arcade::Keys::SIX},
+        {SDLK_7, Arcade::Keys::SEVEN},
+        {SDLK_8, Arcade::Keys::EIGHT},
+        {SDLK_9, Arcade::Keys::NINE},
+    };
 
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT)
-            return Arcade::Keys::ESCAPE;
         if (event.type == SDL_KEYDOWN) {
-            if (event.key.keysym.sym == SDLK_ESCAPE)
-                return Arcade::Keys::ESCAPE;
-            if (event.key.keysym.sym == SDLK_RETURN)
-                return Arcade::Keys::ENTER;
-            if (event.key.keysym.sym == SDLK_SPACE)
-                return Arcade::Keys::SPACE;
-            if (event.key.keysym.sym == SDLK_UP)
-                return Arcade::Keys::UP;
-            if (event.key.keysym.sym == SDLK_DOWN)
-                return Arcade::Keys::DOWN;
-            if (event.key.keysym.sym == SDLK_RIGHT)
-                return Arcade::Keys::RIGHT;
-            if (event.key.keysym.sym == SDLK_LEFT)
-                return Arcade::Keys::LEFT;
-            if (event.key.keysym.sym == SDLK_a)
-                return Arcade::Keys::A;
-            if (event.key.keysym.sym == SDLK_b)
-                return Arcade::Keys::B;
-            if (event.key.keysym.sym == SDLK_c)
-                return Arcade::Keys::C;
-            if (event.key.keysym.sym == SDLK_d)
-                return Arcade::Keys::D;
-            if (event.key.keysym.sym == SDLK_e)
-                return Arcade::Keys::E;
-            if (event.key.keysym.sym == SDLK_f)
-                return Arcade::Keys::F;
-            if (event.key.keysym.sym == SDLK_g)
-                return Arcade::Keys::G;
-            if (event.key.keysym.sym == SDLK_h)
-                return Arcade::Keys::H;
-            if (event.key.keysym.sym == SDLK_i)
-                return Arcade::Keys::I;
-            if (event.key.keysym.sym == SDLK_j)
-                return Arcade::Keys::J;
-            if (event.key.keysym.sym == SDLK_k)
-                return Arcade::Keys::K;
-            if (event.key.keysym.sym == SDLK_l)
-                return Arcade::Keys::L;
-            if (event.key.keysym.sym == SDLK_m)
-                return Arcade::Keys::M;
-            if (event.key.keysym.sym == SDLK_n)
-                return Arcade::Keys::N;
-            if (event.key.keysym.sym == SDLK_o)
-                return Arcade::Keys::O;
-            if (event.key.keysym.sym == SDLK_p)
-                return Arcade::Keys::P;
-            if (event.key.keysym.sym == SDLK_q)
-                return Arcade::Keys::Q;
-            if (event.key.keysym.sym == SDLK_r)
-                return Arcade::Keys::R;
-            if (event.key.keysym.sym == SDLK_s)
-                return Arcade::Keys::S;
-            if (event.key.keysym.sym == SDLK_t)
-                return Arcade::Keys::T;
-            if (event.key.keysym.sym == SDLK_u)
-                return Arcade::Keys::U;
-            if (event.key.keysym.sym == SDLK_v)
-                return Arcade::Keys::V;
-            if (event.key.keysym.sym == SDLK_w)
-                return Arcade::Keys::W;
-            if (event.key.keysym.sym == SDLK_x)
-                return Arcade::Keys::X;
-            if (event.key.keysym.sym == SDLK_y)
-                return Arcade::Keys::Y;
-            if (event.key.keysym.sym == SDLK_z)
-                return Arcade::Keys::Z;
+            if (keyMap.find(event.key.keysym.sym) != keyMap.end())
+                return keyMap[event.key.keysym.sym];
+        } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+            return Arcade::Keys::MOUSE_LEFT;
         }
     }
     return -1;
