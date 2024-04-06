@@ -18,8 +18,8 @@ Test(Food, DefaultConstructor)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 1);
-    cr_assert_eq(food.getSize()[1], 1);
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
@@ -36,8 +36,8 @@ Test(Food, SetSizeAndGetSize)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 1);
-    cr_assert_eq(food.getSize()[1], 1);
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
@@ -58,8 +58,8 @@ Test(Food, SetPosAndGetPos)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 1);
-    cr_assert_eq(food.getSize()[1], 1);
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
@@ -80,8 +80,8 @@ Test(Food, SetCharAndGetChar)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 1);
-    cr_assert_eq(food.getSize()[1], 1);
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
@@ -101,8 +101,8 @@ Test(Food, SetColorAndGetColor)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 1);
-    cr_assert_eq(food.getSize()[1], 1);
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
@@ -125,8 +125,8 @@ Test(Food, SetPathAndGetPath)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 1);
-    cr_assert_eq(food.getSize()[1], 1);
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
@@ -146,8 +146,8 @@ Test(Food, SetRotationAndGetRotation)
 
     cr_assert_eq(food.getPos().size(), 2);
     cr_assert_eq(food.getSize().size(), 2);
-    cr_assert_eq(food.getSize()[0], 1);
-    cr_assert_eq(food.getSize()[1], 1);
+    cr_assert_eq(food.getSize()[0], 29);
+    cr_assert_eq(food.getSize()[1], 29);
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
