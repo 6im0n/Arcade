@@ -16,10 +16,10 @@
 #define TOP_SCORE_FILE "lib/topScores.txt"
 
 #define IM_HERE std::cout << "I'm here " << __LINE__ << " on " << __FILE__ << std::endl;
-//key O = previous game
-//key P = next game
-//key L = previous graphic
-//key M = next graphic
+//key 1 = previous game
+//key 2 = next game
+//key 3 = previous graphic
+//key 4 = next graphic
 
 namespace Arcade {
     class Core {
@@ -34,6 +34,7 @@ namespace Arcade {
             void saveTopScores();
             void loadTopScores();
             void updateTopScores();
+            std::vector<std::string> findLibs(const std::string &path);
         private :
             std::unique_ptr<Menu> _menu;
             std::unique_ptr<IGame> _game;
