@@ -184,7 +184,8 @@ void Arcade::Sfml::displayText(std::vector<std::shared_ptr<IText>> texts)
         sfmlText.setFont(font);
         sfmlText.setString(text->getText());
         sfmlText.setCharacterSize(text->getSize());
-        sfmlText.setFillColor(sf::Color::Red);
+        sf::Color color(text->getColor()->getR(), text->getColor()->getG(), text->getColor()->getB(), text->getColor()->getA());
+        sfmlText.setFillColor(color);
         sfmlText.setPosition(text->getPos()[0] * 29, text->getPos()[1] * 29);
         this->_window.draw(sfmlText);
     }
