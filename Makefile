@@ -212,7 +212,7 @@ tests_obj: $(OBJ_TEST)
 
 tests_run: fclean
 	$(MAKE) obj CXXFLAGS+=--coverage -lcriterion
-	$(MAKE) test_obj CXXFLAGS+=-lcriterion
+	$(MAKE) tests_obj CXXFLAGS+=-lcriterion
 	g++ -o unit_tests $(OBJ_TEST) $(CXXFLAGS) -lcriterion --coverage
 	./unit_tests
 	gcovr --exclude tests/
