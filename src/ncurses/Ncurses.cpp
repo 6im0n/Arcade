@@ -7,12 +7,31 @@
 
 #include "Ncurses.hpp"
 #include "includes/Keys.hpp"
+#include <cmath>
+#include <map>
 #include <memory>
 #include <iostream>
+
 
 Arcade::Ncurses::Ncurses()
 {
     initscr();
+    noecho();
+    keypad(stdscr, TRUE);
+    nodelay(stdscr, TRUE);
+    curs_set(0);
+    start_color();
+    init_color(COLOR_BLACK, 0, 0, 0);
+    init_pair(1, COLOR_WHITE, COLOR_BLACK);
+    init_pair(2, COLOR_RED, COLOR_BLACK);
+    init_pair(3, COLOR_GREEN, COLOR_BLACK);
+    init_pair(4, COLOR_BLUE, COLOR_BLACK);
+    init_pair(5, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(6, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(7, COLOR_CYAN, COLOR_BLACK);
+    init_pair(8, COLOR_WHITE, COLOR_BLACK);
+    wbkgd(stdscr, COLOR_PAIR(1));
+
 }
 
 bool Arcade::Ncurses::isWindowOpen() const
@@ -27,81 +46,74 @@ void Arcade::Ncurses::closeWindow()
 
 void Arcade::Ncurses::clearWindow()
 {
-    clear();
+    for (int i = 0; i < LINES; i++) {
+        for (int j = 0; j < COLS; j++) {
+            mvprintw(i, j, " ");
+        }
+    }
 }
 
 int Arcade::Ncurses::getKeyEvent()
 {
     int key = getch();
-    if (key == 27)
-        return Arcade::Keys::ESCAPE;
-    if (key == 10)
-        return Arcade::Keys::ENTER;
-    if (key == 32)
-        return Arcade::Keys::SPACE;
-    if (key == 65)
-        return Arcade::Keys::UP;
-    if (key == 66)
-        return Arcade::Keys::DOWN;
-    if (key == 67)
-        return Arcade::Keys::RIGHT;
-    if (key == 68)
-        return Arcade::Keys::LEFT;
-    if (key == 97)
-        return Arcade::Keys::A;
-    if (key == 98)
-        return Arcade::Keys::B;
-    if (key == 99)
-        return Arcade::Keys::C;
-    if (key == 100)
-        return Arcade::Keys::D;
-    if (key == 101)
-        return Arcade::Keys::E;
-    if (key == 102)
-        return Arcade::Keys::F;
-    if (key == 103)
-        return Arcade::Keys::G;
-    if (key == 104)
-        return Arcade::Keys::H;
-    if (key == 105)
-        return Arcade::Keys::I;
-    if (key == 106)
-        return Arcade::Keys::J;
-    if (key == 107)
-        return Arcade::Keys::K;
-    if (key == 108)
-        return Arcade::Keys::L;
-    if (key == 109)
-        return Arcade::Keys::M;
-    if (key == 110)
-        return Arcade::Keys::N;
-    if (key == 111)
-        return Arcade::Keys::O;
-    if (key == 112)
-        return Arcade::Keys::P;
-    if (key == 113)
-        return Arcade::Keys::Q;
-    if (key == 114)
-        return Arcade::Keys::R;
-    if (key == 115)
-        return Arcade::Keys::S;
-    if (key == 116)
-        return Arcade::Keys::T;
-    if (key == 117)
-        return Arcade::Keys::U;
-    if (key == 118)
-        return Arcade::Keys::V;
-    if (key == 119)
-        return Arcade::Keys::W;
-    if (key == 120)
-        return Arcade::Keys::X;
-
-    return -1;
+    static std::map<int, int> keyMap = {
+        {'A', Arcade::Keys::A},
+        {'B', Arcade::Keys::B},
+        {'C', Arcade::Keys::C},
+        {'D', Arcade::Keys::D},
+        {'E', Arcade::Keys::E},
+        {'F', Arcade::Keys::F},
+        {'G', Arcade::Keys::G},
+        {'H', Arcade::Keys::H},
+        {'I', Arcade::Keys::I},
+        {'J', Arcade::Keys::J},
+        {'K', Arcade::Keys::K},
+        {'L', Arcade::Keys::L},
+        {'M', Arcade::Keys::M},
+        {'N', Arcade::Keys::N},
+        {'O', Arcade::Keys::O},
+        {'P', Arcade::Keys::P},
+        {'Q', Arcade::Keys::Q},
+        {'R', Arcade::Keys::R},
+        {'S', Arcade::Keys::S},
+        {'T', Arcade::Keys::T},
+        {'U', Arcade::Keys::U},
+        {'V', Arcade::Keys::V},
+        {'W', Arcade::Keys::W},
+        {'X', Arcade::Keys::X},
+        {'Y', Arcade::Keys::Y},
+        {'Z', Arcade::Keys::Z},
+        {'1', Arcade::Keys::ONE},
+        {'2', Arcade::Keys::TWO},
+        {'3', Arcade::Keys::THREE},
+        {'4', Arcade::Keys::FOUR},
+        {'5', Arcade::Keys::FIVE},
+        {'6', Arcade::Keys::SIX},
+        {'7', Arcade::Keys::SEVEN},
+        {'8', Arcade::Keys::EIGHT},
+        {'9', Arcade::Keys::NINE},
+        {'0', Arcade::Keys::ZERO},
+        {27, Arcade::Keys::ESCAPE},
+        {9, Arcade::Keys::TAB},
+        {KEY_BACKSPACE, Arcade::Keys::BACKSPACE},
+        {KEY_UP, Arcade::Keys::UP},
+        {KEY_DOWN, Arcade::Keys::DOWN},
+        {KEY_LEFT, Arcade::Keys::LEFT},
+        {KEY_RIGHT, Arcade::Keys::RIGHT},
+        {10, Arcade::Keys::ENTER},
+        {32, Arcade::Keys::SPACE},
+        {KEY_MOUSE, Arcade::Keys::MOUSE_LEFT}
+    };
+    return keyMap[key];
 }
 
 std::pair<int, int> Arcade::Ncurses::getMousePosition()
 {
-    return std::make_pair(0, 0);
+    MEVENT event;
+    if (getmouse(&event) == OK) {
+        return {event.x * 29 , event.y * 29};
+    }
+    return {-1, -1};
 }
 
 void Arcade::Ncurses::displayWindow()
@@ -109,22 +121,52 @@ void Arcade::Ncurses::displayWindow()
     refresh();
 }
 
+int Arcade::Ncurses::colorToNcurses(const std::shared_ptr<IColor>& color)
+{
+    int bestColor = 1;
+    double minDistance = 1000000;
+
+    std::map<int, std::tuple<int, int, int, int>> colors = {
+        {1, {255, 255, 255, 255}},
+        {2, {255, 0, 0, 255}},
+        {3, {0, 255, 0, 255}},
+        {4, {0, 0, 255, 255}},
+        {5, {255, 255, 0, 255}},
+        {6, {255, 0, 255, 255}},
+        {7, {0, 255, 255, 255}},
+        {8, {255, 255, 255, 255}}
+
+    };
+
+    for (auto &colorPair : colors) {
+        double distance = sqrt(pow(std::get<0>(colorPair.second) - color->getR(), 2) + pow(std::get<1>(colorPair.second) - color->getG(), 2) + pow(std::get<2>(colorPair.second) - color->getB(), 2));
+        if (distance < minDistance) {
+            minDistance = distance;
+            bestColor = colorPair.first;
+        }
+    }
+    return bestColor;
+}
+
 void Arcade::Ncurses::displayEntities(std::vector<std::shared_ptr<IEntity>> entities)
 {
     for (auto &entity : entities) {
-        auto color = entity->getColor();
-        start_color();
-        init_pair(255,255,255);
-        attron(COLOR_PAIR(1));
-        mvprintw(entity->getPos()[1] * 29 , entity->getPos()[0] *29, "%c", entity->getChar());
-        attroff(COLOR_PAIR(1));
+        int x = colorToNcurses(entity->getColor());
+        wattron(stdscr, COLOR_PAIR(x));
+        mvwaddch(stdscr, entity->getPos()[1], entity->getPos()[0], (char)entity->getChar());
+        wattroff(stdscr, COLOR_PAIR(x));
     }
 }
 
 void Arcade::Ncurses::displayText(std::vector<std::shared_ptr<IText>> texts)
 {
     for (auto &text : texts) {
-        mvprintw(text->getPos()[1] *29 , text->getPos()[0] * 29, "%s", text->getText().c_str());
+        int x = colorToNcurses(text->getColor());
+        if (text->getFontPath().empty())
+            continue;
+        wattron(stdscr, COLOR_PAIR(x));
+        mvprintw(text->getPos()[1], text->getPos()[0], "%s", text->getText().c_str());
+        wattroff(stdscr, COLOR_PAIR(x));
     }
 }
 

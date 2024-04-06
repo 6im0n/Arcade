@@ -15,7 +15,7 @@ namespace Arcade {
     class Ncurses : public IGraphic {
         public:
             Ncurses();
-            ~Ncurses() = default;
+            ~Ncurses() override = default;
             bool isWindowOpen() const override;
             void closeWindow() override;
             void clearWindow() override;
@@ -30,6 +30,7 @@ namespace Arcade {
             void displayText(std::vector<std::shared_ptr<IText>> texts) override;
             void playSound(std::vector<std::shared_ptr<ISound>> sounds) override;
         private:
+            static int colorToNcurses(const std::shared_ptr<IColor>& color);
             std::vector<IEntity> _entities;
             std::vector<IText> _texts;
             std::vector<ISound> _sounds;
