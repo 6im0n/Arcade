@@ -15,7 +15,7 @@ namespace Arcade {
     class Ncurses : public IGraphic {
         public:
             Ncurses();
-            ~Ncurses() override = default;
+            ~Ncurses() override;
             bool isWindowOpen() const override;
             void closeWindow() override;
             void clearWindow() override;

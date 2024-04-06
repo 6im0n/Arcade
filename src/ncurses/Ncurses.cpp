@@ -39,8 +39,14 @@ bool Arcade::Ncurses::isWindowOpen() const
     return true;
 }
 
+Arcade::Ncurses::~Ncurses()
+{
+    closeWindow();
+}
+
 void Arcade::Ncurses::closeWindow()
 {
+    clear();
     endwin();
 }
 
