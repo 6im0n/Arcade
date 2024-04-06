@@ -58,7 +58,7 @@ std::string Arcade::Text::getText()
 
 std::shared_ptr<Arcade::IColor> Arcade::Text::getColor() const
 {
-    return _color;
+    return this->_color;
 }
 
 std::vector<std::size_t> Arcade::Text::getPos() const
