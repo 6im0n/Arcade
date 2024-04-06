@@ -25,8 +25,8 @@ Arcade::DLLoader<T>::DLLoader(const std::string &entryPoint) {
 
 template <typename T>
 Arcade::DLLoader<T>::~DLLoader() {
-    if (_handle != nullptr)
-        dlclose(_handle);
+    // if (handle != nullptr)
+    //     dlclose(handle);
 }
 
 template <typename T>
@@ -35,20 +35,24 @@ T *Arcade::DLLoader<T>::getInstance(const std::string &libname) {
         dlclose(_handle);
     _handle = dlopen(libname.c_str(), RTLD_LAZY);
     if (!_handle) {
+        std::cerr << libname << std::endl;
+        std::cerr << _entryPoint << std::endl;
         std::cerr << "Error1: " << dlerror() << std::endl;
-        return nullptr;
+        exit(84);
     }
     T *(*object)(void) = (T*(*)())dlsym(_handle, _entryPoint.c_str());
     if (!object) {
+        std::cerr << libname << std::endl;
+        std::cerr << _entryPoint << std::endl;
         std::cerr << "Error2: "  << dlerror() << std::endl;
-        return nullptr;
+        exit(84);
     }
     T *tmp = object();
     if (tmp == nullptr) {
         std::cerr << libname << std::endl;
         std::cerr << _entryPoint << std::endl;
         std::cerr << "Error3: " << libname << " " << _entryPoint << " returned nullptr" << std::endl;
-        return nullptr;
+        exit(84);
     }
     return tmp;
 }
@@ -56,13 +60,6 @@ T *Arcade::DLLoader<T>::getInstance(const std::string &libname) {
 template <typename T>
 void Arcade::DLLoader<T>::setEntryPoint(std::string const &entryPoint) {
     this->_entryPoint = entryPoint;
-}
-
-template <typename T>
-void Arcade::DLLoader<T>::close() {
-    if (_handle != nullptr)
-        dlclose(_handle);
-    _handle = nullptr;
 }
 
 template class Arcade::DLLoader<int>;

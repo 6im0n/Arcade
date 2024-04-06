@@ -34,7 +34,6 @@ namespace Arcade {
             void saveTopScores();
             void loadTopScores();
             void updateTopScores();
-            std::vector<std::string> findLibs(const std::string &path);
         private :
             std::unique_ptr<Menu> _menu;
             std::unique_ptr<IGame> _game;

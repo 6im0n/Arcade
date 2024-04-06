@@ -16,31 +16,21 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <filesystem>
 
 Arcade::Core::Core(const std::string &graphicPath)
 {
     _graphicLoader = DLLoader<IGraphic>(ENTRY_POINT_GRAPHIC);
-    _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
-    std::vector<std::string> libs = findLibs("lib/");
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
-    _graphicLib = graphicPath;
-    if (_graphic == nullptr) {
-        std::cerr << "Error: can't load graphic library" << std::endl;
-        exit(84);
-    }
     _indexGame = 1;
-    _menu = std::make_unique<Menu>(graphicPath, libs);
+    _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
+    _menu = std::make_unique<Menu>(graphicPath);
     _isMenu = true;
     loadTopScores();
 }
 
 Arcade::Core::~Core()
 {
-    _graphicLoader.close();
-    _gameLoader.close();
     saveTopScores();
-    exit(0);
 }
 
 void Arcade::Core::run()
@@ -120,9 +110,9 @@ void Arcade::Core::run()
                     }
                 }
             }
+            if (_menu->isRunning())
+                loadGame(_menu->getSelectedGame());
         }
-        loadGame(_menu->getSelectedGame());
-        loadGraphic(_menu->getSelectedGraphic());
         _key_event = Keys::UNKNOWN;
     }
 }
@@ -147,10 +137,6 @@ void Arcade::Core::loadGame(const std::string &gamePath)
     _gameLib = gamePath;
     _game.reset();
     _game = std::unique_ptr<IGame>(_gameLoader.getInstance(gamePath));
-    if (_game == nullptr) {
-        std::cerr << "Error: can't load game library" << std::endl;
-        exit(84);
-    }
     _game->startGame();
     _GamesName.at(_indexGame) = gamePath;
     _isMenu = false;
@@ -163,10 +149,6 @@ void Arcade::Core::loadGraphic(const std::string &graphicPath)
     _graphicLib = graphicPath;
     _graphic.reset();
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
-    if (_graphic == nullptr) {
-        std::cerr << "Error: can't load graphic library" << std::endl;
-        exit(84);
-    }
 }
 
 void Arcade::Core::quitGame()
@@ -256,43 +238,4 @@ void Arcade::Core::updateTopScores()
             _menu->getTexts().at(_indexGame + 1)->setText(game + "  " + _topPlayers.at(_indexGame) + "  " + std::to_string(_topScores.at(_indexGame)));
         }
     }
-}
-
-std::vector<std::string> Arcade::Core::findLibs(const std::string &path)
-{
-    std::vector<std::string> libs = std::vector<std::string>(5);
-    std::size_t iGraphic = 2;
-    std::size_t iGame = 0;
-    IGame *game;
-    IGraphic *graphic;
-
-    if (!std::filesystem::exists(path)) {
-        std::cerr << "Error: can't find libs" << std::endl;
-        exit(84);
-    }
-    for (const auto &entry : std::filesystem::directory_iterator(path)) {
-        if (entry.path().string().find(".so") != std::string::npos) {
-            game = _gameLoader.getInstance(entry.path().string());
-            graphic = _graphicLoader.getInstance(entry.path().string());
-            if (graphic != nullptr) {
-                libs.at(iGraphic) = entry.path().string();
-                iGraphic++;
-                _graphicLoader.close();
-                delete graphic;
-            } else if (game != nullptr) {
-                libs.at(iGame) = entry.path().string();
-                iGame++;
-                _gameLoader.close();
-                delete game;
-            }
-        }
-    }
-    for (std::size_t i = 0; i < 5; i++) {
-        if (libs.at(i) == "") {
-            std::cerr << "Error: can't find all libs" << std::endl;
-            std::cerr << i << std::endl;
-            exit(84);
-        }
-    }
-    return libs;
 }
