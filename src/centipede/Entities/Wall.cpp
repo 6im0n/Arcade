@@ -17,6 +17,7 @@ Arcade::Wall::Wall(std::size_t x, std::size_t y)
     _color = std::make_unique<Color>(39, 122, 16, 255);
     _path = WALL_PATH;
     _rotation = 0;
+    _life = 5;
 }
 
 void Arcade::Wall::setPos(std::size_t x, std::size_t y)
@@ -42,6 +43,11 @@ void Arcade::Wall::setColor(std::unique_ptr<IColor> color)
 void Arcade::Wall::setPath(const std::string &path)
 {
     _path = path;
+}
+
+void Arcade::Wall::hit()
+{
+    _life--;
 }
 
 void Arcade::Wall::setRotation(float rotation)
@@ -77,4 +83,9 @@ std::string Arcade::Wall::getPath() const
 float Arcade::Wall::getRotation() const
 {
     return _rotation;
+}
+
+short Arcade::Wall::getLife() const
+{
+    return _life;
 }

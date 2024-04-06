@@ -35,6 +35,7 @@ namespace Arcade {
             int getScore() const;
 
             void incrementScore();
+            void decrementScore(int value);
             void resetScore();
 
         private:

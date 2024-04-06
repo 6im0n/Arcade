@@ -22,6 +22,7 @@ namespace Arcade {
             void setColor(std::unique_ptr<IColor> color);
             void setPath(const std::string &path);
             void setRotation(float rotation);
+            void hit();
 
             //getters
             std::vector<std::size_t> getPos() const;
@@ -30,6 +31,7 @@ namespace Arcade {
             std::shared_ptr<IColor> getColor() const;
             std::string getPath() const;
             float getRotation() const;
+            short getLife() const;
 
         private:
             std::vector<std::size_t> _pos;
@@ -38,5 +40,6 @@ namespace Arcade {
             std::shared_ptr<IColor> _color;
             std::string _path;
             float _rotation;
+            short _life;
     };
 }

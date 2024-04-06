@@ -57,6 +57,9 @@ namespace Arcade {
             std::vector<std::shared_ptr<IText>> getTexts();
             std::vector<std::shared_ptr<ISound>> getSounds();
 
+            //Utils
+            bool isIdPresent(int id);
+
         private:
             std::vector<std::shared_ptr<IEntity>> _entities;
             std::vector<std::shared_ptr<IText>> _texts;
@@ -67,6 +70,7 @@ namespace Arcade {
             float _lastTime;
 
             std::shared_ptr<Score> _score;
+            short _nbKills;
             std::vector<Snake> _snakes;
             Timer _timer;
     };

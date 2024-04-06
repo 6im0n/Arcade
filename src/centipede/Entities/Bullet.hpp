@@ -11,7 +11,7 @@
 #include "classes/Timer.hpp"
 #include "src/centipede/Snake.hpp"
 
-#define BULLET_SPEED 0.05
+#define BULLET_SPEED 0.008
 
 namespace Arcade {
     class Bullet : public IEntity {
@@ -35,7 +35,7 @@ namespace Arcade {
             std::string getPath() const;
             float getRotation() const;
 
-            std::vector<std::size_t> moveBullet(float time, std::vector<Snake> &snakes);
+            std::vector<std::size_t> moveBullet(float time, std::vector<Snake> &snakes, std::vector<std::vector<std::shared_ptr<IEntity>>> &map);
 
         private:
             float _lastTime;

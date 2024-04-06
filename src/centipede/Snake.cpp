@@ -9,6 +9,52 @@
 #include "Entities/Wall.hpp"
 #include "CentipedeGame.hpp"
 
+#include <stdlib.h>
+
+#include <iostream>
+
+Arcade::Snake::Snake(Direction dir, short size, std::vector<std::size_t> pos, bool headPos, int id)
+{
+    if (!headPos) {
+        if (dir == D_RIGHT) {
+            pos[POSX] += (std::size_t)size -1;
+        } else if (dir == D_DOWN) {
+            pos[POSY] += (std::size_t)size - 1;
+        } else if (dir == D_LEFT) {
+            pos[POSX] -= (std::size_t)size - 1;
+        } else if (dir == D_UP) {
+            pos[POSY] -= (std::size_t)size - 1;
+        }
+    }
+    _snake.push_back(std::make_shared<SnakeBody>(pos[POSX], pos[POSY], SNAKE_HEAD_PATH, dir));
+    for (short i = 1; i < size - 1; i++) {
+        if (dir == D_RIGHT) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[POSX] - i, pos[POSY], SNAKE_BODY_PATH, dir));
+        } else if (dir == D_DOWN) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[POSX], pos[POSY] - i, SNAKE_BODY_PATH, dir));
+        } else if (dir == D_LEFT) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[POSX] + i, pos[POSY], SNAKE_BODY_PATH, dir));
+        } else if (dir == D_UP) {
+            _snake.push_back(std::make_shared<SnakeBody>(pos[POSX], pos[POSY] + i, SNAKE_BODY_PATH, dir));
+        }
+    }
+    if (dir == D_RIGHT) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[POSX] - size + 1, pos[POSY], SNAKE_TAIL_PATH, dir));
+    } else if (dir == D_DOWN) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[POSX], pos[POSY] - size + 1, SNAKE_TAIL_PATH, dir));
+    } else if (dir == D_LEFT) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[POSX] + size - 1, pos[POSY], SNAKE_TAIL_PATH, dir));
+    } else if (dir == D_UP) {
+        _snake.push_back(std::make_shared<SnakeBody>(pos[POSX], pos[POSY] + size - 1, SNAKE_TAIL_PATH, dir));
+    }
+    _direction = dir;
+    _lastDirection = dir;
+    _timer = Timer();
+    _timer.start();
+    _speed = 0.15;
+    _id = id;
+}
+
 Arcade::Snake::Snake(Direction dir, short size, std::vector<std::size_t> pos, bool headPos)
 {
     if (!headPos) {
@@ -47,7 +93,8 @@ Arcade::Snake::Snake(Direction dir, short size, std::vector<std::size_t> pos, bo
     _lastDirection = dir;
     _timer = Timer();
     _timer.start();
-    _speed = 0.4;
+    _speed = 0.15;
+    _id = rand();
 }
 
 bool checkCollision(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> map,
@@ -109,6 +156,9 @@ int Arcade::Snake::moveSnake(std::vector<std::vector<std::shared_ptr<Arcade::IEn
         }
     }
     if (_direction == D_DOWN) {
+        if (head->getPos()[POSY] == GET_POSY_AREA(AREA_GAME_HEIGHT - 1)) {
+            return -1;
+        }
         if (_lastDirection == D_LEFT) {
             head->setPath(SNAKE_CORNER_PATH);
             head->setDirection(D_DOWN);
@@ -153,12 +203,27 @@ void Arcade::Snake::setDirection(Direction dir)
     _direction = dir;
 }
 
+Arcade::Direction Arcade::Snake::getDirection() const
+{
+    return _direction;
+}
+
 std::vector<std::shared_ptr<Arcade::SnakeBody>> Arcade::Snake::getSnake() const
 {
     return _snake;
 }
 
+int Arcade::Snake::getId() const
+{
+    return _id;
+}
+
 bool Arcade::Snake::operator==(const Snake &other) const
 {
     return _snake == other._snake;
+}
+
+bool Arcade::Snake::operator!=(const Snake &other) const
+{
+    return _snake != other._snake;
 }

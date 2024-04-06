@@ -90,6 +90,11 @@ void Arcade::Score::incrementScore()
     _score ++;
 }
 
+void Arcade::Score::decrementScore(int value)
+{
+    _score -= value;
+}
+
 void Arcade::Score::resetScore()
 {
     _score = 0;

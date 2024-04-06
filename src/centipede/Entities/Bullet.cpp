@@ -6,10 +6,13 @@
 */
 
 #include "Bullet.hpp"
+#include "Wall.hpp"
 #include "classes/Color.hpp"
 #include "src/centipede/CentipedeGame.hpp"
 
 #include <algorithm>
+
+#include <iostream>
 
 Arcade::Bullet::Bullet(std::size_t x, std::size_t y, float time)
 {
@@ -82,13 +85,18 @@ float Arcade::Bullet::getRotation() const
     return _rotation;
 }
 
-std::vector<std::size_t> Arcade::Bullet::moveBullet(float time, std::vector<Snake> &snakes)
+std::vector<std::size_t> Arcade::Bullet::moveBullet(float time, std::vector<Snake> &snakes, std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> &map)
 {
     std::vector<std::size_t> pos = _pos;
 
     if (time - _lastTime > BULLET_SPEED) {
         _pos[1] -= 1;
         _lastTime = time;
+    }
+    Arcade::IEntity *mapElement = map[_pos[POSY] - START_HEIGHT][_pos[POSX] - START_WIDTH].get();
+    if (typeid(*mapElement) == typeid(Arcade::Wall)) {
+        pos.insert(pos.begin(), 3);
+        return pos;
     }
     for (std::size_t i = 0; i < snakes.size(); i++ ) {
         for (auto snakePart : snakes[i].getSnake()) {

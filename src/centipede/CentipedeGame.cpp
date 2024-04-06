@@ -52,15 +52,16 @@ void generateMap(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> &map
 
 Arcade::CentipedeGame::CentipedeGame()
 {
-    generateMap(_map);
     _score = std::make_shared<Score>();
     _player = std::make_shared<Player>();
     _timer = Timer();
+    _nbKills = 0;
     srand(time(NULL));
 }
 
 int Arcade::CentipedeGame::startGame()
 {
+    generateMap(_map);
     _snakes.push_back(Snake(D_RIGHT, 9, {GET_POSXY_AREA(1, 1)}, false));
     _score.get()->resetScore();
     _timer.reset();
@@ -70,6 +71,11 @@ int Arcade::CentipedeGame::startGame()
 int Arcade::CentipedeGame::stopGame()
 {
     _entities.clear();
+    _snakes.clear();
+    _map.clear();
+    _score.get()->resetScore();
+    _bullet = nullptr;
+    _nbKills = 0;
     return 0;
 }
 
@@ -88,15 +94,35 @@ int Arcade::CentipedeGame::simulate()
     }
     if (_bullet != nullptr) {
         _entities.push_back(_bullet);
-        auto resultMove = _bullet->moveBullet(_timer.getElapsedTime(), _snakes);
+        auto resultMove = _bullet->moveBullet(_timer.getElapsedTime(), _snakes, _map);
         if (resultMove[0] == 2) {
             killSnake(_snakes[resultMove[3]], _bullet->getPos());
+            if (_nbKills == 20) {
+                return -1;
+            }
         }
-        if (resultMove[0] == 1 || resultMove[0] == 2) {
+        if (resultMove[0] == 3) {
+            Arcade::IEntity *mapElement = _map[_bullet->getPos()[POSY] - START_HEIGHT][_bullet->getPos()[POSX] - START_WIDTH].get();
+            Wall *wall = dynamic_cast<Wall *>(mapElement);
+            wall->hit();
+            if (wall->getLife() == 0) {
+                _map[_bullet->getPos()[POSY] - START_HEIGHT][_bullet->getPos()[POSX] - START_WIDTH] = std::make_shared<Arcade::Void>(_bullet->getPos()[POSX], _bullet->getPos()[POSY]);
+            }
+        }
+        if (resultMove[0] == 1 || resultMove[0] == 2 || resultMove[0] == 3) {
             _bullet = nullptr;
         }
     }
-    for (auto &snake : _snakes) {snake.moveSnake(_map);
+    for (std::size_t i = 0; i < _snakes.size(); i++) {
+        if (_snakes[i].moveSnake(_map) == -1) {
+            _snakes.erase(_snakes.begin() + i);
+            _score.get()->decrementScore(10);
+        }
+    }
+    if (_snakes.empty()) {
+        _snakes.push_back(Snake(D_RIGHT, 9, {GET_POSXY_AREA(1, 1)}, false));
+    }
+    for (auto &snake : _snakes) {
         for (auto snakeBody : snake.getSnake()) {
             _entities.push_back(snakeBody);
         }
@@ -107,6 +133,7 @@ int Arcade::CentipedeGame::simulate()
 
 void Arcade::CentipedeGame::killSnake(Snake snakeKilled, std::vector<std::size_t> pos)
 {
+    int id = snakeKilled.getId();
     short size = 0;
     std::vector<std::size_t> posSnake = {0, 0};
     for (std::size_t i = 0; i < _snakes.size(); i++) {
@@ -118,10 +145,17 @@ void Arcade::CentipedeGame::killSnake(Snake snakeKilled, std::vector<std::size_t
             break;
         }
     }
+    Direction dir = snakeKilled.getDirection();
+    Direction dirOpposite = D_RIGHT;
+    if (dir == D_RIGHT)
+        dirOpposite = D_LEFT;
     _map[pos[POSY] - START_HEIGHT][pos[POSX] - START_WIDTH] = std::make_shared<Arcade::Wall>(pos[POSX], pos[POSY]);
     if (size > 2) {
-        _snakes.push_back(Snake(D_RIGHT, (std::size_t)floor(size / 2), {pos[POSX], pos[POSY]}, true));
-        _snakes.push_back(Snake(D_LEFT, (std::size_t)floor(size / 2), {posSnake[POSX], posSnake[POSY]}, false));
+        _snakes.push_back(Snake(dirOpposite, (std::size_t)floor(size / 2), {pos[POSX], pos[POSY]}, true, snakeKilled.getId()));
+        _snakes.push_back(Snake(dir, (std::size_t)floor(size / 2), {posSnake[POSX], posSnake[POSY]}, true, snakeKilled.getId()));
+    }
+    if (!isIdPresent(id)) {
+        _nbKills++;
     }
 }
 
@@ -155,6 +189,15 @@ std::vector<std::shared_ptr<Arcade::IText>> Arcade::CentipedeGame::getTexts()
 std::vector<std::shared_ptr<Arcade::ISound>> Arcade::CentipedeGame::getSounds()
 {
     return _sounds;
+}
+
+bool Arcade::CentipedeGame::isIdPresent(int id)
+{
+    auto it = std::find_if(_snakes.begin(), _snakes.end(),
+        [id](const Snake& snake) {
+            return snake.getId() == id;
+        });
+    return it != _snakes.end();
 }
 
 extern "C"
