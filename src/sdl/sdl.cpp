@@ -68,6 +68,7 @@ extern "C"
     void destructor()
     {
     }
+
     Arcade::Sdl *loadGraphicInstance()
     {
         return new Arcade::Sdl();

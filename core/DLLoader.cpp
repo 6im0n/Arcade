@@ -14,51 +14,55 @@
 
 template <typename T>
 Arcade::DLLoader<T>::DLLoader() {
-    handle = nullptr;
+    _handle = nullptr;
 };
 
 template <typename T>
-Arcade::DLLoader<T>::DLLoader(const std::string &entryPoint) : entryPoint(entryPoint) {
-    handle = nullptr;
+Arcade::DLLoader<T>::DLLoader(const std::string &entryPoint) {
+    _handle = nullptr;
+    _entryPoint = entryPoint;
 }
 
 template <typename T>
 Arcade::DLLoader<T>::~DLLoader() {
-    // if (handle != nullptr)
-    //     dlclose(handle);
+    if (_handle != nullptr)
+        dlclose(_handle);
 }
 
 template <typename T>
 T *Arcade::DLLoader<T>::getInstance(const std::string &libname) {
-    if (handle != nullptr)
-        dlclose(handle);
-    handle = dlopen(libname.c_str(), RTLD_LAZY);
-    if (!handle) {
-        std::cerr << libname << std::endl;
-        std::cerr << entryPoint << std::endl;
+    if (_handle != nullptr)
+        dlclose(_handle);
+    _handle = dlopen(libname.c_str(), RTLD_LAZY);
+    if (!_handle) {
         std::cerr << "Error1: " << dlerror() << std::endl;
-        exit(84);
+        return nullptr;
     }
-    T *(*object)(void) = (T*(*)())dlsym(handle, entryPoint.c_str());
+    T *(*object)(void) = (T*(*)())dlsym(_handle, _entryPoint.c_str());
     if (!object) {
-        std::cerr << libname << std::endl;
-        std::cerr << entryPoint << std::endl;
         std::cerr << "Error2: "  << dlerror() << std::endl;
-        exit(84);
+        return nullptr;
     }
     T *tmp = object();
     if (tmp == nullptr) {
         std::cerr << libname << std::endl;
-        std::cerr << entryPoint << std::endl;
-        std::cerr << "Error3: " << libname << " " << entryPoint << " returned nullptr" << std::endl;
-        exit(84);
+        std::cerr << _entryPoint << std::endl;
+        std::cerr << "Error3: " << libname << " " << _entryPoint << " returned nullptr" << std::endl;
+        return nullptr;
     }
     return tmp;
 }
 
 template <typename T>
 void Arcade::DLLoader<T>::setEntryPoint(std::string const &entryPoint) {
-    this->entryPoint = entryPoint;
+    this->_entryPoint = entryPoint;
+}
+
+template <typename T>
+void Arcade::DLLoader<T>::close() {
+    if (_handle != nullptr)
+        dlclose(_handle);
+    _handle = nullptr;
 }
 
 template class Arcade::DLLoader<int>;
