@@ -177,6 +177,12 @@ void Arcade::CentipedeGame::catchKeyEvent(int key)
     }
 }
 
+void Arcade::CentipedeGame::catchMousePosition(int x, int y)
+{
+    (void)x;
+    (void)y;
+}
+
 std::vector<std::shared_ptr<Arcade::IEntity>> Arcade::CentipedeGame::getEntities()
 {
     return _entities;

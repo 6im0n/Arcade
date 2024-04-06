@@ -17,7 +17,7 @@
 Arcade::Bullet::Bullet(std::size_t x, std::size_t y, float time)
 {
     _pos = {x, y};
-    _size = {1, 1};
+    _size = {29, 29};
     _path = FOOD_PATH;
     _char = '|';
     _rotation = 0;

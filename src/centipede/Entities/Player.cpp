@@ -12,7 +12,7 @@
 Arcade::Player::Player()
 {
     _pos = {GET_POSXY_AREA(7, AREA_GAME_HEIGHT - 3)};
-    _size = {1, 1};
+    _size = {29, 29};
     _path = SNAKE_HEAD_PATH;
     _char = '=';
     _rotation = 0;
