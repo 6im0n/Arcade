@@ -6,8 +6,6 @@
 */
 
 #pragma once
-
-#include "Interfaces/IGraphic.hpp"
 #include "includes/Keys.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

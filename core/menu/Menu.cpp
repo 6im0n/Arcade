@@ -11,10 +11,43 @@
 #include <memory>
 #include <vector>
 
-Arcade::Menu::Menu(std::string graphicLib)
+std::vector<std::string> libs {
+    "",
+    "",
+    "",
+};
+
+std::vector<std::string> games {
+    "",
+    "",
+};
+
+std::vector<char> libsLabel {
+    '\0',
+    '\0',
+    '\0',
+};
+
+std::vector<char> gamesLabel {
+    '\0',
+    '\0',
+};
+
+Arcade::Menu::Menu(std::string graphicLib, std::vector<std::string> libsVector)
 {
     setGraphic(graphicLib);
     setGame("");
+    games.at(0) = libsVector.at(0);
+    games.at(1) = libsVector.at(1);
+    libs.at(0) = libsVector.at(2);
+    libs.at(1) = libsVector.at(3);
+    libs.at(2) = libsVector.at(4);
+    for (std::size_t i = 0; i < games.size(); i++) {
+        gamesLabel.at(i) = games.at(i).at(11) - 32;
+    }
+    for (std::size_t i = 0; i < libs.size(); i++) {
+        libsLabel.at(i) = libs.at(i).at(11) - 32;
+    }
     _isRunning = true;
     _runButtons = new Button("Run", std::vector<std::size_t>(2, 2), std::vector<std::size_t>(130, 87), 'R', "", BUTTON_PATH);
     _runButtons->setNextButton(new Button(std::string("Exit"), std::vector<std::size_t>(10, 2), std::vector<std::size_t>(130, 87), 'E', "", BUTTON_PATH));
