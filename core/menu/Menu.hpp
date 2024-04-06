@@ -15,32 +15,10 @@
 #include "includes/Keys.hpp"
 #include "classes/Text.hpp"
 
-const std::vector<std::string> libs {
-    "lib/arcade_sfml.so",
-    "lib/arcade_ncurses.so",
-    "lib/arcade_sdl.so",
-};
-
-const std::vector<std::string> games {
-    "lib/arcade_centipede.so",
-    "lib/arcade_snake.so",
-};
-
-const std::vector<char> libsLabel {
-    'S',
-    'N',
-    'D',
-};
-
-const std::vector<char> gamesLabel {
-    'P',
-    'S',
-};
-
 namespace Arcade {
     class Menu : public AGame {
         public :
-            Menu(std::string graphicLib);
+            Menu(std::string graphicLib, std::vector<std::string> libsVector);
             ~Menu() override;
             void catchKeyEvent(int key) override;
             int simulate() override;
@@ -56,6 +34,8 @@ namespace Arcade {
             bool isExit() const;
             void restart();
             void addToPlayerName(Keys key);
+            void catchMousePosition(int x, int y);
+            void manageClick();
         private :
             bool _isRunning;
             bool _exit;
@@ -70,5 +50,6 @@ namespace Arcade {
             Button *_graphicButtons;
             Button *_selectButton;
             std::string _playerName;
+            std::pair<int, int> _mousePos;
     };
 }
