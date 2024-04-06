@@ -16,7 +16,7 @@ Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path, Dir
     _size = {29, 29};
     _path = path;
     _char = '=';
-    _color = std::make_unique<Color>(39, 122, 16, 255);
+    _color = std::make_unique<Color>(200, 200, 16, 255);
     _direction = dir;
     updateRotation();
 }

@@ -36,7 +36,7 @@ SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 				classes/Timer.cpp					\
 				classes/Color.cpp					\
 
-NCURSES_SRC  	= src/ncurses/ncurses.cpp \
+NCURSES_SRC  	= src/ncurses/Ncurses.cpp \
 
 SFML_SRC     	= src/sfml/Sfml.cpp \
 

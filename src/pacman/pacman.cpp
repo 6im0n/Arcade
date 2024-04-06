@@ -36,11 +36,6 @@ void Arcade::Pacman::catchKeyEvent(int key)
     (void)key;
 }
 
-void Arcade::Pacman::catchMousePosition(int x, int y)
-{
-    (void)x;
-    (void)y;
-}
 
 std::vector<std::shared_ptr<Arcade::IEntity>> Arcade::Pacman::getEntities()
 {
@@ -55,6 +50,12 @@ std::vector<std::shared_ptr<Arcade::IText>> Arcade::Pacman::getTexts()
 std::vector<std::shared_ptr<Arcade::ISound>> Arcade::Pacman::getSounds()
 {
     return std::vector<std::shared_ptr<Arcade::ISound>>();
+}
+
+void Arcade::Pacman::catchMousePosition(int x, int y)
+{
+    (void)x;
+    (void)y;
 }
 
 extern "C"
