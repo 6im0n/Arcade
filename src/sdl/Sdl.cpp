@@ -18,6 +18,14 @@ Arcade::Sdl::Sdl()
     TTF_Init();
 }
 
+Arcade::Sdl::~Sdl()
+{
+    TTF_Quit();
+    SDL_DestroyRenderer(this->_renderer);
+    SDL_DestroyWindow(this->_window);
+    SDL_Quit();
+}
+
 bool Arcade::Sdl::isWindowOpen() const
 {
     return this->_window != nullptr;

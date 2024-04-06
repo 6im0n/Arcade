@@ -20,7 +20,7 @@ namespace Arcade {
     class Sdl : public IGraphic {
     public:
         Sdl();
-        ~Sdl() = default;
+        ~Sdl();
         bool isWindowOpen() const override;
         void closeWindow() override;
         void clearWindow() override;
