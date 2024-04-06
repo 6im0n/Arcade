@@ -36,11 +36,6 @@ void Arcade::Pacman::catchKeyEvent(int key)
     (void)key;
 }
 
-void Arcade::Pacman::catchMousePosition(int x, int y)
-{
-    (void)x;
-    (void)y;
-}
 
 std::vector<std::shared_ptr<Arcade::IEntity>> Arcade::Pacman::getEntities()
 {
