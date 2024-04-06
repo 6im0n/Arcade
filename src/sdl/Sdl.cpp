@@ -5,7 +5,7 @@
 ** sdl.cpp
 */
 
-#include "sdl.hpp"
+#include "Sdl.hpp"
 
 Arcade::Sdl::Sdl()
 {
