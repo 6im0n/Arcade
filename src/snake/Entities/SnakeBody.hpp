@@ -15,25 +15,25 @@ namespace Arcade {
     class SnakeBody : public IEntity {
         public:
             SnakeBody(std::size_t x, std::size_t y, std::string path, Direction dir);
-            ~SnakeBody() = default;
+            ~SnakeBody() override = default;
 
             //setters
-            void setPos(std::size_t x, std::size_t y);
-            void setSize(std::size_t x, std::size_t y);
-            void setChar(char c);
-            void setColor(std::unique_ptr<IColor> color);
-            void setPath(const std::string &path);
-            void setRotation(float rotation);
+            void setPos(std::size_t x, std::size_t y) override;
+            void setSize(std::size_t x, std::size_t y) override;
+            void setChar(char c) override;
+            void setColor(std::unique_ptr<IColor> color) override;
+            void setPath(const std::string &path) override;
+            void setRotation(float rotation) override;
             void setDirection(Direction dir);
             void updateRotation();
 
-            //getters
-            std::vector<std::size_t> getPos() const;
-            std::vector<std::size_t> getSize() const;
-            int getChar() const;
-            std::shared_ptr<IColor> getColor() const;
-            std::string getPath() const;
-            float getRotation() const;
+            //getter
+            std::vector<std::size_t> getPos() const override;
+            std::vector<std::size_t> getSize() const override;
+            int getChar() const override;
+            std::shared_ptr<IColor> getColor() const override;
+            std::string getPath() const override;
+            float getRotation() const override;
             Direction getDirection() const;
 
         private:
