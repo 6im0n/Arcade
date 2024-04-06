@@ -37,112 +37,63 @@ void Arcade::Sfml::clearWindow()
 
 int Arcade::Sfml::getKeyEvent() //while loop
 {
+    static std::map<sf::Keyboard::Key, int> keyMap = {
+        {sf::Keyboard::Escape, Arcade::Keys::ESCAPE},
+        {sf::Keyboard::Return, Arcade::Keys::ENTER},
+        {sf::Keyboard::Space, Arcade::Keys::SPACE},
+        {sf::Keyboard::Up, Arcade::Keys::UP},
+        {sf::Keyboard::Down, Arcade::Keys::DOWN},
+        {sf::Keyboard::Left, Arcade::Keys::LEFT},
+        {sf::Keyboard::Right, Arcade::Keys::RIGHT},
+        {sf::Keyboard::A, Arcade::Keys::A},
+        {sf::Keyboard::B, Arcade::Keys::B},
+        {sf::Keyboard::C, Arcade::Keys::C},
+        {sf::Keyboard::D, Arcade::Keys::D},
+        {sf::Keyboard::E, Arcade::Keys::E},
+        {sf::Keyboard::F, Arcade::Keys::F},
+        {sf::Keyboard::G, Arcade::Keys::G},
+        {sf::Keyboard::H, Arcade::Keys::H},
+        {sf::Keyboard::I, Arcade::Keys::I},
+        {sf::Keyboard::J, Arcade::Keys::J},
+        {sf::Keyboard::K, Arcade::Keys::K},
+        {sf::Keyboard::L, Arcade::Keys::L},
+        {sf::Keyboard::M, Arcade::Keys::M},
+        {sf::Keyboard::N, Arcade::Keys::N},
+        {sf::Keyboard::O, Arcade::Keys::O},
+        {sf::Keyboard::P, Arcade::Keys::P},
+        {sf::Keyboard::Q, Arcade::Keys::Q},
+        {sf::Keyboard::R, Arcade::Keys::R},
+        {sf::Keyboard::S, Arcade::Keys::S},
+        {sf::Keyboard::T, Arcade::Keys::T},
+        {sf::Keyboard::U, Arcade::Keys::U},
+        {sf::Keyboard::V, Arcade::Keys::V},
+        {sf::Keyboard::W, Arcade::Keys::W},
+        {sf::Keyboard::X, Arcade::Keys::X},
+        {sf::Keyboard::Y, Arcade::Keys::Y},
+        {sf::Keyboard::Z, Arcade::Keys::Z},
+        {sf::Keyboard::Num0, Arcade::Keys::ZERO},
+        {sf::Keyboard::Num1, Arcade::Keys::ONE},
+        {sf::Keyboard::Num2, Arcade::Keys::TWO},
+        {sf::Keyboard::Num3, Arcade::Keys::THREE},
+        {sf::Keyboard::Num4, Arcade::Keys::FOUR},
+        {sf::Keyboard::Num5, Arcade::Keys::FIVE},
+        {sf::Keyboard::Num6, Arcade::Keys::SIX},
+        {sf::Keyboard::Num7, Arcade::Keys::SEVEN},
+        {sf::Keyboard::Num8, Arcade::Keys::EIGHT},
+        {sf::Keyboard::Num9, Arcade::Keys::NINE},
+    };
     while (this->_window.pollEvent(this->_event)) {
         if (this->_event.type == sf::Event::Closed)
             this->_window.close();
         if (this->_event.type == sf::Event::KeyPressed) {
-            if (this->_event.key.code == sf::Keyboard::A)
-                return Arcade::Keys::A;
-            if (this->_event.key.code == sf::Keyboard::B)
-                return Arcade::Keys::B;
-            if (this->_event.key.code == sf::Keyboard::C)
-                return Arcade::Keys::C;
-            if (this->_event.key.code == sf::Keyboard::D)
-                return Arcade::Keys::D;
-            if (this->_event.key.code == sf::Keyboard::E)
-                return Arcade::Keys::E;
-            if (this->_event.key.code == sf::Keyboard::F)
-                return Arcade::Keys::F;
-            if (this->_event.key.code == sf::Keyboard::G)
-                return Arcade::Keys::G;
-            if (this->_event.key.code == sf::Keyboard::H)
-                return Arcade::Keys::H;
-            if (this->_event.key.code == sf::Keyboard::I)
-                return Arcade::Keys::I;
-            if (this->_event.key.code == sf::Keyboard::J)
-                return Arcade::Keys::J;
-            if (this->_event.key.code == sf::Keyboard::K)
-                return Arcade::Keys::K;
-            if (this->_event.key.code == sf::Keyboard::L)
-                return Arcade::Keys::L;
-            if (this->_event.key.code == sf::Keyboard::M)
-                return Arcade::Keys::M;
-            if (this->_event.key.code == sf::Keyboard::N)
-                return Arcade::Keys::N;
-            if (this->_event.key.code == sf::Keyboard::O)
-                return Arcade::Keys::O;
-            if (this->_event.key.code == sf::Keyboard::P)
-                return Arcade::Keys::P;
-            if (this->_event.key.code == sf::Keyboard::Q)
-                return Arcade::Keys::Q;
-            if (this->_event.key.code == sf::Keyboard::R)
-                return Arcade::Keys::R;
-            if (this->_event.key.code == sf::Keyboard::S)
-                return Arcade::Keys::S;
-            if (this->_event.key.code == sf::Keyboard::T)
-                return Arcade::Keys::T;
-            if (this->_event.key.code == sf::Keyboard::U)
-                return Arcade::Keys::U;
-            if (this->_event.key.code == sf::Keyboard::V)
-                return Arcade::Keys::V;
-            if (this->_event.key.code == sf::Keyboard::W)
-                return Arcade::Keys::W;
-            if (this->_event.key.code == sf::Keyboard::X)
-                return Arcade::Keys::X;
-            if (this->_event.key.code == sf::Keyboard::Y)
-                return Arcade::Keys::Y;
-            if (this->_event.key.code == sf::Keyboard::Z)
-                return Arcade::Keys::Z;
-            if (this->_event.key.code == sf::Keyboard::Escape)
-                return Arcade::Keys::ESCAPE;
-            if (this->_event.key.code == sf::Keyboard::Tab)
-                return Arcade::Keys::TAB;
-            if (this->_event.key.code == sf::Keyboard::LShift || this->_event.key.code == sf::Keyboard::RShift)
-                return Arcade::Keys::SHIFT;
-            if (this->_event.key.code == sf::Keyboard::LControl || this->_event.key.code == sf::Keyboard::RControl)
-                return Arcade::Keys::CONTROL;
-            if (this->_event.key.code == sf::Keyboard::Space)
-                return Arcade::Keys::SPACE;
-            if (this->_event.key.code == sf::Keyboard::Enter)
-                return Arcade::Keys::ENTER;
-            if (this->_event.key.code == sf::Keyboard::BackSpace)
-                return Arcade::Keys::BACKSPACE;
-            if (this->_event.key.code == sf::Keyboard::Up)
-                return Arcade::Keys::UP;
-            if (this->_event.key.code == sf::Keyboard::Down)
-                return Arcade::Keys::DOWN;
-            if (this->_event.key.code == sf::Keyboard::Left)
-                return Arcade::Keys::LEFT;
-            if (this->_event.key.code == sf::Keyboard::Right)
-                return Arcade::Keys::RIGHT;
-            if (this->_event.key.code == sf::Keyboard::Num0 || this->_event.key.code == sf::Keyboard::Numpad0)
-                return Arcade::Keys::ZERO;
-            if (this->_event.key.code == sf::Keyboard::Num1 || this->_event.key.code == sf::Keyboard::Numpad1)
-                return Arcade::Keys::ONE;
-            if (this->_event.key.code == sf::Keyboard::Num2 || this->_event.key.code == sf::Keyboard::Numpad2)
-                return Arcade::Keys::TWO;
-            if (this->_event.key.code == sf::Keyboard::Num3 || this->_event.key.code == sf::Keyboard::Numpad3)
-                return Arcade::Keys::THREE;
-            if (this->_event.key.code == sf::Keyboard::Num4 || this->_event.key.code == sf::Keyboard::Numpad4)
-                return Arcade::Keys::FOUR;
-            if (this->_event.key.code == sf::Keyboard::Num5 || this->_event.key.code == sf::Keyboard::Numpad5)
-                return Arcade::Keys::FIVE;
-            if (this->_event.key.code == sf::Keyboard::Num6 || this->_event.key.code == sf::Keyboard::Numpad6)
-                return Arcade::Keys::SIX;
-            if (this->_event.key.code == sf::Keyboard::Num7 || this->_event.key.code == sf::Keyboard::Numpad7)
-                return Arcade::Keys::SEVEN;
-            if (this->_event.key.code == sf::Keyboard::Num8 || this->_event.key.code == sf::Keyboard::Numpad8)
-                return Arcade::Keys::EIGHT;
-            if (this->_event.key.code == sf::Keyboard::Num9 || this->_event.key.code == sf::Keyboard::Numpad9)
-                return Arcade::Keys::NINE;
+            if (keyMap.find(this->_event.key.code) != keyMap.end())
+                return keyMap[this->_event.key.code];
         }
-        if (_event.type == sf::Event::MouseButtonPressed) {
-            if (this->_event.mouseButton.button == sf::Mouse::Left) {
+        if (this->_event.type == sf::Event::MouseButtonPressed) {
+            if (this->_event.mouseButton.button == sf::Mouse::Left)
                 return Arcade::Keys::MOUSE_LEFT;
-            }
-            if (this->_event.mouseButton.button == sf::Mouse::Right) {
+            if (this->_event.mouseButton.button == sf::Mouse::Right)
                 return Arcade::Keys::MOUSE_RIGHT;
-            }
         }
     }
     return -1;
@@ -159,10 +110,12 @@ void Arcade::Sfml::displayEntities(std::vector<std::shared_ptr<IEntity>> entitie
     for (auto &entity : entities) {
         if (entity->getPath().empty())
             continue;
-        sf::RectangleShape sprite(sf::Vector2f(entity->getSize()[0], entity->getSize()[1]));
+        float width = static_cast<int>(entity->getSize()[0]);
+        float height = static_cast<int>(entity->getSize()[1]);
+        sf::RectangleShape sprite(sf::Vector2f(width, height));
         sf::Texture texture;
         texture.loadFromFile(entity->getPath() + ".png");
-        sprite.setOrigin(entity->getSize()[0] / 2.f, entity->getSize()[1] / 2.f);
+        sprite.setOrigin(width / 2, height / 2);
         sprite.setTexture(&texture);
         sprite.setRotation(entity->getRotation());
         sprite.setPosition(entity->getPos()[0] * 29 + entity->getSize()[0] / 2, entity->getPos()[1] * 29 + entity->getSize()[1] / 2);
@@ -182,7 +135,8 @@ void Arcade::Sfml::displayText(std::vector<std::shared_ptr<IText>> texts)
         sfmlText.setFont(font);
         sfmlText.setString(text->getText());
         sfmlText.setCharacterSize(text->getSize());
-        sfmlText.setFillColor(sf::Color::Red);
+        sf::Color color(text->getColor()->getR(), text->getColor()->getG(), text->getColor()->getB(), text->getColor()->getA());
+        sfmlText.setFillColor(color);
         sfmlText.setPosition(text->getPos()[0] * 29, text->getPos()[1] * 29);
         this->_window.draw(sfmlText);
     }

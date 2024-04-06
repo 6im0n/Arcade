@@ -13,7 +13,7 @@
 Arcade::SnakeBody::SnakeBody(std::size_t x, std::size_t y, std::string path, Direction dir)
 {
     _pos = {x, y};
-    _size = {1, 1};
+    _size = {29, 29};
     _path = path;
     _char = '=';
     _color = std::make_unique<Color>(39, 122, 16, 255);

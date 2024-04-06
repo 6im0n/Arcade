@@ -12,6 +12,7 @@ NAME_SNAKE 	 	= lib/arcade_snake.so
 NAME_NCURSES 	= lib/arcade_ncurses.so
 NAME_SFML 	 	= lib/arcade_sfml.so
 NAME_SDL 	 	= lib/arcade_sdl.so
+NAME_VULKAN 	= lib/arcade_vulkan.so
 
 #Sources
 SRC_CORE      	= core/main.cpp \
@@ -39,7 +40,9 @@ NCURSES_SRC  	= src/ncurses/ncurses.cpp \
 
 SFML_SRC     	= src/sfml/Sfml.cpp \
 
-SDL_SRC      	= src/sdl/sdl.cpp \
+SDL_SRC      	= src/sdl/Sdl.cpp \
+
+VULKAN_SRC  	= src/vulkan/Vulkan.cpp \
 
 SRC_TEST     	= tests/tests_color.cpp		\
 				  classes/Color.cpp			\
@@ -68,6 +71,7 @@ OBJ_NCURSES		= $(NCURSES_SRC:.cpp=.o)
 OBJ_SFML		= $(SFML_SRC:.cpp=.o)
 OBJ_SDL			= $(SDL_SRC:.cpp=.o)
 OBJ_TEST		= $(SRC_TEST:.cpp=.o)
+OBJ_VULKAN		= $(VULKAN_SRC:.cpp=.o)
 
 #GCDA & GCNO
 GCDA_CORE		= $(SRC_CORE:.cpp=.gcda)
@@ -76,6 +80,7 @@ GCDA_SNAKE		= $(SNAKE_SRC:.cpp=.gcda)
 GCDA_NCURSES	= $(NCURSES_SRC:.cpp=.gcda)
 GCDA_SFML		= $(SFML_SRC:.cpp=.gcda)
 GCDA_SDL		= $(SDL_SRC:.cpp=.gcda)
+GCDA_VULKAN		= $(VULKAN_SRC:.cpp=.gcda)
 GCDA_TEST		= $(SRC_TEST:.cpp=.gcda)
 GCDA_FILES		= $(GCDA_CORE) $(GCDA_PACMAN) $(GCDA_SNAKE) $(GCDA_NCURSES) $(GCDA_SFML) $(GCDA_SDL) $(GCDA_TEST)
 GCNO_CORE		= $(SRC_CORE:.cpp=.gcno)
@@ -84,6 +89,7 @@ GCNO_SNAKE		= $(SNAKE_SRC:.cpp=.gcno)
 GCNO_NCURSES	= $(NCURSES_SRC:.cpp=.gcno)
 GCNO_SFML		= $(SFML_SRC:.cpp=.gcno)
 GCNO_SDL		= $(SDL_SRC:.cpp=.gcno)
+GCNO_VULKAN		= $(VULKAN_SRC:.cpp=.gcno)
 GCNO_TEST		= $(SRC_TEST:.cpp=.gcno)
 GCNO_FILES		= $(GCNO_CORE) $(GCNO_PACMAN) $(GCNO_SNAKE) $(GCNO_NCURSES) $(GCNO_SFML) $(GCNO_SDL) $(GCNO_TEST)
 
@@ -92,6 +98,7 @@ CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
 CXXFLAGS 		+= -fprofile-arcs
 SFML_FLAGS		= -lsfml-graphics -lsfml-window -lsfml-system
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
+VULKAN_FLAGS	= -lglfw
 NCURSES_FLAGS	= -lncurses
 INC				= -I.
 
@@ -116,12 +123,12 @@ games: $(NAME_PACMAN) $(NAME_SNAKE)
 	$(call YELLOW,"❌ $<")
 
 $(NAME_PACMAN) : $(OBJ_PACMAN)
-	@$(LINKER) -shared -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_PACMAN) $(OBJ_PACMAN) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SNAKE) : $(OBJ_SNAKE)
-	@$(LINKER) -shared -o $(NAME_SNAKE) $(OBJ_SNAKE) $(CXXFLAGS) && \
+	@$(LINKER) -shared -fPIC  -o $(NAME_SNAKE) $(OBJ_SNAKE) $(CXXFLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
@@ -149,17 +156,17 @@ graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 	$(call YELLOW,"❌ $<")
 
 $(NAME_NCURSES) : $(OBJ_NCURSES)
-	@$(LINKER) -shared -o $(NAME_NCURSES) $(OBJ_NCURSES) $(CXXFLAGS) $(NCURSES_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_NCURSES) $(OBJ_NCURSES) $(CXXFLAGS) $(NCURSES_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SFML) : $(OBJ_SFML)
-	@$(LINKER) -shared -o $(NAME_SFML) $(OBJ_SFML) $(CXXFLAGS) $(SFML_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_SFML) $(OBJ_SFML) $(CXXFLAGS) $(SFML_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SDL) : $(OBJ_SDL)
-	@$(LINKER) -shared -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
+	@$(LINKER) -shared -fPIC -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 

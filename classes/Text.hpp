@@ -34,7 +34,7 @@ namespace Arcade {
             std::string _text;
             std::vector<std::size_t> _pos;
             std::vector<std::size_t> _size;
-            std::unique_ptr<IColor> _color;
+            std::shared_ptr<IColor> _color;
             std::string _fontPath;
             float _rotation;
             char _c;
