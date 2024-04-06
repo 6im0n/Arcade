@@ -14,22 +14,22 @@ namespace Arcade {
     class Text : public IText {
         public:
             Text(std::string text, std::vector<std::size_t> pos, std::vector<std::size_t> size, char c);
-            ~Text() = default;
+            ~Text() override = default;
 
-            void setFontPath(const std::string &fontPath);
-            void setText(const std::string &text);
-            void setColor(std::unique_ptr<IColor> color);
-            void setPos(std::size_t x, std::size_t y);
-            void setSize(std::size_t x);
-            void setRotation(float rotation);
+            void setFontPath(const std::string &fontPath) override;
+            void setText(const std::string &text) override;
+            void setColor(std::unique_ptr<IColor> color) override;
+            void setPos(std::size_t x, std::size_t y) override;
+            void setSize(std::size_t x) override;
+            void setRotation(float rotation) override;
 
             //getters
-            std::string getFontPath();
-            std::string getText();
-            std::shared_ptr<IColor> getColor() const;
-            std::vector<std::size_t> getPos() const;
-            std::size_t getSize() const;
-            float getRotation() const;
+            std::string getFontPath() override;
+            std::string getText() override;
+            std::shared_ptr<IColor> getColor() const override;
+            std::vector<std::size_t> getPos() const override;
+            std::size_t getSize() const override;
+            float getRotation() const override;
         private:
             std::string _text;
             std::vector<std::size_t> _pos;

@@ -13,14 +13,14 @@ namespace Arcade {
     class Color : public IColor {
         public:
             Color(short r, short g, short b, short a);
-            ~Color() = default;
+            ~Color() override = default;
 
-        void setColor(short r, short g, short b, short a);
+        void setColor(short r, short g, short b, short a) override;
 
-        short getR();
-        short getG();
-        short getB();
-        short getA();
+        short getR() override;
+        short getG() override;
+        short getB() override;
+        short getA() override;
 
         private:
             short _r;

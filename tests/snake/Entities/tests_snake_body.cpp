@@ -22,8 +22,8 @@ Test(Snake, snake_constructor)
     cr_assert_eq(snake.getSize()[0], 29);
     cr_assert_eq(snake.getSize()[1], 29);
     cr_assert_eq(snake.getChar(), '=');
-    cr_assert_eq(snake.getColor()->getR(), 39);
-    cr_assert_eq(snake.getColor()->getG(), 122);
+    cr_assert_eq(snake.getColor()->getR(), 200);
+    cr_assert_eq(snake.getColor()->getG(), 200);
     cr_assert_eq(snake.getColor()->getB(), 16);
     cr_assert_eq(snake.getColor()->getA(), 255);
 }
@@ -67,8 +67,8 @@ Test(Snake, setColor)
 {
     Arcade::SnakeBody snake = Arcade::SnakeBody(10, 10, "assets/body", Arcade::Direction::D_RIGHT);
 
-    cr_assert_eq(snake.getColor()->getR(), 39);
-    cr_assert_eq(snake.getColor()->getG(), 122);
+    cr_assert_eq(snake.getColor()->getR(), 200);
+    cr_assert_eq(snake.getColor()->getG(), 200);
     cr_assert_eq(snake.getColor()->getB(), 16);
     cr_assert_eq(snake.getColor()->getA(), 255);
     snake.setColor(std::make_unique<Arcade::Color>(10, 20, 30, 40));

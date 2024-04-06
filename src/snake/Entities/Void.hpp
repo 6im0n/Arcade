@@ -13,23 +13,23 @@ namespace Arcade {
     class Void : public IEntity {
         public:
             Void(std::size_t x, std::size_t y);
-            ~Void() = default;
+            ~Void() override = default;
 
             //setters
-            void setPos(std::size_t x, std::size_t y);
-            void setSize(std::size_t x, std::size_t y);
-            void setChar(char c);
-            void setColor(std::unique_ptr<IColor> color);
-            void setPath(const std::string &path);
-            void setRotation(float rotation);
+            void setPos(std::size_t x, std::size_t y) override;
+            void setSize(std::size_t x, std::size_t y) override;
+            void setChar(char c) override;
+            void setColor(std::unique_ptr<IColor> color) override;
+            void setPath(const std::string &path) override;
+            void setRotation(float rotation) override;
 
-            //getters
-            std::vector<std::size_t> getPos() const;
-            std::vector<std::size_t> getSize() const;
-            int getChar() const;
-            std::shared_ptr<IColor> getColor() const;
-            std::string getPath() const;
-            float getRotation() const;
+            //getter overrides
+            std::vector<std::size_t> getPos() const override;
+            std::vector<std::size_t> getSize() const override;
+            int getChar() const override;
+            std::shared_ptr<IColor> getColor() const override;
+            std::string getPath() const override;
+            float getRotation() const override;
 
         private:
             std::vector<std::size_t> _pos;

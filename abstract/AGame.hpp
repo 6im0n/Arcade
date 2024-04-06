@@ -12,21 +12,21 @@
 namespace Arcade {
     class AGame : public IGame {
         public:
-            virtual ~AGame() = default;
+            ~AGame() override = default;
 
             //Game
-            virtual int startGame() = 0;
-            virtual int stopGame() = 0;
-            int getScore();
-            virtual int simulate() = 0;
+            int startGame() override = 0;
+            int stopGame() override = 0;
+            int getScore() override;
+            int simulate() override = 0;
 
             //Event
-            virtual void catchKeyEvent(int key) = 0;
+            void catchKeyEvent(int key) override = 0;
 
             //Display
-            std::vector<std::shared_ptr<IEntity>> getEntities();
-            std::vector<std::shared_ptr<IText>> getTexts();
-            std::vector<std::shared_ptr<ISound>> getSounds();
+            std::vector<std::shared_ptr<IEntity>> getEntities() override;
+            std::vector<std::shared_ptr<IText>> getTexts() override;
+            std::vector<std::shared_ptr<ISound>> getSounds() override;
 
         protected:
             std::vector<std::shared_ptr<IEntity>> _entities;
