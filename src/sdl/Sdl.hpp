@@ -12,6 +12,12 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 #include <iostream>
+#include <memory>
+#include <vector>
+#include "Interfaces/IGraphic.hpp"
+#include "Interfaces/IEntity.hpp"
+#include "Interfaces/IText.hpp"
+#include "Interfaces/ISound.hpp"
 
 namespace Arcade {
     class Sdl : public IGraphic {

@@ -51,6 +51,12 @@ std::vector<std::shared_ptr<Arcade::ISound>> Arcade::Pacman::getSounds()
     return std::vector<std::shared_ptr<Arcade::ISound>>();
 }
 
+void Arcade::Pacman::catchMousePosition(int x, int y)
+{
+    (void)x;
+    (void)y;
+}
+
 extern "C"
 {
     __attribute__((constructor))

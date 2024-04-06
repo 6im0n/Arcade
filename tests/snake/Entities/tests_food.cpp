@@ -23,7 +23,7 @@ Test(Food, DefaultConstructor)
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
-    cr_assert_eq(food.getColor()->getR(), 40);
+    cr_assert_eq(food.getColor()->getR(), 175);
     cr_assert_eq(food.getColor()->getG(), 79);
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
@@ -41,7 +41,7 @@ Test(Food, SetSizeAndGetSize)
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
-    cr_assert_eq(food.getColor()->getR(), 40);
+    cr_assert_eq(food.getColor()->getR(), 175);
     cr_assert_eq(food.getColor()->getG(), 79);
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
@@ -63,7 +63,7 @@ Test(Food, SetPosAndGetPos)
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
-    cr_assert_eq(food.getColor()->getR(), 40);
+    cr_assert_eq(food.getColor()->getR(), 175);
     cr_assert_eq(food.getColor()->getG(), 79);
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
@@ -85,7 +85,7 @@ Test(Food, SetCharAndGetChar)
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
-    cr_assert_eq(food.getColor()->getR(), 40);
+    cr_assert_eq(food.getColor()->getR(), 175);
     cr_assert_eq(food.getColor()->getG(), 79);
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
@@ -106,7 +106,7 @@ Test(Food, SetColorAndGetColor)
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
-    cr_assert_eq(food.getColor()->getR(), 40);
+    cr_assert_eq(food.getColor()->getR(), 175);
     cr_assert_eq(food.getColor()->getG(), 79);
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
@@ -130,7 +130,7 @@ Test(Food, SetPathAndGetPath)
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
-    cr_assert_eq(food.getColor()->getR(), 40);
+    cr_assert_eq(food.getColor()->getR(), 175);
     cr_assert_eq(food.getColor()->getG(), 79);
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
@@ -151,7 +151,7 @@ Test(Food, SetRotationAndGetRotation)
     cr_assert_eq(food.getPath(), FOOD_PATH);
     cr_assert_eq(food.getRotation(), 0);
     cr_assert_eq(food.getChar(), 'O');
-    cr_assert_eq(food.getColor()->getR(), 40);
+    cr_assert_eq(food.getColor()->getR(), 175);
     cr_assert_eq(food.getColor()->getG(), 79);
     cr_assert_eq(food.getColor()->getB(), 42);
     cr_assert_eq(food.getColor()->getA(), 255);
