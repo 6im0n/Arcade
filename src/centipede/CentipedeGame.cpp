@@ -37,6 +37,16 @@ void generateLine(std::vector<std::shared_ptr<Arcade::IEntity>> &line, int y, in
     line.push_back(wall2);
 }
 
+void generateRandomWall(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> &map)
+{
+    int nbWall = rand() % 7 + 8;
+    for (int i = 0; i < nbWall; i++) {
+        int x = rand() % AREA_GAME_WIDTH;
+        int y = rand() % AREA_GAME_HEIGHT;
+        map[y][x] = std::make_shared<Arcade::Wall>(GET_POSXY_AREA(x, y));
+    }
+}
+
 void generateMap(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> &map)
 {
     for (int i = 0; i < AREA_GAME_HEIGHT; i++) {
@@ -48,6 +58,7 @@ void generateMap(std::vector<std::vector<std::shared_ptr<Arcade::IEntity>>> &map
         generateLine(map[i], i, AREA_GAME_WIDTH);
     }
     generateWallLine(map[AREA_GAME_HEIGHT - 1], AREA_GAME_HEIGHT, AREA_GAME_WIDTH);
+    generateRandomWall(map);
 }
 
 Arcade::CentipedeGame::CentipedeGame()
