@@ -1,2 +1,2 @@
 arcade_snake.so
-arcade_pacman.so
+arcade_centipede.so
