@@ -116,11 +116,11 @@ Arcade::Menu::Menu(std::string graphicLib, std::vector<std::string> libsVector)
     _texts.at(5)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.at(5)->setFontPath(FONT_PATH);
     _texts.at(5)->setPos(19, 3);
-    _texts.push_back(std::make_shared<Text>(games.at(0).substr(games.at(0).find("_") + 1, games.at(0).substr(games.at(0).find("_") + 1).length() - 3), std::vector<std::size_t>(6, 15), std::vector<std::size_t>(30, 30), gamesLabel.at(0)));
+    _texts.push_back(std::make_shared<Text>(games.at(0).substr(games.at(0).find("_") + 1, games.at(0).substr(games.at(0).find("_") + 1).length() - 3), std::vector<std::size_t>(6, 15), std::vector<std::size_t>(25, 25), gamesLabel.at(0)));
     _texts.at(6)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.at(6)->setFontPath(FONT_PATH);
     _texts.at(6)->setPos(6, 15);
-    _texts.push_back(std::make_shared<Text>(games.at(1).substr(games.at(1).find("_") + 1, games.at(1).substr(games.at(1).find("_") + 1).length() - 3), std::vector<std::size_t>(15, 15), std::vector<std::size_t>(30, 30), gamesLabel.at(1)));
+    _texts.push_back(std::make_shared<Text>(games.at(1).substr(games.at(1).find("_") + 1, games.at(1).substr(games.at(1).find("_") + 1).length() - 3), std::vector<std::size_t>(15, 15), std::vector<std::size_t>(20, 20), gamesLabel.at(1)));
     _texts.at(7)->setColor(std::make_unique<Color>(255, 255, 255, 255));
     _texts.at(7)->setFontPath(FONT_PATH);
     _texts.at(7)->setPos(15, 15);

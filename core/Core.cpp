@@ -147,8 +147,8 @@ void Arcade::Core::loadGraphic(const std::string &graphicPath)
 void Arcade::Core::quitGame()
 {
     _graphic->clearWindow();
-    _game->stopGame();
     updateTopScores();
+    _game->stopGame();
     loadMenu();
 }
 
