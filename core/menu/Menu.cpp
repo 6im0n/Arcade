@@ -42,11 +42,17 @@ Arcade::Menu::Menu(std::string graphicLib, std::vector<std::string> libsVector)
     libs.at(0) = libsVector.at(2);
     libs.at(1) = libsVector.at(3);
     libs.at(2) = libsVector.at(4);
-    for (std::size_t i = 0; i < games.size(); i++) {
-        gamesLabel.at(i) = games.at(i).at(11) - 32;
+    for (std::size_t i = 0; i < 2; i++) {
+        if (i < games.size() && games.at(i).size() > 11)
+            gamesLabel.at(i) = games.at(i).at(11) - 32;
+        else
+            gamesLabel.at(i) = '\0';
     }
-    for (std::size_t i = 0; i < libs.size(); i++) {
-        libsLabel.at(i) = libs.at(i).at(11) - 32;
+    for (std::size_t i = 0; i < 3; i++) {
+        if (i < libsVector.size() && libs.at(i).size() > 11)
+            libsLabel.at(i) = libs.at(i).at(11) - 32;
+        else
+            libsLabel.at(i) = '\0';
     }
     _isRunning = true;
     _runButtons = new Button("Run", std::vector<std::size_t>(2, 2), std::vector<std::size_t>(130, 87), 'R', "", BUTTON_PATH);
@@ -263,8 +269,6 @@ int Arcade::Menu::simulate()
     }
     _selectButton->setPos(_currentButton->getPos().at(0), _currentButton->getPos().at(1));
     _texts.at(0)->setText(_playerName);
-    // std::cout << _selectedGame << std::endl;
-    // std::cout << _selectedGraphic << std::endl;
     return 0;
 }
 
@@ -456,4 +460,35 @@ void Arcade::Menu::manageClick()
     if ((std::size_t)_mousePos.first >= _graphicButtons->getPrevButton()->getPos().at(0) - (_graphicButtons->getPrevButton()->getPos().at(0) / 2) && (std::size_t)_mousePos.first <= _graphicButtons->getPrevButton()->getPos().at(0) + (_graphicButtons->getPrevButton()->getSize().at(0) / 2) && (std::size_t)_mousePos.second >= _graphicButtons->getPrevButton()->getPos().at(1) - (_graphicButtons->getPrevButton()->getPos().at(1) / 2) && (std::size_t)_mousePos.second <= _graphicButtons->getPrevButton()->getPos().at(1) + (_graphicButtons->getPrevButton()->getSize().at(1) / 2)) {
         setGraphic(_graphicButtons->getPrevButton()->getLabel());
     }
+}
+
+void Arcade::Menu::updateLibs(std::vector<std::string> libsVector)
+{
+    games.at(0) = libsVector.at(0);
+    games.at(1) = libsVector.at(1);
+    libs.at(0) = libsVector.at(2);
+    libs.at(1) = libsVector.at(3);
+    libs.at(2) = libsVector.at(4);
+    for (std::size_t i = 0; i < 2; i++) {
+        if (i < games.size() && games.at(i).size() > 11)
+            gamesLabel.at(i) = games.at(i).at(11) - 32;
+        else
+            gamesLabel.at(i) = '\0';
+    }
+    for (std::size_t i = 0; i < 3; i++) {
+        if (i < libsVector.size() && libs.at(i).size() > 11)
+            libsLabel.at(i) = libs.at(i).at(11) - 32;
+        else
+            libsLabel.at(i) = '\0';
+    }
+    if (libsVector.size() >= 1)
+        _texts.at(6)->setText(games.at(0).substr(games.at(0).find("_") + 1, games.at(0).substr(games.at(0).find("_") + 1).length() - 3));
+    if (libsVector.size() >= 2)
+        _texts.at(7)->setText(games.at(1).substr(games.at(1).find("_") + 1, games.at(1).substr(games.at(1).find("_") + 1).length() - 3));
+    if (libsVector.size() >= 3)
+        _texts.at(8)->setText(libs.at(0).substr(libs.at(0).find("_") + 1, libs.at(0).substr(libs.at(0).find("_") + 1).length() - 3));
+    if (libsVector.size() >= 4)
+        _texts.at(9)->setText(libs.at(1).substr(libs.at(1).find("_") + 1, libs.at(1).substr(libs.at(1).find("_") + 1).length() - 3));
+    if (libsVector.size() >= 5)
+        _texts.at(10)->setText(libs.at(2).substr(libs.at(2).find("_") + 1, libs.at(2).substr(libs.at(2).find("_") + 1).length() - 3));
 }

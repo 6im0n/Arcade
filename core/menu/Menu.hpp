@@ -36,6 +36,7 @@ namespace Arcade {
             void addToPlayerName(Keys key);
             void catchMousePosition(int x, int y);
             void manageClick();
+            void updateLibs(std::vector<std::string> libsVector);
         private :
             bool _isRunning;
             bool _exit;

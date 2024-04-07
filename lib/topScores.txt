@@ -1,2 +1,2 @@
-centipede OK 4
+snake OK 4
 centipede TEST 2

@@ -89,6 +89,8 @@ void Arcade::Core::run()
             if (_menu->isExit()) {
                 return;
             }
+            std::vector<std::string> libs = getLibs();
+            _menu->updateLibs(libs);
             _menu->catchMousePosition(mousePos.first, mousePos.second);
             _graphic.get()->clearWindow();
             _graphic.get()->displayEntities(_menu->getEntities());
@@ -249,9 +251,13 @@ std::vector<std::string> Arcade::Core::getLibs()
         return libs;
     }
     while (std::getline(file, line)) {
-        _GamesName.push_back(line.substr(line.find("_") + 1, line.substr(line.find("_") + 1).length() - 3));
-        libs.push_back("./lib/" + line);
+        if (line.find("arcade_") != std::string::npos && line.find(".so") != std::string::npos) {
+            _GamesName.push_back(line.substr(line.find("_") + 1, line.substr(line.find("_") + 1).length() - 3));
+            libs.push_back("./lib/" + line);
+        }
     }
+    while (libs.size() < 2)
+        libs.push_back("");
     file.close();
     file.open("lib/graphics.txt");
     if (!file.is_open()) {
@@ -259,15 +265,12 @@ std::vector<std::string> Arcade::Core::getLibs()
         return libs;
     }
     while (std::getline(file, line)) {
-        libs.push_back("./lib/" + line);
+        if (line.find("arcade_") != std::string::npos && line.find(".so") != std::string::npos) {
+            libs.push_back("./lib/" + line);
+        }
     }
     file.close();
-    if (libs.size() != 5) {
-        std::cerr << "Error not the good number of libs" << std::endl;
-        exit(84);
-    }
-    for (std::size_t i = 0; i < libs.size(); i++) {
-        std::cout << libs.at(i) << std::endl;
-    }
+    while (libs.size() < 5)
+        libs.push_back("");
     return libs;
 }
