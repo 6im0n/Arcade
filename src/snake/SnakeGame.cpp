@@ -81,6 +81,8 @@ int Arcade::SnakeGame::simulate()
         }
     }
 
+    if (_snake.moveSnake(_map) == -1)
+        return -1;
     auto head = _snake.getSnake().front();
     for (std::size_t i = 0; i < _foods.size(); i++) {
         std::vector<std::size_t> pos = _foods[i].get()->getPos();
@@ -99,8 +101,6 @@ int Arcade::SnakeGame::simulate()
     for (auto snakeBody : _snake.getSnake()) {
         _entities.push_back(snakeBody);
     }
-    if (_snake.moveSnake(_map) == -1)
-        return -1;
     return 0;
 }
 
