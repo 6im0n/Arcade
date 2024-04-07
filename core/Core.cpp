@@ -36,6 +36,7 @@ Arcade::Core::Core(const std::string &graphicPath)
 
 Arcade::Core::~Core()
 {
+    _graphic->closeWindow();
     saveTopScores();
     exit(0);
 }
