@@ -1,0 +1,2 @@
+arcade_snake.so
+arcade_centipede.so

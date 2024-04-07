@@ -177,36 +177,32 @@ Arcade::Menu::~Menu()
 
 void Arcade::Menu::catchKeyEvent(int key)
 {
+    _lastKey = static_cast<Keys>(key);
+    if (_lastKey == Keys::ONE) {
+        _gameButtons = _gameButtons->getPrevButton();
+        setGame(_gameButtons->getLabel());
+    }
+    if (_lastKey == Keys::TWO) {
+        _gameButtons = _gameButtons->getNextButton();
+        setGame(_gameButtons->getLabel());
+    }
+    if (_lastKey == Keys::THREE) {
+        _graphicButtons = _graphicButtons->getPrevButton();
+        setGraphic(_graphicButtons->getLabel())   ;
+    }
+    if (_lastKey == Keys::FOUR) {
+        _graphicButtons = _graphicButtons->getNextButton();
+        setGraphic(_graphicButtons->getLabel());
+    }
     if (!_isRunning) {
         return;
     }
-    _lastKey = static_cast<Keys>(key);
     if (_changePlayer) {
         addToPlayerName(_lastKey);
         return;
     }
     if (_lastKey == Keys::ESCAPE) {
         _exit = true;
-    }
-    if (_lastKey == Keys::ONE) {
-        std::cout << "PREV GAME" << std::endl;
-        _gameButtons = _gameButtons->getPrevButton();
-        setGame(_gameButtons->getLabel());
-    }
-    if (_lastKey == Keys::TWO) {
-        std::cout << "NEXT GAME" << std::endl;
-        _gameButtons = _gameButtons->getNextButton();
-        setGame(_gameButtons->getLabel());
-    }
-    if (_lastKey == Keys::THREE) {
-        std::cout << "PREV GRAPHIC" << std::endl;
-        _graphicButtons = _graphicButtons->getPrevButton();
-        setGraphic(_graphicButtons->getLabel())   ;
-    }
-    if (_lastKey == Keys::FOUR) {
-        std::cout << "NEXT GRAPHIC" << std::endl;
-        _graphicButtons = _graphicButtons->getNextButton();
-        setGraphic(_graphicButtons->getLabel());
     }
     if (_lastKey == Keys::ENTER && !_changePlayer) {
         if (_currentButton->getLabel() == "Run") {
@@ -267,6 +263,8 @@ int Arcade::Menu::simulate()
     }
     _selectButton->setPos(_currentButton->getPos().at(0), _currentButton->getPos().at(1));
     _texts.at(0)->setText(_playerName);
+    // std::cout << _selectedGame << std::endl;
+    // std::cout << _selectedGraphic << std::endl;
     return 0;
 }
 

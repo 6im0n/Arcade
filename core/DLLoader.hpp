@@ -21,7 +21,6 @@ namespace Arcade {
             ~DLLoader();
             T *getInstance(const std::string &libname);
             void setEntryPoint(std::string const &entryPoint);
-            void close();
         private :
             void *_handle;
             std::string _entryPoint;
