@@ -117,8 +117,6 @@ int Arcade::Ncurses::getKeyEvent()
         {32, Arcade::Keys::SPACE},
         {KEY_MOUSE, Arcade::Keys::MOUSE_LEFT}
     };
-    if (keyMap[key] == Keys::FOUR)
-        std::cout << keyMap[key] << std::endl;
     return keyMap[key];
 }
 

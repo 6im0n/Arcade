@@ -224,14 +224,9 @@ void Arcade::Core::updateTopScores()
 {
     if (_game != nullptr) {
         std::string game = _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1, _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1).length() - 3);
-        std::cout << game << std::endl;
-        std::cout << _GamesName.at(0) << std::endl;
-        std::cout << _GamesName.at(1) << std::endl;
         if (game == _GamesName.at(0)) {
-            std::cout << "game 0" << std::endl;
             _indexGame = 0;
         } else if (game == _GamesName.at(1)) {
-            std::cout << "game 1" << std::endl;
             _indexGame = 1;
         }
         if (_GamesName.at(0) == _GamesName.at(1)) {
