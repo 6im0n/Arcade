@@ -110,6 +110,7 @@ CXXFLAGS		= -g -fno-gnu-unique -Wall -Wextra -Werror -std=c++20
 CXXFLAGS 		+= -fprofile-arcs
 SFML_FLAGS		= -lsfml-graphics -lsfml-window -lsfml-system
 SDL_FLAGS		= -lSDL2 -lSDL2_image -lSDL2_ttf
+#GTK_FLAGS		= `pkg-config --cflags --libs gtk+-3.0`
 VULKAN_FLAGS	= -lglfw
 NCURSES_FLAGS	= -lncurses
 INC				= -I.
@@ -163,7 +164,7 @@ $(NAME) : $(OBJ_CORE)
 graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 
 %.o: 	%.cpp
-	@$(CC) $(INC) $(CXXFLAGS) `pkg-config --cflags --libs gtk+-3.0` -fPIC -c -o $@ $< && \
+	@$(CC) $(INC) $(CXXFLAGS) $(GTK_FLAGS) -fPIC -c -o $@ $< && \
 	$(call YELLOW,"🆗 $<") || \
 	$(call YELLOW,"❌ $<")
 
@@ -178,7 +179,7 @@ $(NAME_SFML) : $(OBJ_SFML)
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SDL) : $(OBJ_SDL)
-	@$(LINKER) -shared -fPIC `pkg-config --cflags --libs gtk+-3.0` -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
+	$(LINKER) -shared -fPIC $(GTK_FLAGS) -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
