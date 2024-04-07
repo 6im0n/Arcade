@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Interfaces/IGame.hpp"
+#include "abstract/AGame.hpp"
 #include "Snake.hpp"
 #include "Score.hpp"
 #include "Entities/Food.hpp"
@@ -28,7 +28,7 @@
 #define SNAKE_TAIL_PATH "assets/snake/tail"
 
 namespace Arcade {
-    class SnakeGame : public IGame {
+    class SnakeGame : public AGame {
         public:
             SnakeGame();
             ~SnakeGame() override = default;
@@ -41,17 +41,11 @@ namespace Arcade {
 
             //Event
             void catchKeyEvent(int key) override;
-            void catchMousePosition(int x, int y) override;
 
-            //Display
-            std::vector<std::shared_ptr<IEntity>> getEntities() override;
+            //Dispay
             std::vector<std::shared_ptr<IText>> getTexts() override;
-            std::vector<std::shared_ptr<ISound>> getSounds() override;
 
         private:
-            std::vector<std::shared_ptr<IEntity>> _entities;
-            std::vector<std::shared_ptr<IText>> _texts;
-            std::vector<std::shared_ptr<ISound>> _sounds;
             std::vector<std::vector<std::shared_ptr<IEntity>>> _map;
 
             std::shared_ptr<Score> _score;

@@ -34,6 +34,7 @@ CENTIPEDE_SRC = 	src/centipede/Entities/Void.cpp			\
 					src/centipede/Snake.cpp					\
 					classes/Timer.cpp						\
 					classes/Color.cpp						\
+					abstract/AGame.cpp							\
 
 SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 				src/snake/Entities/Wall.cpp			\
@@ -44,6 +45,7 @@ SNAKE_SRC = 	src/snake/Entities/Void.cpp			\
 				src/snake/Snake.cpp					\
 				classes/Timer.cpp					\
 				classes/Color.cpp					\
+				abstract/AGame.cpp					\
 
 NCURSES_SRC  	= src/ncurses/Ncurses.cpp \
 
@@ -70,6 +72,7 @@ SRC_TEST     	= tests/tests_color.cpp		\
 				  src/snake/SnakeGame.cpp					\
 				  src/snake/Entities/SnakeBody.cpp			\
 				  src/snake/Entities/Void.cpp				\
+				  abstract/AGame.cpp						\
 
 
 #Objects

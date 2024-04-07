@@ -188,27 +188,11 @@ void Arcade::CentipedeGame::catchKeyEvent(int key)
     }
 }
 
-void Arcade::CentipedeGame::catchMousePosition(int x, int y)
-{
-    (void)x;
-    (void)y;
-}
-
-std::vector<std::shared_ptr<Arcade::IEntity>> Arcade::CentipedeGame::getEntities()
-{
-    return _entities;
-}
-
 std::vector<std::shared_ptr<Arcade::IText>> Arcade::CentipedeGame::getTexts()
 {
     _texts.clear();
     _texts.push_back(_score);
     return _texts;
-}
-
-std::vector<std::shared_ptr<Arcade::ISound>> Arcade::CentipedeGame::getSounds()
-{
-    return _sounds;
 }
 
 bool Arcade::CentipedeGame::isIdPresent(int id)

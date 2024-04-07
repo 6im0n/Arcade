@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Interfaces/IGame.hpp"
+#include "abstract/AGame.hpp"
 #include "Snake.hpp"
 #include "Score.hpp"
 #include "Entities/Player.hpp"
@@ -37,34 +37,28 @@
 #define SNAKE_TAIL_PATH "assets/snake/tail"
 
 namespace Arcade {
-    class CentipedeGame : public IGame {
+    class CentipedeGame : public AGame {
         public:
             CentipedeGame();
             ~CentipedeGame() = default;
 
             //Game
-            int startGame();
-            int stopGame();
-            int getScore();
-            int simulate();
+            int startGame() override;
+            int stopGame() override;
+            int getScore() override;
+            int simulate() override;
             void killSnake(Snake snakeKilled, std::vector<std::size_t> pos);
 
             //Event
-            void catchKeyEvent(int key);
-            void catchMousePosition(int x, int y);
+            void catchKeyEvent(int key) override;
 
-            //Display
-            std::vector<std::shared_ptr<IEntity>> getEntities();
-            std::vector<std::shared_ptr<IText>> getTexts();
-            std::vector<std::shared_ptr<ISound>> getSounds();
+            //Dispay
+            std::vector<std::shared_ptr<IText>> getTexts() override;
 
             //Utils
             bool isIdPresent(int id);
 
         private:
-            std::vector<std::shared_ptr<IEntity>> _entities;
-            std::vector<std::shared_ptr<IText>> _texts;
-            std::vector<std::shared_ptr<ISound>> _sounds;
             std::vector<std::vector<std::shared_ptr<IEntity>>> _map;
             std::shared_ptr<Bullet> _bullet;
             std::shared_ptr<Player> _player;
