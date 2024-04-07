@@ -66,8 +66,6 @@ void Arcade::Ncurses::clearWindow()
 int Arcade::Ncurses::getKeyEvent()
 {
     int key = getch();
-    if (key == -1)
-        return Arcade::Keys::UNKNOWN;
     static std::map<int, int> keyMap = {
         {'\0', Arcade::Keys::UNKNOWN},
         {'A', Arcade::Keys::A},
@@ -96,6 +94,16 @@ int Arcade::Ncurses::getKeyEvent()
         {'X', Arcade::Keys::X},
         {'Y', Arcade::Keys::Y},
         {'Z', Arcade::Keys::Z},
+        {'&', Arcade::Keys::ONE},
+        {130, Arcade::Keys::TWO},
+        {'"', Arcade::Keys::THREE},
+        {'\'', Arcade::Keys::FOUR},
+        {'(', Arcade::Keys::FIVE},
+        {'-', Arcade::Keys::SIX},
+        {232, Arcade::Keys::SEVEN},
+        {'_', Arcade::Keys::EIGHT},
+        {231, Arcade::Keys::NINE},
+        {224, Arcade::Keys::ZERO},
         {'1', Arcade::Keys::ONE},
         {'2', Arcade::Keys::TWO},
         {'3', Arcade::Keys::THREE},
@@ -117,9 +125,10 @@ int Arcade::Ncurses::getKeyEvent()
         {32, Arcade::Keys::SPACE},
         {KEY_MOUSE, Arcade::Keys::MOUSE_LEFT}
     };
-    if (keyMap[key] == Keys::FOUR)
-        std::cout << keyMap[key] << std::endl;
+    if (keyMap.find(key) == keyMap.end())
+        return Arcade::Keys::UNKNOWN;
     return keyMap[key];
+    
 }
 
 std::pair<int, int> Arcade::Ncurses::getMousePosition()
