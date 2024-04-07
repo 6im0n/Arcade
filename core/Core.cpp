@@ -142,6 +142,8 @@ void Arcade::Core::loadGraphic(const std::string &graphicPath)
     if (_graphicLib == graphicPath)
         return;
     _graphicLib = graphicPath;
+    _graphic->clearWindow();
+    _graphic->closeWindow();
     _graphic.reset();
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
 }
