@@ -83,7 +83,7 @@ void Arcade::Player::shoot(std::shared_ptr<Bullet> &bullet, Timer &timer)
 {
     if (bullet != nullptr)
         return;
-    std::shared_ptr<Bullet> new_bullet = std::make_shared<Bullet>(_pos[POSX], _pos[POSY] - 1, timer.getElapsedTime());
+    std::shared_ptr<Bullet> new_bullet = std::make_shared<Bullet>(_pos[POSX], _pos[POSY], timer.getElapsedTime());
     bullet = new_bullet;
 }
 
