@@ -36,18 +36,21 @@ Arcade::Ncurses::Ncurses()
 
 bool Arcade::Ncurses::isWindowOpen() const
 {
-    return true;
+    return !isendwin();
 }
 
 Arcade::Ncurses::~Ncurses()
 {
-    closeWindow();
+    clear();
+    endwin();
+    refresh();
 }
 
 void Arcade::Ncurses::closeWindow()
 {
     clear();
     endwin();
+    refresh();
 }
 
 void Arcade::Ncurses::clearWindow()
@@ -57,6 +60,7 @@ void Arcade::Ncurses::clearWindow()
             mvprintw(i, j, " ");
         }
     }
+    clear();
 }
 
 int Arcade::Ncurses::getKeyEvent()
@@ -179,6 +183,7 @@ void Arcade::Ncurses::displayText(std::vector<std::shared_ptr<IText>> texts)
         mvprintw(text->getPos()[1], text->getPos()[0], "%s", text->getText().c_str());
         wattroff(stdscr, COLOR_PAIR(x));
     }
+
 }
 
 void Arcade::Ncurses::playSound(std::vector<std::shared_ptr<ISound>> sounds)
@@ -196,6 +201,7 @@ extern "C"
     void destructor()
     {
     }
+
     Arcade::Ncurses *loadGraphicInstance()
     {
         return new Arcade::Ncurses();
