@@ -62,7 +62,10 @@ void Arcade::Ncurses::clearWindow()
 int Arcade::Ncurses::getKeyEvent()
 {
     int key = getch();
+    if (key == -1)
+        return Arcade::Keys::UNKNOWN;
     static std::map<int, int> keyMap = {
+        {'\0', Arcade::Keys::UNKNOWN},
         {'A', Arcade::Keys::A},
         {'B', Arcade::Keys::B},
         {'C', Arcade::Keys::C},
@@ -110,6 +113,8 @@ int Arcade::Ncurses::getKeyEvent()
         {32, Arcade::Keys::SPACE},
         {KEY_MOUSE, Arcade::Keys::MOUSE_LEFT}
     };
+    if (keyMap[key] == Keys::FOUR)
+        std::cout << keyMap[key] << std::endl;
     return keyMap[key];
 }
 

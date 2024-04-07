@@ -1,0 +1,3 @@
+arcade_sfml.so
+arcade_ncurses.so
+arcade_sdl.so

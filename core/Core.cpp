@@ -23,7 +23,8 @@ Arcade::Core::Core(const std::string &graphicPath)
     _graphic = std::unique_ptr<IGraphic>(_graphicLoader.getInstance(graphicPath));
     _indexGame = 1;
     _gameLoader = DLLoader<IGame>(ENTRY_POINT_GAME);
-    _menu = std::make_unique<Menu>(graphicPath);
+    std::vector<std::string> libs = getLibs();
+    _menu = std::make_unique<Menu>(graphicPath, libs);
     _isMenu = true;
     loadTopScores();
 }
@@ -110,9 +111,9 @@ void Arcade::Core::run()
                     }
                 }
             }
-            if (_menu->isRunning())
-                loadGame(_menu->getSelectedGame());
         }
+        loadGame(_menu->getSelectedGame());
+        loadGraphic(_menu->getSelectedGraphic());
         _key_event = Keys::UNKNOWN;
     }
 }
@@ -238,4 +239,37 @@ void Arcade::Core::updateTopScores()
             _menu->getTexts().at(_indexGame + 1)->setText(game + "  " + _topPlayers.at(_indexGame) + "  " + std::to_string(_topScores.at(_indexGame)));
         }
     }
+}
+
+std::vector<std::string> Arcade::Core::getLibs()
+{
+    std::vector<std::string> libs;
+    std::ifstream file("lib/games.txt");
+    std::string line;
+
+    if (!file.is_open()) {
+        std::cerr << "Error: can't load games" << std::endl;
+        return libs;
+    }
+    while (std::getline(file, line)) {
+        libs.push_back("./lib/" + line);
+    }
+    file.close();
+    file.open("lib/graphics.txt");
+    if (!file.is_open()) {
+        std::cerr << "Error: can't load graphics" << std::endl;
+        return libs;
+    }
+    while (std::getline(file, line)) {
+        libs.push_back("./lib/" + line);
+    }
+    file.close();
+    if (libs.size() != 5) {
+        std::cerr << "Error not the good number of libs" << std::endl;
+        exit(84);
+    }
+    for (std::size_t i = 0; i < libs.size(); i++) {
+        std::cout << libs.at(i) << std::endl;
+    }
+    return libs;
 }
