@@ -86,8 +86,11 @@ int Arcade::Sfml::getKeyEvent() //while loop
         if (this->_event.type == sf::Event::Closed)
             this->_window.close();
         if (this->_event.type == sf::Event::KeyPressed) {
-            if (keyMap.find(this->_event.key.code) != keyMap.end())
+            if (this->_event.key.code == 51)
+                return Arcade::Keys::FOUR;
+            if (keyMap.find(this->_event.key.code) != keyMap.end()) {
                 return keyMap[this->_event.key.code];
+            }
         }
         if (this->_event.type == sf::Event::MouseButtonPressed) {
             if (this->_event.mouseButton.button == sf::Mouse::Left)

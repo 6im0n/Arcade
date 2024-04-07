@@ -24,15 +24,15 @@ namespace Arcade {
             Sdl();
             ~Sdl();
             bool isWindowOpen() const override;
-            void closeWindow();
-            void clearWindow();
+            void closeWindow() override;
+            void clearWindow() override;
 
             //Event
             int getKeyEvent() override;
-            std::pair<int, int> getMousePosition();
+            std::pair<int, int> getMousePosition() override;
 
             //Display
-            void displayWindow();
+            void displayWindow() override;
             void displayEntities(std::vector<std::shared_ptr<IEntity>> entities) override;
             void displayText(std::vector<std::shared_ptr<IText>> texts) override;
             void playSound(std::vector<std::shared_ptr<ISound>> sounds) override;

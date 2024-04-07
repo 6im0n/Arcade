@@ -7,11 +7,15 @@
 
 #include "Sdl.hpp"
 #include "includes/Keys.hpp"
+#include <gtk/gtk.h>
 #include <map>
 
 Arcade::Sdl::Sdl()
 {
-    SDL_Init(SDL_INIT_VIDEO);
+    gtk_disable_setlocale();
+    gtk_init(NULL, NULL);
+    gtk_init_check(NULL, NULL);
+    SDL_Init(SDL_INIT_EVERYTHING);
     this->_window = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED, 725, 899, SDL_WINDOW_SHOWN);
     this->_renderer = SDL_CreateRenderer(this->_window, -1,

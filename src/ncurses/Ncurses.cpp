@@ -36,18 +36,21 @@ Arcade::Ncurses::Ncurses()
 
 bool Arcade::Ncurses::isWindowOpen() const
 {
-    return true;
+    return !isendwin();
 }
 
 Arcade::Ncurses::~Ncurses()
 {
-    closeWindow();
+    clear();
+    endwin();
+    refresh();
 }
 
 void Arcade::Ncurses::closeWindow()
 {
     clear();
     endwin();
+    refresh();
 }
 
 void Arcade::Ncurses::clearWindow()
@@ -57,13 +60,12 @@ void Arcade::Ncurses::clearWindow()
             mvprintw(i, j, " ");
         }
     }
+    clear();
 }
 
 int Arcade::Ncurses::getKeyEvent()
 {
     int key = getch();
-    if (key == -1)
-        return Arcade::Keys::UNKNOWN;
     static std::map<int, int> keyMap = {
         {'\0', Arcade::Keys::UNKNOWN},
         {'A', Arcade::Keys::A},
@@ -92,6 +94,16 @@ int Arcade::Ncurses::getKeyEvent()
         {'X', Arcade::Keys::X},
         {'Y', Arcade::Keys::Y},
         {'Z', Arcade::Keys::Z},
+        {'&', Arcade::Keys::ONE},
+        {130, Arcade::Keys::TWO},
+        {'"', Arcade::Keys::THREE},
+        {'\'', Arcade::Keys::FOUR},
+        {'(', Arcade::Keys::FIVE},
+        {'-', Arcade::Keys::SIX},
+        {232, Arcade::Keys::SEVEN},
+        {'_', Arcade::Keys::EIGHT},
+        {231, Arcade::Keys::NINE},
+        {224, Arcade::Keys::ZERO},
         {'1', Arcade::Keys::ONE},
         {'2', Arcade::Keys::TWO},
         {'3', Arcade::Keys::THREE},
@@ -113,9 +125,10 @@ int Arcade::Ncurses::getKeyEvent()
         {32, Arcade::Keys::SPACE},
         {KEY_MOUSE, Arcade::Keys::MOUSE_LEFT}
     };
-    if (keyMap[key] == Keys::FOUR)
-        std::cout << keyMap[key] << std::endl;
+    if (keyMap.find(key) == keyMap.end())
+        return Arcade::Keys::UNKNOWN;
     return keyMap[key];
+    
 }
 
 std::pair<int, int> Arcade::Ncurses::getMousePosition()
@@ -179,6 +192,7 @@ void Arcade::Ncurses::displayText(std::vector<std::shared_ptr<IText>> texts)
         mvprintw(text->getPos()[1], text->getPos()[0], "%s", text->getText().c_str());
         wattroff(stdscr, COLOR_PAIR(x));
     }
+
 }
 
 void Arcade::Ncurses::playSound(std::vector<std::shared_ptr<ISound>> sounds)
@@ -196,6 +210,7 @@ extern "C"
     void destructor()
     {
     }
+
     Arcade::Ncurses *loadGraphicInstance()
     {
         return new Arcade::Ncurses();
