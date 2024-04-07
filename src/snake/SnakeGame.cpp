@@ -117,27 +117,11 @@ void Arcade::SnakeGame::catchKeyEvent(int key)
     }
 }
 
-void Arcade::SnakeGame::catchMousePosition(int x, int y)
-{
-    (void)x;
-    (void)y;
-}
-
-std::vector<std::shared_ptr<Arcade::IEntity>> Arcade::SnakeGame::getEntities()
-{
-    return _entities;
-}
-
 std::vector<std::shared_ptr<Arcade::IText>> Arcade::SnakeGame::getTexts()
 {
     _texts.clear();
     _texts.push_back(_score);
     return _texts;
-}
-
-std::vector<std::shared_ptr<Arcade::ISound>> Arcade::SnakeGame::getSounds()
-{
-    return _sounds;
 }
 
 extern "C"
