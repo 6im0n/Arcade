@@ -160,7 +160,7 @@ $(NAME) : $(OBJ_CORE)
 graphicals: $(NAME_NCURSES) $(NAME_SFML) $(NAME_SDL)
 
 %.o: 	%.cpp
-	@$(CC) $(INC) $(CXXFLAGS) -fPIC -c -o $@ $< && \
+	@$(CC) $(INC) $(CXXFLAGS) `pkg-config --cflags --libs gtk+-3.0` -fPIC -c -o $@ $< && \
 	$(call YELLOW,"🆗 $<") || \
 	$(call YELLOW,"❌ $<")
 
@@ -175,7 +175,7 @@ $(NAME_SFML) : $(OBJ_SFML)
 	$(call YELLOW,"❌ $@")
 
 $(NAME_SDL) : $(OBJ_SDL)
-	@$(LINKER) -shared -fPIC -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
+	@$(LINKER) -shared -fPIC `pkg-config --cflags --libs gtk+-3.0` -o $(NAME_SDL) $(OBJ_SDL) $(CXXFLAGS) $(SDL_FLAGS) && \
 	$(call YELLOW,"✅ $@") || \
 	$(call YELLOW,"❌ $@")
 
