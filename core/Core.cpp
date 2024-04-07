@@ -83,13 +83,7 @@ void Arcade::Core::run()
                         exit(84);
                     }
                 }
-                if (_game.get()->startGame() == -1) {
-                    if (_isMenu == false) {
-                        quitGame();
-                    } else {
-                        exit(84);
-                    }
-                }
+                loadMenu();
             }
         } else {
             if (_menu->isExit()) {
@@ -103,18 +97,10 @@ void Arcade::Core::run()
             _graphic.get()->displayWindow();
             if (_menu->simulate() == -1) {
                 if (_menu->stopGame() == -1) {
-                    if (_isMenu == false) {
-                        quitGame();
-                    } else {
-                        exit(84);
-                    }
+                    exit(84);
                 }
                 if (_menu->startGame() == -1) {
-                    if (_isMenu == false) {
-                        quitGame();
-                    } else {
-                        exit(84);
-                    }
+                    exit(84);
                 }
             }
         }
@@ -217,9 +203,9 @@ void Arcade::Core::loadTopScores()
     while (_GamesName.size() < 2) {
         _GamesName.push_back("");
     }
-    if (_GamesName.at(0) != "")
+    if (_GamesName.at(0) != "" && _topPlayers.at(0) != "")
         _menu->getTexts().at(1)->setText(_GamesName.at(0) + "  " + _topPlayers.at(0) + "  " + std::to_string(_topScores.at(0)));
-    if (_GamesName.at(1) != "")
+    if (_GamesName.at(1) != "" && _topPlayers.at(1) != "")
         _menu->getTexts().at(2)->setText(_GamesName.at(1) + "  " + _topPlayers.at(1) + "  " + std::to_string(_topScores.at(1)));
     file.close();
 }
@@ -228,9 +214,14 @@ void Arcade::Core::updateTopScores()
 {
     if (_game != nullptr) {
         std::string game = _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1, _GamesName.at(_indexGame).substr(_GamesName.at(_indexGame).find("_") + 1).length() - 3);
+        std::cout << game << std::endl;
+        std::cout << _GamesName.at(0) << std::endl;
+        std::cout << _GamesName.at(1) << std::endl;
         if (game == _GamesName.at(0)) {
+            std::cout << "game 0" << std::endl;
             _indexGame = 0;
         } else if (game == _GamesName.at(1)) {
+            std::cout << "game 1" << std::endl;
             _indexGame = 1;
         }
         if (_GamesName.at(0) == _GamesName.at(1)) {
@@ -258,6 +249,7 @@ std::vector<std::string> Arcade::Core::getLibs()
         return libs;
     }
     while (std::getline(file, line)) {
+        _GamesName.push_back(line.substr(line.find("_") + 1, line.substr(line.find("_") + 1).length() - 3));
         libs.push_back("./lib/" + line);
     }
     file.close();
