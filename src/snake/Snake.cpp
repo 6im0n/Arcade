@@ -137,10 +137,10 @@ void Arcade::Snake::growSnake()
 
 void Arcade::Snake::setDirection(Direction dir)
 {
-    if ((_direction == D_UP && dir == D_DOWN) ||
-        (_direction == D_DOWN && dir == D_UP) ||
-        (_direction == D_LEFT && dir == D_RIGHT) ||
-        (_direction == D_RIGHT && dir == D_LEFT))
+    if ((_lastDirection == D_UP && dir == D_DOWN) ||
+        (_lastDirection == D_DOWN && dir == D_UP) ||
+        (_lastDirection == D_LEFT && dir == D_RIGHT) ||
+        (_lastDirection == D_RIGHT && dir == D_LEFT))
         return;
     _direction = dir;
 }

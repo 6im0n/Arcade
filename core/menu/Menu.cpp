@@ -179,22 +179,18 @@ void Arcade::Menu::catchKeyEvent(int key)
 {
     _lastKey = static_cast<Keys>(key);
     if (_lastKey == Keys::ONE) {
-        std::cout << "PREV" << std::endl;
         _gameButtons = _gameButtons->getPrevButton();
         setGame(_gameButtons->getLabel());
     }
     if (_lastKey == Keys::TWO) {
-        std::cout << "NEXT" << std::endl;
         _gameButtons = _gameButtons->getNextButton();
         setGame(_gameButtons->getLabel());
     }
     if (_lastKey == Keys::THREE) {
-        std::cout << "PREV" << std::endl;
         _graphicButtons = _graphicButtons->getPrevButton();
         setGraphic(_graphicButtons->getLabel())   ;
     }
     if (_lastKey == Keys::FOUR) {
-        std::cout << "NEXT" << std::endl;
         _graphicButtons = _graphicButtons->getNextButton();
         setGraphic(_graphicButtons->getLabel());
     }

@@ -9,7 +9,7 @@
 #include <criterion/redirect.h>
 #include "src/snake/Entities/SnakeBody.hpp"
 #include "classes/Color.hpp"
-#include "src/snake/direction.hpp"
+#include "includes/Direction.hpp"
 
 Test(Snake, snake_constructor)
 {
