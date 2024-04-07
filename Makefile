@@ -72,6 +72,7 @@ SRC_TEST     	= tests/tests_color.cpp		\
 				  src/snake/SnakeGame.cpp					\
 				  src/snake/Entities/SnakeBody.cpp			\
 				  src/snake/Entities/Void.cpp				\
+				  abstract/AGame.cpp						\
 
 
 #Objects
