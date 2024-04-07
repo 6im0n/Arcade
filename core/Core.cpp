@@ -65,6 +65,11 @@ void Arcade::Core::run()
                 _menu->catchMousePosition(mousePos.first, mousePos.second);
                 _menu->catchKeyEvent(_key_event);
             } else {
+                if (_key_event == Keys::FIVE) {
+                    _game->stopGame();
+                    _game->startGame();
+                    _key_event = Keys::UNKNOWN;
+                }
                 _game.get()->catchMousePosition(mousePos.first, mousePos.second);
                 _game.get()->catchKeyEvent(_key_event);
             }
